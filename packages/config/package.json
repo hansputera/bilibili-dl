@@ -23,6 +23,6 @@
     "files": [
         "eslint.cjs",
         "eslint-ts.cjs",
-        "prettier.js"
+        "prettier.cjs"
     ]
 }
