@@ -23,6 +23,7 @@
     "files": [
         "eslint.cjs",
         "eslint-ts.cjs",
-        "prettier.cjs"
+        "prettier.cjs",
+        "tsconfig.base.json"
     ]
 }
