@@ -1,0 +1,19 @@
+{
+  "name": "bilibili-dl",
+  "version": "1.0.0",
+  "description": "Bilibili Downloader",
+  "scripts": {
+    "lint": "turbo run lint",
+    "format": "turbo run format"
+  },
+  "keywords": ["bilibili.tv", "bilibili", "bstation"],
+  "author": "Hanif Dwy Putra S <hanifdwyputrasembiring@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "turbo": "^1.2.16"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=14.x"
+  }
+}
