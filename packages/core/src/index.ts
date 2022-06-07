@@ -32,9 +32,11 @@ export const search = async (q: string) => {
                 ? []
                 : response.data.at(1)!.items,
         )
-        .map((t) => plainToClass(ItemTransformed, t, {
-          strategy: 'excludeAll'
-        }));
+        .map((t) =>
+            plainToClass(ItemTransformed, t, {
+                strategy: 'excludeAll',
+            }),
+        );
 
     console.log(data);
 };

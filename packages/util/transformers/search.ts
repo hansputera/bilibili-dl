@@ -7,7 +7,7 @@ export type ItemType = 'anime' | 'video';
  */
 export class ItemTransformed {
     @Expose()
-    @Transform(({ value }) => value.trim())
+    @Transform(({value}) => value.trim())
     title!: string;
     @Expose({name: 'mid'})
     _videoId!: number;
