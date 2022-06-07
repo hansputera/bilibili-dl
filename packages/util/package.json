@@ -17,7 +17,9 @@
     "type": "module",
     "dependencies": {
         "@bilibili-dl/config": "*",
-        "got": "^12.1.0"
+        "class-transformer": "^0.5.1",
+        "got": "^12.1.0",
+        "reflect-metadata": "^0.1.13"
     },
     "devDependencies": {
         "rimraf": "^3.0.2",

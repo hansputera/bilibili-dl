@@ -87,12 +87,16 @@ importers:
   packages/util:
     specifiers:
       '@bilibili-dl/config': '*'
+      class-transformer: ^0.5.1
       got: ^12.1.0
+      reflect-metadata: ^0.1.13
       rimraf: ^3.0.2
       typescript: ^4.7.3
     dependencies:
       '@bilibili-dl/config': link:../config
+      class-transformer: 0.5.1
       got: 12.1.0
+      reflect-metadata: 0.1.13
     devDependencies:
       rimraf: 3.0.2
       typescript: 4.7.3
@@ -1072,6 +1076,10 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /class-transformer/0.5.1:
+    resolution: {integrity: sha512-SQa1Ws6hUbfC98vKGxZH3KFY0Y1lm5Zm0SY8XX9zbK7FJCyVEac3ATW0RIpwzW+oOfmHE5PMPufDG9hCfoEOMw==}
+    dev: false
 
   /clone-response/1.0.2:
     resolution: {integrity: sha512-yjLXh88P599UOyPTFX0POsd7WxnbsVsGohcwzHOLspIhhpalPw1BcqED8NblyZLKcGrL8dTgMlcaZxV2jAD41Q==}
@@ -2213,6 +2221,10 @@ packages:
       css-unit-converter: 1.1.2
       postcss-value-parser: 3.3.1
     dev: true
+
+  /reflect-metadata/0.1.13:
+    resolution: {integrity: sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==}
+    dev: false
 
   /regenerator-runtime/0.13.9:
     resolution: {integrity: sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==}
