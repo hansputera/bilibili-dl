@@ -27,6 +27,10 @@ export class ItemTransformed {
     )
     views!: string;
     @Expose({name: 'duration'})
-    @Transform(({value}) => (!value.length ? 'anime' : 'video'))
-    type!: ItemType;
+    @Transform(({value}) => (value.length ? value : '-'))
+    duration!: string;
+    @Expose()
+    get type(): ItemType {
+        return this.duration === '-' ? 'anime' : 'video';
+    }
 }
