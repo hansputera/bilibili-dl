@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Bilibili Downloader",
   "scripts": {
-    "lint": "turbo run lint",
-    "format": "turbo run format",
-    "dev": "turbo run dev"
+    "lint": "turbo run lint --parallel",
+    "format": "turbo run format --parallel",
+    "dev": "turbo run dev",
+    "build": "turbo run build"
   },
   "keywords": ["bilibili.tv", "bilibili", "bstation"],
   "author": "Hanif Dwy Putra S <hanifdwyputrasembiring@gmail.com>",

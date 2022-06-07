@@ -12,7 +12,8 @@
         "outDir": "dist",
         "lib": ["dom", "dom.iterable", "esnext"],
         "resolveJsonModule": true,
-        "strict": true
+        "strict": true,
+        "jsxImportSource": "@emotion/react"
     },
     "exclude": ["node_modules", "dist"],
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]

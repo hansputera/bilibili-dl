@@ -75,15 +75,25 @@ importers:
     specifiers:
       '@bilibili-dl/config': '*'
       '@bilibili-dl/util': '*'
+      rimraf: ^3.0.2
+      typescript: ^4.7.3
     dependencies:
       '@bilibili-dl/config': link:../config
       '@bilibili-dl/util': link:../util
+    devDependencies:
+      rimraf: 3.0.2
+      typescript: 4.7.3
 
   packages/util:
     specifiers:
       '@bilibili-dl/config': '*'
+      rimraf: ^3.0.2
+      typescript: ^4.7.3
     dependencies:
       '@bilibili-dl/config': link:../config
+    devDependencies:
+      rimraf: 3.0.2
+      typescript: 4.7.3
 
 packages:
 
