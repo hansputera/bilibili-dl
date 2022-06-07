@@ -21,6 +21,7 @@ importers:
       '@types/react': ^18.0.12
       '@types/react-dom': ^18.0.5
       autoprefixer: ^10.4.4
+      fastest-validator: ^1.12.0
       next: latest
       next-transpile-modules: ^9.0.0
       postcss: ^8.4.12
@@ -33,6 +34,7 @@ importers:
     dependencies:
       '@emotion/react': 11.9.0_c2yrnpm4nh46g4pq2db4aa34x4
       '@emotion/styled': 11.8.1_phk2wh7cbb2njtjwf4s3pfvbsy
+      fastest-validator: 1.12.0
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       tailwindcss-filters: 3.0.0
@@ -1453,6 +1455,10 @@ packages:
   /fast-levenshtein/2.0.6:
     resolution: {integrity: sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==}
     dev: true
+
+  /fastest-validator/1.12.0:
+    resolution: {integrity: sha512-Qc7oCVO9hAPz5GUONmToIoa95YWzoe7SLsrjIXTfCFf6HFQXxxWePXe8D+Kp/XCrr5H/pMJwP2xprW07wYv/BQ==}
+    dev: false
 
   /fastq/1.13.0:
     resolution: {integrity: sha512-YpkpUnK8od0o1hmeSc7UUs/eB/vIPWJYjKck2QKIzAf71Vm1AAQ3EbuZB3g2JIy+pg+ERD0vqI79KyZiB2e2Nw==}
