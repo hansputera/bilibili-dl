@@ -12,11 +12,13 @@ import {getGatewayURL} from '@bilibili-dl/config/constants.js';
  * @return {Promise<ItemTransformed[]>}
  */
 // TODO: create pagination request
-export const searchQuery = async (query: string): ItemTransformed[] => {
+export const searchQuery = async (
+    query: string,
+): Promise<ItemTransformed[]> => {
     const response = await fetchAPI
         .get(getGatewayURL('v2').concat('search'), {
             searchParams: {
-                keyword: encodeURIComponent(q),
+                keyword: encodeURIComponent(query),
                 platform: 'web',
                 s_locale: 'id-ID',
             },
@@ -29,7 +31,7 @@ export const searchQuery = async (query: string): ItemTransformed[] => {
 
     if (response.data.length < 2) return [];
 
-    return (data = response.data
+    return response.data
         .at(-1)!
         .items.concat(
             compare(response.data.at(-1), response.data.at(1))
@@ -40,6 +42,5 @@ export const searchQuery = async (query: string): ItemTransformed[] => {
             plainToClass(ItemTransformed, t, {
                 strategy: 'excludeAll',
             }),
-        ));
+        );
 };
-
