@@ -43,4 +43,3 @@ export const searchQuery = async (query: string): ItemTransformed[] => {
         ));
 };
 
-search('Enen no shouboutai');
