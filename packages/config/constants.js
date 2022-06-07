@@ -7,6 +7,6 @@ export const apiBaseURL = 'https://api.bilibili.tv';
  */
 export const getGatewayURL = (version) => {
     if (typeof version === 'string') {
-        return apiBaseURL.concat(`/intl/gateway/web/${version.toLowerCase()}/`);
-    } else return apiBaseURL.concat('/intl/gateway/web/');
+        return `./intl/gateway/web/${version.toLowerCase()}/`;
+    } else return './intl/gateway/web/';
 };

@@ -6,3 +6,5 @@
 export const sayHello = (name: string): string => {
     return 'Hello '.concat(name);
 };
+
+export * from './fetch.js';
