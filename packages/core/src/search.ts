@@ -27,6 +27,8 @@ export const searchQuery = async (query: string): ItemTransformed[] => {
             }[];
         }>();
 
+    if (response.data.length < 2) return [];
+
     return (data = response.data
         .at(-1)!
         .items.concat(
