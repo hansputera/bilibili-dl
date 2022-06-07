@@ -1,0 +1,20 @@
+{
+    "name": "@bilibili-dl/util",
+    "version": "1.0.0",
+    "description": "Bilibili-DL Project Utility",
+    "main": "index.js",
+    "scripts": {
+        "lint": "eslint \"**/*.ts\" --fix",
+        "format": "prettier . --write"
+    },
+    "keywords": [
+        "bilibili-project",
+        "bilibili-util"
+    ],
+    "author": "Hanif Dwy Putra S <hanifdwyputrasembiring@gmail.com>",
+    "license": "MIT",
+    "type": "module",
+    "dependencies": {
+        "@bilibili-dl/config": "*"
+    }
+}

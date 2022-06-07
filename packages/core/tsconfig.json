@@ -1,0 +1,3 @@
+{
+    "extends": "@bilibili-dl/config/tsconfig.base.json"
+}

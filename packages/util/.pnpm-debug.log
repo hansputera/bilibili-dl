@@ -1,0 +1,23 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1,
+    "workspacePrefix": "/home/hanif/Projects/bilibili-dl"
+  },
+  "1 error pnpm": {
+    "code": "ELIFECYCLE",
+    "errno": "ENOENT",
+    "syscall": "spawn",
+    "file": "sh",
+    "pkgid": "@bilibili-dl/util@1.0.0",
+    "stage": "format",
+    "script": "prettier . --write",
+    "pkgname": "@bilibili-dl/util",
+    "err": {
+      "name": "pnpm",
+      "message": "@bilibili-dl/util@1.0.0 format: `prettier . --write`\nspawn ENOENT",
+      "code": "ELIFECYCLE",
+      "stack": "pnpm: @bilibili-dl/util@1.0.0 format: `prettier . --write`\nspawn ENOENT\n    at ChildProcess.<anonymous> (/home/hanif/.nvm/versions/node/v17.7.1/pnpm-global/5/node_modules/.pnpm/pnpm@7.1.2/node_modules/pnpm/dist/pnpm.cjs:93455:22)\n    at ChildProcess.emit (node:events:527:28)\n    at maybeClose (node:internal/child_process:1090:16)\n    at Process.ChildProcess._handle.onexit (node:internal/child_process:302:5)"
+    }
+  },
+  "2 warn pnpm:global": " Local package.json exists, but node_modules missing, did you mean to install?"
+}

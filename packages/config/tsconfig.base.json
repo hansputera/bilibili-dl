@@ -11,7 +11,10 @@
         "strictFunctionTypes": true,
         "strictNullChecks": true,
         "strictPropertyInitialization": true,
-        "noImplicitThis": true
+        "noImplicitThis": true,
+        "allowJs": true,
+        "moduleResolution": "node",
+        "strict": true
     },
     "exclude": ["node_modules"]
 }

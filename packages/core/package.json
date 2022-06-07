@@ -1,0 +1,20 @@
+{
+    "name": "@bilibili-dl/core",
+    "version": "1.0.0",
+    "description": "Bilibili-DL Core Project",
+    "main": "index.js",
+    "scripts": {
+        "lint": "eslint \"src/**/*.{ts,js}\" --fix",
+        "format": "prettier . --write"
+    },
+    "keywords": [
+        "bilibili-core"
+    ],
+    "author": "Hanif Dwy Putra S <hanidwyputrasembiring@gmail.com>",
+    "license": "MIT",
+    "dependencies": {
+        "@bilibili-dl/config": "*",
+        "@bilibili-dl/util": "*"
+    },
+    "type": "module"
+}
