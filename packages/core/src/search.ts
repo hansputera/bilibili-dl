@@ -1,7 +1,7 @@
 import {
     fetchAPI,
     ItemTransformed,
-    plainToClass,
+    plainToInstance,
     compare,
 } from '@bilibili-dl/util';
 import {getGatewayURL} from '@bilibili-dl/config/constants.js';
@@ -39,7 +39,7 @@ export const searchQuery = async (
                 : response.data.at(1)!.items,
         )
         .map((t) =>
-            plainToClass(ItemTransformed, t, {
+            plainToInstance(ItemTransformed, t, {
                 strategy: 'excludeAll',
             }),
         );
