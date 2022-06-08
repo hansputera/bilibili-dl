@@ -3,5 +3,6 @@
     "compilerOptions": {
         "declaration": true,
         "experimentalDecorators": true
-    }
+    },
+    "exclude": ["dist"]
 }
