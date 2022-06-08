@@ -1,6 +1,6 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 import {searchQuery} from '@bilibili-dl/core';
-import {classToPlain} from '@bilibili-dl/util';
+import {instanceToPlain} from '@bilibili-dl/util';
 import Validator from 'fastest-validator';
 
 const v = new Validator();
@@ -20,7 +20,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const result = await searchQuery(req.body.query || req.query.query);
     return res.status(200).json(
         result.map((c) =>
-            classToPlain(c, {
+            instanceToPlain(c, {
                 strategy: 'excludeAll',
             }),
         ),

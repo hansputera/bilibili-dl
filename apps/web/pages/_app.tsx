@@ -6,10 +6,13 @@ import type {AppProps} from 'next/app';
  * @param {AppProps} arg0 App properties.
  * @return {JSX.Element}
  */
-export default function BilibiliApp({Component, pageProps}: AppProps): JSX.Element {
+export default function BilibiliApp({
+    Component,
+    pageProps,
+}: AppProps): JSX.Element {
     return (
-      <>
-        <Component {...pageProps} />
-      </>
+        <>
+            <Component {...pageProps} />
+        </>
     );
 }

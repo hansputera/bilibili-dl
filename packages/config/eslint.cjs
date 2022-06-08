@@ -10,13 +10,13 @@ module.exports = {
     },
     rules: {},
     settings: {
-      next: {
-        rootDir: [
-          'apps/web/',
-          'packages/core/',
-          'packages/config/',
-          'packages/util/',
-        ]
-      }
-    }
+        next: {
+            rootDir: [
+                'apps/web/',
+                'packages/core/',
+                'packages/config/',
+                'packages/util/',
+            ],
+        },
+    },
 };
