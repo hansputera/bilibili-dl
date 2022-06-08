@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import {Expose, Transform} from 'class-transformer';
+import {Exclude, Expose, Transform} from 'class-transformer';
 
 export type ItemType = 'anime' | 'video';
 
@@ -11,10 +11,15 @@ export class ItemTransformed {
     @Expose()
     @Transform(({value}) => value.trim())
     title!: string;
+
+    @Exclude()
     @Expose({name: 'mid'})
     _videoId!: number;
+
+    @Exclude()
     @Expose({name: 'season_id'})
     _seasonId!: number;
+
     @Expose()
     get id(): number {
         return this._videoId || this._seasonId;
