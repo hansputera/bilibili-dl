@@ -76,7 +76,15 @@ export class ItemTransformed {
     @Transform(
         ({value}) => value.match(/\d+((.|\/)+)?\d+(m|k)?/gi)?.at(0) ?? '0',
     )
-    views!: string;
+    @Exclude({toPlainOnly: true})
+    _views!: string;
+
+    @Expose()
+    get views(): string {
+        return this._views === '0'
+            ? this.desc.match(/\d+((.|\/)+)?\d+(m|k)?/gi)?.at(0) ?? '0'
+            : this._views;
+    }
 
     @Expose({name: 'duration'})
     @Transform(({value}) => (value.length ? value : '-'))
