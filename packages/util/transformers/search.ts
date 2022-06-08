@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import {Exclude, Expose, Transform} from 'class-transformer';
+import {baseURL} from '@bilibili-dl/config/constants.js';
 
 export type ItemType = 'anime' | 'video';
 
@@ -23,6 +24,16 @@ export class ItemTransformed {
     @Expose()
     get id(): number {
         return this._videoId || this._seasonId;
+    }
+
+    @Expose()
+    get url(): string {
+        return new URL(
+            `./en/${
+                this.type === 'anime' ? 'play' : 'video'
+            }/${encodeURIComponent(this.id)}`,
+            baseURL,
+        ).href;
     }
 
     @Expose()
