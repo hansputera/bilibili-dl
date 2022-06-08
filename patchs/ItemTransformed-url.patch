@@ -1,0 +1,37 @@
+commit 360062caa242671d76781d69c807549028d78a0c
+Author: Hanif Dwy Putra S <hanifdwyputrasembiring@gmail.com>
+Date:   Wed Jun 8 20:12:19 2022 +0700
+
+    feat(packages.util.transformers): add "url" in ItemTransformed class
+    
+    Signed-off-by: Hanif Dwy Putra S <hanifdwyputrasembiring@gmail.com>
+
+diff --git a/packages/util/transformers/search.ts b/packages/util/transformers/search.ts
+index fafdb25..b07cf1b 100644
+--- a/packages/util/transformers/search.ts
++++ b/packages/util/transformers/search.ts
+@@ -1,6 +1,7 @@
+ /* eslint-disable */
+ 
+ import {Exclude, Expose, Transform} from 'class-transformer';
++import {baseURL} from '@bilibili-dl/config/constants.js';
+ 
+ export type ItemType = 'anime' | 'video';
+ 
+@@ -25,6 +26,16 @@ export class ItemTransformed {
+         return this._videoId || this._seasonId;
+     }
+ 
++    @Expose()
++    get url(): string {
++        return new URL(
++            `./en/${
++                this.type === 'anime' ? 'play' : 'video'
++            }/${encodeURIComponent(this.id)}`,
++            baseURL,
++        ).href;
++    }
++
+     @Expose()
+     @Exclude({toPlainOnly: true})
+     desc!: string;
