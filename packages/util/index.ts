@@ -8,6 +8,6 @@ export const sayHello = (name: string): string => {
 };
 
 export * from 'class-transformer';
-export * from './fetch.js';
-export * from './compare.js';
-export * from './transformers/index.js';
+export * from './fetch';
+export * from './compare';
+export * from './transformers/index';

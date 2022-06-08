@@ -1,7 +1,7 @@
 {
     "extends": "@bilibili-dl/config/tsconfig.base.json",
     "compilerOptions": {
-        "outDir": "./dist",
-        "declaration": true
+        "declaration": true,
+        "experimentalDecorators": true
     }
 }

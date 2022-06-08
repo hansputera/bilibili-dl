@@ -2,7 +2,7 @@
     "name": "@bilibili-dl/util",
     "version": "1.0.0",
     "description": "Bilibili-DL Project Utility",
-    "main": "dist/index.js",
+    "main": "./index.ts",
     "scripts": {
         "lint": "eslint \"**/*.ts\" --fix",
         "format": "prettier . --write",
@@ -22,6 +22,8 @@
         "reflect-metadata": "^0.1.13"
     },
     "devDependencies": {
+        "eslint": "^8.17.0",
+        "prettier": "^2.6.2",
         "rimraf": "^3.0.2",
         "typescript": "^4.7.3"
     }

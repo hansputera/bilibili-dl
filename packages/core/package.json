@@ -2,7 +2,7 @@
     "name": "@bilibili-dl/core",
     "version": "1.0.0",
     "description": "Bilibili-DL Core Project",
-    "main": "dist/index.js",
+    "main": "./src/index.ts",
     "scripts": {
         "lint": "eslint \"src/**/*.{ts,js}\" --fix",
         "format": "prettier . --write",
@@ -19,6 +19,8 @@
     },
     "type": "module",
     "devDependencies": {
+        "eslint": "^8.17.0",
+        "prettier": "^2.6.2",
         "rimraf": "^3.0.2",
         "typescript": "^4.7.3"
     }

@@ -16,7 +16,8 @@
         "moduleResolution": "node",
         "strict": true,
         "skipLibCheck": true,
-        "skipDefaultLibCheck": true
+        "skipDefaultLibCheck": true,
+        "experimentalDecorators": true
     },
     "exclude": ["node_modules"]
 }

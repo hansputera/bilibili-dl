@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import {Expose, Transform} from 'class-transformer';
 
 export type ItemType = 'anime' | 'video';
@@ -23,7 +25,7 @@ export class ItemTransformed {
     @Expose({name: 'styles'}) genre!: string;
     @Expose({name: 'view'})
     @Transform(
-        ({value}) => value.match(/\d+((.|\/)+)?\d+(m|k)?/gi).at(0) ?? '0',
+        ({value}) => value.match(/\d+((.|\/)+)?\d+(m|k)?/gi)?.at(0) ?? '0',
     )
     views!: string;
     @Expose({name: 'duration'})
