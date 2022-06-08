@@ -11,18 +11,27 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             min: 5,
             max: 255,
         },
+        filter: {
+            type: 'enum',
+            values: ['anime', 'video'],
+            optional: true,
+        },
     })(req.body || req.query);
 
     if (typeof validReq === 'object') {
         return res.status(400).json(validReq);
     }
 
-    const result = await searchQuery(req.body.query || req.query.query);
+    const filter =
+        (req.body.filter || req.query.filter)?.toLowerCase() ?? 'all';
+    const result = await searchQuery(req.body?.query || req.query.query);
     return res.status(200).json(
-        result.map((c) =>
-            instanceToPlain(c, {
-                strategy: 'excludeAll',
-            }),
-        ),
+        result
+            .filter((c) => (filter === 'all' ? true : filter === c.type))
+            .map((c) =>
+                instanceToPlain(c, {
+                    strategy: 'excludeAll',
+                }),
+            ),
     );
 };
