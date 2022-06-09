@@ -17,6 +17,7 @@ importers:
       '@types/node': ^17.0.40
       '@types/react': ^18.0.12
       '@types/react-dom': ^18.0.5
+      dotenv: ^16.0.1
       fastest-validator: ^1.12.0
       next: latest
       next-transpile-modules: ^9.0.0
@@ -28,6 +29,7 @@ importers:
     dependencies:
       '@bilibili-dl/core': link:../../packages/core
       '@bilibili-dl/util': link:../../packages/util
+      dotenv: 16.0.1
       fastest-validator: 1.12.0
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -692,6 +694,11 @@ packages:
     dependencies:
       esutils: 2.0.3
     dev: true
+
+  /dotenv/16.0.1:
+    resolution: {integrity: sha512-1K6hR6wtk2FviQ4kEiSjFiH5rpzEVi8WW0x96aztHVMhEspNpc4DVOUTEHtEva5VThQ8IaBX1Pe4gSzpVVUsKQ==}
+    engines: {node: '>=12'}
+    dev: false
 
   /emojis-list/3.0.0:
     resolution: {integrity: sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==}
