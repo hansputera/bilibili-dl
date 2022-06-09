@@ -57,17 +57,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         await redis.set(
             req.body.query?.toLowerCase() ||
                 (req.query.query as string)?.toLowerCase(),
-            JSON.stringify(
-                result
-                    .map((c) =>
-                        instanceToPlain(c, {
-                            strategy: 'excludeAll',
-                        }),
-                    )
-                    .filter((c) =>
-                        filter === 'all' ? true : filter === c.type,
-                    ),
-            ),
+            JSON.stringify(result),
             'EX',
             maxLifetimeData,
         );
