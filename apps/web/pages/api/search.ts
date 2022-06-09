@@ -1,7 +1,10 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 import {searchQuery} from '@bilibili-dl/core';
-import {instanceToPlain} from '@bilibili-dl/util';
 import Validator from 'fastest-validator';
+import {instanceToPlain, ItemTransformed, jsonParse} from '@bilibili-dl/util';
+
+import {redis} from '../../lib/redis';
+import {maxLifetimeData} from '../../config';
 
 const v = new Validator();
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -22,9 +25,46 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(400).json(validReq);
     }
 
+    if (process.env.NODE_ENV === 'development') {
+        await redis.del(
+            req.body.query?.toLowerCase() ||
+                (req.query.query as string)?.toLowerCase(),
+        );
+    }
     const filter =
         (req.body.filter || req.query.filter)?.toLowerCase() ?? 'all';
-    const result = await searchQuery(req.body?.query || req.query.query);
+    let result: ItemTransformed[] = jsonParse(
+        (await redis.get(
+            req.body.query?.toLowerCase() ||
+                (req.query.query as string)?.toLowerCase(),
+        )) as string,
+        [],
+    );
+
+    if (!result.length) {
+        result = await searchQuery(
+            req.body.query?.toLowerCase() ||
+                (req.query.query as string)?.toLowerCase(),
+        );
+        await redis.set(
+            req.body.query?.toLowerCase() ||
+                (req.query.query as string)?.toLowerCase(),
+            JSON.stringify(
+                result
+                    .filter((c) =>
+                        filter === 'all' ? true : filter === c.type,
+                    )
+                    .map((c) =>
+                        instanceToPlain(c, {
+                            strategy: 'excludeAll',
+                        }),
+                    ),
+            ),
+            'EX',
+            maxLifetimeData,
+        );
+    }
+
     return res.status(200).json(
         result
             .filter((c) => (filter === 'all' ? true : filter === c.type))
