@@ -7,7 +7,7 @@ import type {Resource, VideoResource} from '@bilibili-dl/interfaces/core';
  * @param {string} id Video ID
  * @return {Promise<void>}
  */
-export const getPlayUrl = async (id: string) => {
+export const getPlayUrl = async (id: string): Promise<void> => {
     const response = await fetchAPI(
         getGatewayURL(undefined).concat('playurl'),
         {
