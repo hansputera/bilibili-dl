@@ -19,9 +19,12 @@
         "@bilibili-dl/config": "*",
         "class-transformer": "^0.5.1",
         "got": "^12.1.0",
+        "pretty-bytes": "^6.0.0",
+        "pretty-ms": "^8.0.0",
         "reflect-metadata": "^0.1.13"
     },
     "devDependencies": {
+        "@bilibili-dl/interfaces": "*",
         "eslint": "^8.17.0",
         "prettier": "^2.6.2",
         "rimraf": "^3.0.2",
