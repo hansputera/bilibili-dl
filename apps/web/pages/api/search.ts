@@ -1,7 +1,12 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 import {searchQuery} from '@bilibili-dl/core';
 import Validator from 'fastest-validator';
-import {instanceToPlain, ItemTransformed, jsonParse} from '@bilibili-dl/util';
+import {
+    compare,
+    instanceToPlain,
+    ItemTransformed,
+    jsonParse,
+} from '@bilibili-dl/util';
 
 import {redis} from '../../lib/redis';
 import {maxLifetimeData} from '../../config';
@@ -41,7 +46,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         [],
     );
 
-    if (!result.length) {
+    if (
+        !result.length ||
+        compare(result[0], {} as unknown as ItemTransformed)
+    ) {
         result = await searchQuery(
             req.body.query?.toLowerCase() ||
                 (req.query.query as string)?.toLowerCase(),
@@ -51,13 +59,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 (req.query.query as string)?.toLowerCase(),
             JSON.stringify(
                 result
-                    .filter((c) =>
-                        filter === 'all' ? true : filter === c.type,
-                    )
                     .map((c) =>
                         instanceToPlain(c, {
                             strategy: 'excludeAll',
                         }),
+                    )
+                    .filter((c) =>
+                        filter === 'all' ? true : filter === c.type,
                     ),
             ),
             'EX',
