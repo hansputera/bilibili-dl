@@ -23,7 +23,7 @@ export const getPlayUrl = async (id: string): Promise<void> => {
         data: {
             playurl: {
                 duration: number;
-                audio_resource: Resource;
+                audio_resource: Resource[];
                 video: VideoResource[];
             };
         };
