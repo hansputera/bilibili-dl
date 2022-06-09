@@ -39,7 +39,7 @@ jobs:
 
       - name: Build
         run: |
-          cd aps/web
+          cd apps/web
           pnpm run build
           pnpm run export
       - name: Deploy
