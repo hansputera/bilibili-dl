@@ -19,6 +19,7 @@ export const getPlayUrl = async (id: string): Promise<void> => {
             },
         },
     ).json<{
+        code: number;
         data: {
             playurl: {
                 duration: number;
@@ -28,5 +29,7 @@ export const getPlayUrl = async (id: string): Promise<void> => {
         };
     }>();
 
-    console.log(response);
+    if (+response.code === 404) {
+        return undefined;
+    }
 };
