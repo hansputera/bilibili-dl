@@ -1,6 +1,6 @@
 /* eslint-disable */
 import {Resource, VideoResource} from '@bilibili-dl/interfaces/core';
-import {Expose, Transform} from 'class-transformer';
+import {Expose, Transform, Type} from 'class-transformer';
 import prettyMs from 'pretty-ms';
 import prettyBytes from 'pretty-bytes';
 
@@ -38,6 +38,14 @@ export class PlayUrlResourceTransformed {
 export class PlayUrlTransformed {
     @Expose()
     duration!: number;
+
+    @Expose()
+    @Type(() => PlayUrlResourceTransformed)
+    audios!: PlayUrlResourceTransformed[];
+
+    @Expose()
+    @Type(() => PlayUrlResourceTransformed)
+    videos!: PlayUrlResourceTransformed[];
 }
 
 interface RawPlayUrlStruct {
