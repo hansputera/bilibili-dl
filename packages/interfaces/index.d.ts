@@ -1,1 +1,0 @@
-export * as CoreInterface from './core/index';

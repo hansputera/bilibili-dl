@@ -6,9 +6,7 @@
         "name": "Hanif Dwy Putra S",
         "email": "hanifdwyputrasembiring@gmail.com"
     },
-    "main": "index.js",
-    "type": "module",
-    "typings": "index.d.ts",
+    "main": "./index.js",
     "license": "MIT",
     "devDependencies": {
         "@bilibili-dl/config": "*"

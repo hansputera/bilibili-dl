@@ -1,27 +1,6 @@
 import {fetchAPI} from '@bilibili-dl/util';
 import {getGatewayURL} from '@bilibili-dl/config/constants.js';
-
-interface Resource {
-    bandwith: number;
-    codecs: string;
-    duration: number;
-    id: string; // we will use this to identify the video/audio.
-    mime_type: string;
-    quality: number;
-    size: number;
-    url: string; // audio url.
-}
-
-interface VideoStreamInfo {
-    desc_words: string;
-    quality: number;
-}
-
-interface VideoResource {
-    audio_quality: number;
-    stream_info: VideoStreamInfo;
-    video_resource: Resource;
-}
+import type {Resource, VideoResource} from '@bilibili-dl/interfaces/core';
 
 /**
  * Get video URL by id.
@@ -43,7 +22,7 @@ export const getPlayUrl = async (id: string) => {
         data: {
             playurl: {
                 duration: number;
-                audio_resource: Resource[];
+                audio_resource: Resource;
                 video: VideoResource[];
             };
         };

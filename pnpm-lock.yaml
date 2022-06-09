@@ -64,6 +64,7 @@ importers:
   packages/core:
     specifiers:
       '@bilibili-dl/config': '*'
+      '@bilibili-dl/interfaces': '*'
       '@bilibili-dl/util': '*'
       eslint: ^8.17.0
       prettier: ^2.6.2
@@ -71,6 +72,7 @@ importers:
       typescript: ^4.7.3
     dependencies:
       '@bilibili-dl/config': link:../config
+      '@bilibili-dl/interfaces': link:../interfaces
       '@bilibili-dl/util': link:../util
     devDependencies:
       eslint: 8.17.0

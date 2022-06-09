@@ -15,7 +15,8 @@
     "license": "MIT",
     "dependencies": {
         "@bilibili-dl/config": "*",
-        "@bilibili-dl/util": "*"
+        "@bilibili-dl/util": "*",
+        "@bilibili-dl/interfaces": "*"
     },
     "type": "module",
     "devDependencies": {
