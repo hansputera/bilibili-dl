@@ -4,3 +4,4 @@ dist/
 *.log
 .yarn/cache
 .yarn/*.gz
+.env
