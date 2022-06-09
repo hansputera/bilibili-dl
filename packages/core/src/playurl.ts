@@ -1,13 +1,15 @@
-import {fetchAPI} from '@bilibili-dl/util';
+import {fetchAPI, plainToInstance, PlayUrlTransformed} from '@bilibili-dl/util';
 import {getGatewayURL} from '@bilibili-dl/config/constants.js';
 import type {Resource, VideoResource} from '@bilibili-dl/interfaces/core';
 
 /**
  * Get video URL by id.
  * @param {string} id Video ID
- * @return {Promise<void>}
+ * @return {Promise<PlayUrlTransformed>}
  */
-export const getPlayUrl = async (id: string): Promise<void> => {
+export const getPlayUrl = async (
+    id: string,
+): Promise<PlayUrlTransformed | undefined> => {
     const response = await fetchAPI(
         getGatewayURL(undefined).concat('playurl'),
         {
@@ -32,4 +34,6 @@ export const getPlayUrl = async (id: string): Promise<void> => {
     if (+response.code === 404) {
         return undefined;
     }
+
+    return plainToInstance(PlayUrlTransformed, response.data.playurl);
 };
