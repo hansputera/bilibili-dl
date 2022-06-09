@@ -1,10 +1,14 @@
 /**
- * Say hello to {name}
- * @param {string} name Person name.
- * @return {string}
+ * Get Bilibili.TV Video ID.
+ * @param {string} url Bilibili.TV Video URL.
+ * @return {string | undefined}
  */
-export const sayHello = (name: string): string => {
-    return 'Hello '.concat(name);
+export const getBtvID = (url: string): string | undefined => {
+    return url
+        .match(
+            /http(s)?:\/\/(www\.)?bilibili\.tv\/[a-zA-Z]+\/(video|play)\/(\d+)/i,
+        )
+        ?.at(-1);
 };
 
 export * from 'class-transformer';
