@@ -1,0 +1,16 @@
+{
+    "name": "@bilibili-dl/interfaces",
+    "description": "Bilibili-DL Project TypeScript Interfaces",
+    "version": "1.0.0",
+    "author": {
+        "name": "Hanif Dwy Putra S",
+        "email": "hanifdwyputrasembiring@gmail.com"
+    },
+    "main": "index.js",
+    "type": "module",
+    "typings": "index.d.ts",
+    "license": "MIT",
+    "devDependencies": {
+        "@bilibili-dl/config": "*"
+    }
+}
