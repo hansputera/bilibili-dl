@@ -31,9 +31,8 @@ export const getPlayUrl = async (
         };
     }>();
 
-    if (+response.code === 404) {
+    if (+response.code === 404 || !response.data) {
         return undefined;
     }
-
     return plainToInstance(PlayUrlTransformed, response.data.playurl);
 };

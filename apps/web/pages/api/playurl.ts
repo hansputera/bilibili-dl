@@ -1,6 +1,11 @@
 import {NextApiRequest, NextApiResponse} from 'next';
 import Validator from 'fastest-validator';
-import {compare, getBtvID, jsonParse} from '@bilibili-dl/util';
+import {
+    getBtvID,
+    instanceToPlain,
+    jsonParse,
+    PlayUrlTransformed,
+} from '@bilibili-dl/util';
 import {redis} from '../../lib/redis';
 import {getPlayUrl} from '@bilibili-dl/core';
 import {maxLifetimeData} from '../../config';
@@ -13,7 +18,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         },
     })(req.body || req.query);
 
-    if (typeof validationRequest === 'string') {
+    if (typeof validationRequest === 'object') {
         return res.status(400).json(validationRequest);
     }
 
@@ -23,11 +28,22 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             message: 'Please send valid bilibili.tv video url!',
         });
 
-    let result = jsonParse((await redis.get(videoId)) ?? '', {});
-    if (compare(result, {})) {
+    let result = jsonParse((await redis.get(videoId)) ?? '');
+    if (!(result instanceof PlayUrlTransformed)) {
         result = await getPlayUrl(videoId);
+        if (!result) {
+            return res.status(201).json({
+                message: "Couldn't get the playUrl data of this video!",
+            });
+        }
         await redis.set(videoId, JSON.stringify(result), 'EX', maxLifetimeData);
     }
 
-    return res.status(200).json(result);
+    return res.status(200).json(
+        result instanceof PlayUrlTransformed
+            ? instanceToPlain(result, {
+                  strategy: 'excludeAll',
+              })
+            : result,
+    );
 };

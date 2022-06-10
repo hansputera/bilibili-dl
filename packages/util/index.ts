@@ -7,7 +7,7 @@ import 'reflect-metadata';
  */
 export const getBtvID = (url: string): string | undefined => {
     return url
-        .match(
+        ?.match(
             /http(s)?:\/\/(www\.)?bilibili\.tv\/[a-zA-Z]+\/(video|play)\/(\d+)/i,
         )
         ?.at(-1);
