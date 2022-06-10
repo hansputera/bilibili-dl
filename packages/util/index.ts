@@ -32,3 +32,4 @@ export * from 'class-transformer';
 export * from './fetch';
 export * from './compare';
 export * from './transformers/index';
+export * as Got from 'got';
