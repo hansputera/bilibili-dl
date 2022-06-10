@@ -37,7 +37,8 @@ export class PlayUrlResourceTransformed {
  */
 export class PlayUrlTransformed {
     @Expose()
-    duration!: number;
+    @Transform(({value}) => prettyMs(value))
+    duration!: string;
 
     @Expose()
     @Type(() => PlayUrlResourceTransformed)
@@ -61,21 +62,23 @@ interface RawPlayUrlStruct {
  */
 export const transformToReadable = (data: RawPlayUrlStruct) => {
     return {
-        duration: data.duration,
+        duration: +data.duration,
         audios: data.audio_resource.map((audio) => ({
             url: audio.url,
             id: audio.id,
             mimeType: audio.mime_type,
             codecs: audio.codecs,
-            size: audio.size,
+            size: +audio.size,
+            duration: +audio.duration,
         })),
         videos: data.video.map((video) => ({
             url: video.video_resource.url,
             quality: video.stream_info.quality,
             mimeType: video.video_resource.mime_type,
-            size: video.video_resource.size,
+            size: +video.video_resource.size,
             codecs: video.video_resource.codecs,
             id: video.video_resource.id,
+            duration: +video.video_resource.duration,
         })),
     };
 };
