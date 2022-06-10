@@ -2,6 +2,7 @@
 
 import {Exclude, Expose, Transform} from 'class-transformer';
 import {baseURL} from '@bilibili-dl/config/constants.js';
+import {matchView} from '..';
 
 export type ItemType = 'anime' | 'video';
 
@@ -73,17 +74,13 @@ export class ItemTransformed {
     }
 
     @Expose({name: 'view'})
-    @Transform(
-        ({value}) => value.match(/\d+((.|\/)+)?\d+(m|k)?/gi)?.at(0) ?? '0',
-    )
+    @Transform(({value}) => matchView(value))
     @Exclude({toPlainOnly: true})
     _views!: string;
 
     @Expose()
     get views(): string {
-        return this._views === '0'
-            ? this.desc.match(/\d+((.|\/)+)?\d+(m|k)?/gi)?.at(0) ?? '0'
-            : this._views;
+        return this._views === '0' ? matchView(this.desc) : this._views;
     }
 
     @Expose({name: 'duration'})
