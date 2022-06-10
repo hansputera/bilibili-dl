@@ -1,6 +1,7 @@
 /* eslint-disable new-cap */
 import {baseURL} from '@bilibili-dl/config/constants';
 import {Expose, Transform, Type} from 'class-transformer';
+import {cleanupURL} from '..';
 
 /**
  * @class PhotoMeta
@@ -116,6 +117,16 @@ export const transformMeta = (data: any) => {
                     thumbnail: e.cover,
                     id: e.episode_id,
                     publishedAt: e.publish_time,
+                    url: `${cleanupURL(
+                        new URL(data.shareData.url, baseURL),
+                    ).replace(
+                        /\/(\d+)(\/\d+)?/g,
+                        `/${data.OgvVideo.seasonData.season_id}${
+                            data.OgvVideo.epId !== e.episode_id
+                                ? `/${e.episode_id}`
+                                : ''
+                        }`,
+                    )}`,
                 }),
             ) ?? undefined,
         limitAreas: data.OgvVideo.seasonData
