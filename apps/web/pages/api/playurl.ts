@@ -22,22 +22,27 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(400).json(validationRequest);
     }
 
-    const videoId = getBtvID(req.body.url || req.query.url);
-    if (!videoId)
+    const video = getBtvID(req.body.url || req.query.url);
+    if (!video)
         return res.status(400).json({
             message: 'Please send valid bilibili.tv video url!',
         });
 
-    let result = jsonParse((await redis.get(videoId)) ?? '');
+    let result = jsonParse((await redis.get(video.videoId)) ?? '');
     if (!(result instanceof PlayUrlTransformed)) {
-        result = await getPlayUrl(videoId);
+        result = await getPlayUrl(video.videoId);
         if (typeof result === 'string' || !result) {
             return res.status(201).json({
                 message:
                     result || "Couldn't get the playUrl data of this video!",
             });
         }
-        await redis.set(videoId, JSON.stringify(result), 'EX', maxLifetimeData);
+        await redis.set(
+            video.videoId,
+            JSON.stringify(result),
+            'EX',
+            maxLifetimeData,
+        );
     }
 
     return res.status(200).json(
