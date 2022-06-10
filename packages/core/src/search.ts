@@ -20,7 +20,7 @@ export const searchQuery = async (
             searchParams: {
                 keyword: encodeURIComponent(query),
                 platform: 'web',
-                s_locale: 'id-ID',
+                s_locale: 'en_US',
             },
         })
         .json<{

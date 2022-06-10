@@ -27,7 +27,7 @@ export const getPlayUrl = async (
             {
                 searchParams: {
                     type: 0,
-                    s_locale: 'id-ID',
+                    s_locale: 'en_US',
                     platform: 'web',
                     ...(type === 'video'
                         ? {
