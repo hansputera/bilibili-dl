@@ -16,6 +16,9 @@ export const transformToReadable = (data: any) => {
             ? data.OgcVideo.seasonData.styles
                   .map((style: {title: string}) => style.title)
                   .join(', ')
+            : '-',
+        originTitle: data.OgcVideo.seasonData
+            ? data.OgcVideo.seasonData.origin_name
             : undefined,
     };
 };
