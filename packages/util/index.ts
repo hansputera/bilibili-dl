@@ -1,16 +1,34 @@
 import 'reflect-metadata';
 
+interface BtvID {
+    seasonId?: string;
+    videoId: string;
+}
+
 /**
  * Get Bilibili.TV Video ID.
  * @param {string} url Bilibili.TV Video URL.
- * @return {string | undefined}
+ * @return {BtvID | undefined}
  */
-export const getBtvID = (url: string): string | undefined => {
-    return url
-        ?.match(
-            /http(s)?:\/\/(www\.)?bilibili\.tv\/[a-zA-Z]+\/(video|play)\/(\d+)/i,
-        )
-        ?.at(-1);
+export const getBtvID = (url: string): BtvID | undefined => {
+    const matchs =
+        /http(s)?:\/\/(www\.)?bilibili\.tv\/[a-zA-Z]+\/(video|play)\/(\d+)(\/(\d+))?/gi.exec(
+            url,
+        );
+
+    if (matchs) {
+        if (matchs.length > 5)
+            return {
+                seasonId: matchs.at(4),
+                videoId: matchs.at(-1)!,
+            };
+        else
+            return {
+                videoId: matchs.at(-1)!,
+            };
+    } else {
+        return undefined;
+    }
 };
 
 /**
