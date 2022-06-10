@@ -33,3 +33,4 @@ export * from './fetch';
 export * from './compare';
 export * from './transformers/index';
 export * as Got from 'got';
+export * from './extractors/index';
