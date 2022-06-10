@@ -27,7 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         result
             ? result
             : {
-                  message: 'Couldn\'t parse the response data from Bilibili.TV',
+                  message: "Couldn't parse the response data from Bilibili.TV",
               },
     );
 };

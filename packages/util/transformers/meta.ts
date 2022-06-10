@@ -50,13 +50,13 @@ export class MetaTransformed {
 // TODO: completing meta data transform.
 export const transformMeta = (data: any) => {
     return {
-        title: data.sharedData.title,
-        url: data.sharedData.url,
+        title: data.shareData.title,
+        url: data.shareData.url,
         photo: {
-            vertical: data.sharedData.vertical_pic,
-            horizontal: data.sharedData.horizontal_pic,
+            vertical: data.shareData.vertical_pic,
+            horizontal: data.shareData.horizontal_pic,
         },
-        description: data.sharedData.desc,
+        description: data.shareData.desc,
         id: data.OgvVideo.epId || data.UgcVideo.videoData.aid,
         thumbnail: data.UgcVideo.videoData
             ? data.UgcVideo.videoData.cover
