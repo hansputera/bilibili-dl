@@ -31,9 +31,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     let result = jsonParse((await redis.get(videoId)) ?? '');
     if (!(result instanceof PlayUrlTransformed)) {
         result = await getPlayUrl(videoId);
-        if (!result) {
+        if (typeof result === 'string' || !result) {
             return res.status(201).json({
-                message: "Couldn't get the playUrl data of this video!",
+                message:
+                    result || "Couldn't get the playUrl data of this video!",
             });
         }
         await redis.set(videoId, JSON.stringify(result), 'EX', maxLifetimeData);
