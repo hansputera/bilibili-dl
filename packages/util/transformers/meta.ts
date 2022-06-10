@@ -1,4 +1,5 @@
 /* eslint-disable new-cap */
+import {baseURL} from '@bilibili-dl/config/constants';
 import {Expose, Transform, Type} from 'class-transformer';
 
 /**
@@ -86,6 +87,9 @@ export const transformMeta = (data: any) => {
         },
         description: data.shareData.desc,
         id: data.OgvVideo.epId || data.UgcVideo.videoData.aid,
+        season_id: data.OgvVideo.seasonData
+            ? data.OgvVideo.seasonData.season_id
+            : undefined,
         thumbnail: data.UgcVideo.videoData
             ? data.UgcVideo.videoData.cover
             : data.OgvVideo.epDetail.cover,

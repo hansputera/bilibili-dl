@@ -6,6 +6,21 @@ interface BtvID {
 }
 
 /**
+ * Remove searchParams from URL.
+ * @param {string} url Cleanup the URL.
+ * @return {string}
+ */
+export const cleanupURL = (url: string | URL): string => {
+    if (url instanceof URL) {
+        url.search = '';
+    } else {
+        return cleanupURL(new URL(url));
+    }
+
+    return url.href;
+};
+
+/**
  * Match view count.
  * @param {string} viewStr View count string.
  * @return {string}
