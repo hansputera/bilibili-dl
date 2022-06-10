@@ -1,3 +1,4 @@
+import { getMeta } from '@bilibili-dl/core';
 import {getBtvID} from '@bilibili-dl/util';
 import Validator from 'fastest-validator';
 import {NextApiRequest, NextApiResponse} from 'next';
@@ -20,7 +21,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         });
     }
 
-    return res.status(200).json({
-        message: 'OK!',
-    });
+    const result = await getMeta(req.body.url || req.query.url);
+
+    return res.status(200).json(
+        result ? result : {
+            message: 'I KENOT',
+        }
+    );
 };
