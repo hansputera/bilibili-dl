@@ -132,5 +132,17 @@ export const transformMeta = (data: any) => {
         limitAreas: data.OgvVideo.seasonData
             ? data.OgvVideo.seasonData.limit_areas
             : undefined,
+        series: data.OgvVideo.seriesList ? data.OgvVideo.seriesList.map((serie: {
+            title: string;
+            season_id: number
+        }) => ({
+            title: serie.title,
+            id: serie.season_id.toString(),
+            url: `${
+                cleanupURL(
+                    new URL(data.shareData.url, baseURL),
+                ).replace(/\/(\d+)(\/\d+)?/g, `/${serie.season_id}`)
+            }`,
+        })) : undefined,
     };
 };
