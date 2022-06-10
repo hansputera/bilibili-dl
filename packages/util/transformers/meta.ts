@@ -12,6 +12,27 @@ export class PhotoMeta {
     horizontal!: string;
 }
 /**
+ * @class EpisodeMeta
+ */
+export class EpisodeMeta {
+    @Expose()
+    title!: string;
+
+    @Expose()
+    @Transform(({value}) => value.toString())
+    id!: string;
+
+    @Expose()
+    thumbnail!: string;
+
+    @Expose()
+    @Transform(({value}) => new Date(value), {
+        toClassOnly: true,
+    })
+    publishedAt!: Date;
+}
+
+/**
  * @class MetaTransformed
  */
 export class MetaTransformed {
@@ -45,6 +66,13 @@ export class MetaTransformed {
         toClassOnly: true,
     })
     publishDate!: string;
+
+    @Expose()
+    @Type(() => EpisodeMeta)
+    episodes!: EpisodeMeta[];
+
+    @Expose()
+    limitAreas!: string[];
 }
 
 // TODO: completing meta data transform.
@@ -72,5 +100,22 @@ export const transformMeta = (data: any) => {
         publishDate: data.OgvVideo.epDetail
             ? data.OgvVideo.epDetail.publish_time
             : data.UgcVideo.videoData.formatted_pub_date,
+        episodes:
+            data.OgvVideo.allEpisodeList?.map(
+                (e: {
+                    title_display: string;
+                    cover: string;
+                    episode_id: number;
+                    publish_time: string;
+                }) => ({
+                    title: e.title_display,
+                    thumbnail: e.cover,
+                    id: e.episode_id,
+                    publishedAt: e.publish_time,
+                }),
+            ) ?? undefined,
+        limitAreas: data.OgvVideo.seasonData
+            ? data.OgvVideo.seasonData.limit_areas
+            : undefined,
     };
 };
