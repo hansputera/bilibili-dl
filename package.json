@@ -22,9 +22,5 @@
   "engines": {
     "node": ">=14.x"
   },
-  "private": true,
-  "workspaces": [
-   "packages/*",
-   "apps/*"
-  ]
+  "private": true
 }
