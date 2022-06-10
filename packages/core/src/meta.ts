@@ -1,4 +1,10 @@
-import {extractInitialState, fetchBase} from '@bilibili-dl/util';
+import {
+    extractInitialState,
+    fetchBase,
+    MetaTransformed,
+    plainToInstance,
+    transformMeta,
+} from '@bilibili-dl/util';
 
 /**
  * Get Video Meta data.
@@ -15,5 +21,8 @@ export const getMeta = async (url: string): Promise<any> => {
             ?.toLowerCase() === 'bstation'
     )
         return undefined;
-    return extractInitialState(response.body);
+    return plainToInstance(
+        MetaTransformed,
+        transformMeta(extractInitialState(response.body)),
+    );
 };
