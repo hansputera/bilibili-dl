@@ -6,6 +6,14 @@ interface BtvID {
 }
 
 /**
+ * Match view count.
+ * @param {string} viewStr View count string.
+ * @return {string}
+ */
+export const matchView = (viewStr: string): string =>
+    /\d+((.|\/)+)?\d+(m|k)?/gi.exec(viewStr)?.at(0) ?? '0';
+
+/**
  * Get Bilibili.TV Video ID.
  * @param {string} url Bilibili.TV Video URL.
  * @return {BtvID | undefined}
