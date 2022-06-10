@@ -66,7 +66,7 @@ interface RawPlayUrlStruct {
  * @param {RawPlayUrlStruct} data original playurl data.
  * @return {*}
  */
-export const transformToReadable = (data: RawPlayUrlStruct) => {
+export const transformPlayUrl = (data: RawPlayUrlStruct) => {
     return {
         duration: +data.duration,
         audios: data.audio_resource.map((audio) => ({

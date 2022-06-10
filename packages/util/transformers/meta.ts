@@ -48,7 +48,7 @@ export class MetaTransformed {
 }
 
 // TODO: completing meta data transform.
-export const transformToReadable = (data: any) => {
+export const transformMeta = (data: any) => {
     return {
         title: data.sharedData.title,
         url: data.sharedData.url,
