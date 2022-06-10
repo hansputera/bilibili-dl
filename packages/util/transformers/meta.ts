@@ -35,6 +35,20 @@ export class EpisodeMeta {
 }
 
 /**
+ * @class SerieMeta
+ */
+export class SerieMeta {
+    @Expose()
+    title!: string;
+
+    @Expose()
+    id!: string;
+
+    @Expose()
+    url!: string;
+}
+
+/**
  * @class MetaTransformed
  */
 export class MetaTransformed {
@@ -75,6 +89,10 @@ export class MetaTransformed {
 
     @Expose()
     limitAreas!: string[];
+
+    @Expose()
+    @Type(() => SerieMeta)
+    series!: SerieMeta[];
 }
 
 // TODO: completing meta data transform.
@@ -132,17 +150,16 @@ export const transformMeta = (data: any) => {
         limitAreas: data.OgvVideo.seasonData
             ? data.OgvVideo.seasonData.limit_areas
             : undefined,
-        series: data.OgvVideo.seriesList ? data.OgvVideo.seriesList.map((serie: {
-            title: string;
-            season_id: number
-        }) => ({
-            title: serie.title,
-            id: serie.season_id.toString(),
-            url: `${
-                cleanupURL(
-                    new URL(data.shareData.url, baseURL),
-                ).replace(/\/(\d+)(\/\d+)?/g, `/${serie.season_id}`)
-            }`,
-        })) : undefined,
+        series: data.OgvVideo.seriesList
+            ? data.OgvVideo.seriesList.map(
+                  (serie: {title: string; season_id: number}) => ({
+                      title: serie.title,
+                      id: serie.season_id.toString(),
+                      url: `${cleanupURL(
+                          new URL(data.shareData.url, baseURL),
+                      ).replace(/\/(\d+)(\/\d+)?/g, `/${serie.season_id}`)}`,
+                  }),
+              )
+            : undefined,
     };
 };
