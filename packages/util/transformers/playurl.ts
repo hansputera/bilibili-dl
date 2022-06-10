@@ -15,7 +15,9 @@ export class PlayUrlResourceTransformed {
     id!: string;
 
     @Expose()
-    @Transform(({value}) => prettyMs(value))
+    @Transform(({value}) => prettyMs(value), {
+        toPlainOnly: true,
+    })
     duration!: string;
 
     @Expose()
@@ -25,7 +27,9 @@ export class PlayUrlResourceTransformed {
     codecs!: string;
 
     @Expose()
-    @Transform(({value}) => prettyBytes(value))
+    @Transform(({value}) => prettyBytes(value), {
+        toPlainOnly: true,
+    })
     size!: string;
 
     @Expose()
@@ -37,7 +41,9 @@ export class PlayUrlResourceTransformed {
  */
 export class PlayUrlTransformed {
     @Expose()
-    @Transform(({value}) => prettyMs(value))
+    @Transform(({value}) => prettyMs(value), {
+        toPlainOnly: true,
+    })
     duration!: string;
 
     @Expose()
