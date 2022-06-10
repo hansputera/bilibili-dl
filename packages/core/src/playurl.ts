@@ -1,4 +1,9 @@
-import {fetchAPI, plainToInstance, PlayUrlTransformed} from '@bilibili-dl/util';
+import {
+    fetchAPI,
+    plainToInstance,
+    PlayUrlTransformed,
+    transformToReadable,
+} from '@bilibili-dl/util';
 import {getGatewayURL} from '@bilibili-dl/config/constants.js';
 import type {Resource, VideoResource} from '@bilibili-dl/interfaces/core';
 
@@ -34,5 +39,8 @@ export const getPlayUrl = async (
     if (+response.code === 404 || !response.data) {
         return undefined;
     }
-    return plainToInstance(PlayUrlTransformed, response.data.playurl);
+    return plainToInstance(
+        PlayUrlTransformed,
+        transformToReadable(response.data.playurl),
+    );
 };
