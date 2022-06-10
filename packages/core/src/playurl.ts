@@ -3,7 +3,7 @@ import {
     ItemType,
     plainToInstance,
     PlayUrlTransformed,
-    transformToReadable,
+    transformPlayUrl,
     Got,
 } from '@bilibili-dl/util';
 import {getGatewayURL} from '@bilibili-dl/config/constants.js';
@@ -62,7 +62,7 @@ export const getPlayUrl = async (
         }
         return plainToInstance(
             PlayUrlTransformed,
-            transformToReadable(response.data.playurl),
+            transformPlayUrl(response.data.playurl),
         );
     } catch (e) {
         if (e instanceof Got.HTTPError) {
