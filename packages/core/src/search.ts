@@ -18,9 +18,13 @@ export const searchQuery = async (
     const response = await fetchAPI
         .get(getGatewayURL('v2').concat('search'), {
             searchParams: {
-                keyword: encodeURIComponent(query),
+                keyword: decodeURIComponent(query),
                 platform: 'web',
                 s_locale: 'en_US',
+            },
+            headers: {
+                Referer: 'https://www.bilibili.tv/en',
+                Origin: 'https://www.bilibili.tv',
             },
         })
         .json<{
