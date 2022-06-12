@@ -35,10 +35,9 @@ export const matchView = (viewStr: string): string =>
  */
 export const getBtvID = (url: string): BtvID | undefined => {
     const matchs =
-        /http(s)?:\/\/(www\.)?bilibili\.tv\/[a-zA-Z]+\/(video|play)\/(\d+)(\/(\d+))?/gi.exec(
-            url,
-        );
-
+        /http(s)?:\/\/(www\.)?bilibili\.tv\/[a-zA-Z]+\/(video|play)\/(\d+)(\/(\d+))?/gi
+            .exec(url)
+            ?.filter((x) => typeof x === 'string');
     if (matchs) {
         if (matchs.length > 5)
             return {
