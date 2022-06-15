@@ -1,5 +1,5 @@
 export const baseURL = 'https://bilibili.tv';
-export const apiBaseURL = 'https://api-bilibili.besecure.eu.org';
+export const apiBaseURL = 'https://api.bilibili.tv';
 /**
  * Get api gateway url.
  * @param {string} version api version.
