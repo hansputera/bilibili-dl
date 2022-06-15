@@ -42,7 +42,7 @@ export const getPlayUrl = async (
                     request: 5000,
                     response: 5000,
                     socket: 4000,
-                }
+                },
             },
         ).json<{
             code: number;
@@ -55,7 +55,6 @@ export const getPlayUrl = async (
                 };
             };
         }>();
-
         if (+response.code === 404 || !response.data) {
             if (/unknown error/gi.test(response.message) && retryCount <= 2) {
                 return getPlayUrl(
