@@ -37,6 +37,12 @@ export const getPlayUrl = async (
                               ep_id: id,
                           }),
                 },
+                timeout: {
+                    connect: 3000,
+                    request: 5000,
+                    response: 5000,
+                    socket: 4000,
+                }
             },
         ).json<{
             code: number;
