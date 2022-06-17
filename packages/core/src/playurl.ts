@@ -29,6 +29,9 @@ export const getPlayUrl = async (
                     type: 0,
                     s_locale: 'en_US',
                     platform: 'web',
+                    qn: 4,
+                    tf: 0,
+                    device: 'wap',
                     ...(type === 'video'
                         ? {
                               aid: id,
@@ -42,6 +45,10 @@ export const getPlayUrl = async (
                     request: 5000,
                     response: 5000,
                     socket: 4000,
+                    send: 5000,
+                    secureConnect: 5000,
+                    read: 5000,
+                    lookup: 5000,
                 },
             },
         ).json<{
