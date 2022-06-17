@@ -26,7 +26,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             optional: true,
         },
         locale: {
-            type: 'stringEnum',
+            type: 'enum',
             values: supportedLocales,
             optional: true,
             default: 'en_US',
