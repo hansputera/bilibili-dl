@@ -16,7 +16,7 @@ export function compare<T>(first: T, second: T): boolean {
         typeof first === 'object' &&
         typeof second === 'object'
     ) {
-        return Object.is(first, second);
+        return JSON.stringify(first) === JSON.stringify(second);
     } else {
         return first === second;
     }

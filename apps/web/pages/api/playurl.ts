@@ -1,6 +1,7 @@
 import {NextApiRequest, NextApiResponse} from 'next';
 import Validator from 'fastest-validator';
 import {
+    compare,
     getBtvID,
     instanceToPlain,
     jsonParse,
@@ -36,7 +37,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         });
 
     let result = jsonParse((await redis.get(video.videoId)) ?? '');
-    if (!(result instanceof PlayUrlTransformed)) {
+    if (compare(result, {}) && !(result instanceof PlayUrlTransformed)) {
         result = await getPlayUrl(
             video.videoId,
             video.seasonId ? 'anime' : 'video',
@@ -50,7 +51,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         }
         await redis.set(
             video.videoId,
-            JSON.stringify(result),
+            JSON.stringify(instanceToPlain(result, {
+                strategy: 'excludeAll',
+            })),
             'EX',
             maxLifetimeData,
         );

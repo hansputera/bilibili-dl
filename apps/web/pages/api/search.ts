@@ -65,19 +65,28 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         await redis.set(
             req.body.query?.toLowerCase() ||
                 (req.query.query as string)?.toLowerCase(),
-            JSON.stringify(result),
+            JSON.stringify(
+                result.map((x) =>
+                    instanceToPlain(x, {
+                        strategy: 'excludeAll',
+                    }),
+                ),
+            ),
             'EX',
             maxLifetimeData,
         );
     }
 
+    result = result.filter((c) =>
+        filter === 'all' ? true : filter === c.type,
+    );
     return res.status(200).json(
-        result
-            .filter((c) => (filter === 'all' ? true : filter === c.type))
-            .map((c) =>
-                instanceToPlain(c, {
-                    strategy: 'excludeAll',
-                }),
-            ),
+        result[0] instanceof ItemTransformed
+            ? result.map((c) =>
+                  instanceToPlain(c, {
+                      strategy: 'excludeAll',
+                  }),
+              )
+            : result,
     );
 };
