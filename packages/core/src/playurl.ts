@@ -6,19 +6,24 @@ import {
     transformPlayUrl,
     Got,
 } from '@bilibili-dl/util';
-import {getGatewayURL} from '@bilibili-dl/config/constants.js';
+import {
+    getGatewayURL,
+    SupportedLocales,
+} from '@bilibili-dl/config/constants.js';
 import type {Resource, VideoResource} from '@bilibili-dl/interfaces/core';
 
 /**
  * Get video URL by id.
  * @param {string} id Video ID
  * @param {ItemType} type Video Type.
+ * @param {SupportedLocales} locale Supported Locale.
  * @param {number} retryCount Retry count.
  * @return {Promise<PlayUrlTransformed | string>}
  */
 export const getPlayUrl = async (
     id: string,
     type: ItemType = 'video',
+    locale: SupportedLocales = 'en_US',
     retryCount: number = 0,
 ): Promise<PlayUrlTransformed | string> => {
     try {
@@ -27,7 +32,7 @@ export const getPlayUrl = async (
             {
                 searchParams: {
                     type: 0,
-                    s_locale: 'en_US',
+                    s_locale: locale,
                     platform: 'web',
                     qn: 4,
                     tf: 0,
@@ -67,6 +72,7 @@ export const getPlayUrl = async (
                 return getPlayUrl(
                     id,
                     type === 'video' ? 'anime' : 'video',
+                    locale,
                     retryCount++,
                 );
             }

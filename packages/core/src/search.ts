@@ -4,7 +4,10 @@ import {
     plainToInstance,
     compare,
 } from '@bilibili-dl/util';
-import {getGatewayURL} from '@bilibili-dl/config/constants.js';
+import {
+    getGatewayURL,
+    SupportedLocales,
+} from '@bilibili-dl/config/constants.js';
 
 /**
  * Search videos/anime from given query.
@@ -14,13 +17,14 @@ import {getGatewayURL} from '@bilibili-dl/config/constants.js';
 // TODO: create pagination request
 export const searchQuery = async (
     query: string,
+    locale: SupportedLocales = 'en_US',
 ): Promise<ItemTransformed[]> => {
     const response = await fetchAPI
         .get(getGatewayURL('v2').concat('search'), {
             searchParams: {
                 keyword: decodeURIComponent(query),
                 platform: 'web',
-                s_locale: 'en_US',
+                s_locale: locale,
             },
             headers: {
                 Referer: 'https://www.bilibili.tv/en',
