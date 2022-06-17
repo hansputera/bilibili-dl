@@ -51,9 +51,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         }
         await redis.set(
             video.videoId,
-            JSON.stringify(instanceToPlain(result, {
-                strategy: 'excludeAll',
-            })),
+            JSON.stringify(
+                instanceToPlain(result, {
+                    strategy: 'excludeAll',
+                }),
+            ),
             'EX',
             maxLifetimeData,
         );

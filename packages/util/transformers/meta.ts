@@ -97,34 +97,41 @@ export class MetaTransformed {
 
 // TODO: completing meta data transform.
 export const transformMeta = (data: any) => {
+    const sectionsList = data.ogv?.sectionsList?.reduce(
+        (
+            prev: {
+                episodes: Record<string, unknown>[];
+            },
+            curr: {
+                episodes: Record<string, unknown>[];
+            },
+        ) => prev.episodes.concat(curr.episodes),
+    );
+
     return {
-        title: data.shareData.title,
-        url: data.shareData.url,
+        title: data.share.shareInfo.title,
+        url: data.share.shareInfo.url,
         photo: {
-            vertical: data.shareData.vertical_pic,
-            horizontal: data.shareData.horizontal_pic,
+            vertical: data.share.shareInfo.vertical_pic ?? undefined,
+            horizontal: data.share.shareInfo.horizontal_pic,
         },
-        description: data.shareData.desc,
-        id: data.OgvVideo.epId || data.UgcVideo.videoData.aid,
-        season_id: data.OgvVideo.seasonData
-            ? data.OgvVideo.seasonData.season_id
-            : undefined,
-        thumbnail: data.UgcVideo.videoData
-            ? data.UgcVideo.videoData.cover
-            : data.OgvVideo.epDetail.cover,
-        genre: data.OgvVideo.seasonData
-            ? data.OgvVideo.seasonData.styles
+        description: data.share.shareInfo.desc,
+        id: data.ogv?.epId || data.ugc.aid,
+        season_id: data.ogv?.season ? data.ogv.season.season_id : undefined,
+        thumbnail: data.ugc?.archive
+            ? data.ugc?.archive.cover
+            : data.ogv?.season.horizontal_cover,
+        genre: data.ogv?.season
+            ? data.ogv.season.styles
                   .map((style: {title: string}) => style.title)
                   .join(', ')
             : '-',
-        originTitle: data.OgvVideo.seasonData
-            ? data.OgvVideo.seasonData.origin_name
-            : undefined,
-        publishDate: data.OgvVideo.epDetail
-            ? data.OgvVideo.epDetail.publish_time
-            : data.UgcVideo.videoData.formatted_pub_date,
+        originTitle: data.ogv?.season ? data.ogv.season.origin_name : undefined,
+        publishDate: data.ogv?.season
+            ? data.ogv.season.player_time.replace(/[a-zA-Z]/g, '')
+            : data.ugc.archive.formatted_pub_date,
         episodes:
-            data.OgvVideo.allEpisodeList?.map(
+            sectionsList?.map(
                 (e: {
                     title_display: string;
                     cover: string;
@@ -136,27 +143,25 @@ export const transformMeta = (data: any) => {
                     id: e.episode_id,
                     publishedAt: e.publish_time,
                     url: `${cleanupURL(
-                        new URL(data.shareData.url, baseURL),
+                        new URL(data.share.shareInfo.url, baseURL),
                     ).replace(
                         /\/(\d+)(\/\d+)?/g,
-                        `/${data.OgvVideo.seasonData.season_id}${
-                            data.OgvVideo.epId !== e.episode_id
+                        `/${data.ogv.season.season_id}${
+                            data.ogv.epId !== e.episode_id
                                 ? `/${e.episode_id}`
                                 : ''
                         }`,
                     )}`,
                 }),
             ) ?? undefined,
-        limitAreas: data.OgvVideo.seasonData
-            ? data.OgvVideo.seasonData.limit_areas
-            : undefined,
-        series: data.OgvVideo.seriesList
-            ? data.OgvVideo.seriesList.map(
+        limitAreas: data.ogv?.season ? data.ogv.season.limit_areas : undefined,
+        series: data.ogv?.series
+            ? data.ogv.series.map(
                   (serie: {title: string; season_id: number}) => ({
                       title: serie.title,
                       id: serie.season_id.toString(),
                       url: `${cleanupURL(
-                          new URL(data.shareData.url, baseURL),
+                          new URL(data.share.shareInfo.url, baseURL),
                       ).replace(/\/(\d+)(\/\d+)?/g, `/${serie.season_id}`)}`,
                   }),
               )

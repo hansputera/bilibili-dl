@@ -18,7 +18,7 @@ export const getMeta = async (url: string): Promise<any> => {
         /\<title\>(.*)\<\/title\>/gi
             .exec(response.body)
             ?.at(1)
-            ?.toLowerCase() === 'bstation'
+            ?.toLowerCase() === 'bilibili'
     )
         return undefined;
     return plainToInstance(

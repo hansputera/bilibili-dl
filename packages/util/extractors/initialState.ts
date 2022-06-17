@@ -1,4 +1,4 @@
-import {jsonParse} from '..';
+import * as vm from 'node:vm';
 
 /**
  * Extract `window.__INITIAL_STATE__` data.
@@ -6,10 +6,15 @@ import {jsonParse} from '..';
  * @return {*}
  */
 export const extractInitialState = (html: string): any => {
-    return jsonParse(
-        '{'.concat(
-            html.match(/window\.__INITIAL_STATE__=\{(.*)\}\}/i)?.at(1)!,
-            '}}',
-        ),
-    );
+    const scriptWant2Execute = html
+        .match(/\__initialState=(.*)\"\)\)/i)
+        ?.at(1)
+        ?.concat('"))');
+    if (!scriptWant2Execute) {
+        return undefined;
+    }
+
+    return vm.runInThisContext(scriptWant2Execute, {
+        filename: 'initialState.vm',
+    });
 };
