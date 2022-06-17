@@ -10,6 +10,7 @@ import {
 
 import {redis} from '../../lib/redis';
 import {maxLifetimeData} from '../../config';
+import {supportedLocales} from '@bilibili-dl/config/constants.js';
 
 const v = new Validator();
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -23,6 +24,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             type: 'enum',
             values: ['anime', 'video'],
             optional: true,
+        },
+        locale: {
+            type: 'stringEnum',
+            values: supportedLocales,
+            optional: true,
+            default: 'en_US',
         },
     })(req.body || req.query);
 
@@ -53,6 +60,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         result = await searchQuery(
             req.body.query?.toLowerCase() ||
                 (req.query.query as string)?.toLowerCase(),
+            req.body.locale || req.query.locale || 'en_US',
         );
         await redis.set(
             req.body.query?.toLowerCase() ||

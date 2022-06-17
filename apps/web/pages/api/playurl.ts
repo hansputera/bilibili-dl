@@ -8,6 +8,7 @@ import {
 } from '@bilibili-dl/util';
 import {redis} from '../../lib/redis';
 import {getPlayUrl} from '@bilibili-dl/core';
+import {supportedLocales} from '@bilibili-dl/config/constants.js';
 import {maxLifetimeData} from '../../config';
 
 const v = new Validator();
@@ -15,6 +16,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const validationRequest = v.compile({
         url: {
             type: 'url',
+        },
+        locale: {
+            type: 'stringEnum',
+            values: supportedLocales,
+            default: 'en_US',
+            optional: true,
         },
     })(req.body || req.query);
 
@@ -30,7 +37,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     let result = jsonParse((await redis.get(video.videoId)) ?? '');
     if (!(result instanceof PlayUrlTransformed)) {
-        result = await getPlayUrl(video.videoId);
+        result = await getPlayUrl(
+            video.videoId,
+            video.seasonId ? 'anime' : 'video',
+            req.body.locale || req.query.locale || 'en_US',
+        );
         if (typeof result === 'string' || !result) {
             return res.status(201).json({
                 message:
