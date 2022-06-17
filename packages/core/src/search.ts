@@ -27,7 +27,9 @@ export const searchQuery = async (
                 s_locale: locale,
             },
             headers: {
-                Referer: 'https://www.bilibili.tv/en',
+                Referer: 'https://www.bilibili.tv/'.concat(
+                    locale.split('_')?.at(0)!,
+                ),
                 Origin: 'https://www.bilibili.tv',
             },
         })

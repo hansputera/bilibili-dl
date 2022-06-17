@@ -37,6 +37,7 @@ export const getPlayUrl = async (
                     qn: 4,
                     tf: 0,
                     device: 'wap',
+                    spm_id: 'bstar-web.pgc-video-detail.0.0',
                     ...(type === 'video'
                         ? {
                               aid: id,
@@ -54,6 +55,12 @@ export const getPlayUrl = async (
                     secureConnect: 5000,
                     read: 5000,
                     lookup: 5000,
+                },
+                headers: {
+                    Origin: 'https://www.bilibili.tv',
+                    Referer: 'https://www.bilibili.tv/'.concat(
+                        locale.split('_').at(0)!,
+                    ),
                 },
             },
         ).json<{
