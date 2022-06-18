@@ -6,7 +6,8 @@
     "lint": "turbo run lint --parallel",
     "format": "turbo run format --parallel",
     "dev": "turbo run dev",
-    "build": "turbo run build"
+    "build": "turbo run build",
+    "pack": "node scripts/packs.js"
   },
   "keywords": [
     "bilibili.tv",
@@ -16,6 +17,7 @@
   "author": "Hanif Dwy Putra S <hanifdwyputrasembiring@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "execa": "^6.1.0",
     "turbo": "^1.2.16"
   },
   "type": "module",
