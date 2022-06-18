@@ -55,11 +55,12 @@ async function load(directoryOrFile) {
           }
         );
       } catch (e) {
-        resolvedJson.main = mainPath;
-        fs.writeFileSync(directoryOrFile, JSON.stringify(resolvedJson, 0, 2));
         errors.push({ name: directoryOrFile, error: e });
       }
 
+
+      resolvedJson.main = mainPath;
+      fs.writeFileSync(directoryOrFile, JSON.stringify(resolvedJson, 0, 2));
       return 1;
     }
   }

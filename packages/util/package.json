@@ -2,7 +2,7 @@
   "name": "@bilibili-dl/util",
   "version": "1.0.1",
   "description": "Bilibili-DL Project Utility",
-  "main": "./dist/index.js",
+  "main": "./index.ts",
   "module": "./dist/index.js",
   "scripts": {
     "lint": "eslint \"**/*.ts\" --fix",
