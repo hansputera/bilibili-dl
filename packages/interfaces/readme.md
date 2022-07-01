@@ -2,7 +2,6 @@
 
 Just TypeScript Declaration/Interface for Bilibili-DL Project.
 
-
 ## Installation
 
 Install `@bilibili-dl/interfaces`
@@ -10,11 +9,15 @@ Install `@bilibili-dl/interfaces`
 ```bash
   npm i @bilibili-dl/interfaces -D
 ```
+
 or
+
 ```bash
   pnpm add @bilibili-dl/interfaces -D
 ```
+
 or
+
 ```bash
   yarn add @bilibili-dl/interfaces -D
 ```
@@ -53,11 +56,10 @@ const video: VideoResource = {
 }
 ```
 
-
 ## Authors
 
-- [@hansputera](https://github.com/hansputera)
+-   [@hansputera](https://github.com/hansputera)
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
-

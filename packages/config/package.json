@@ -1,32 +1,32 @@
 {
-  "name": "@bilibili-dl/config",
-  "version": "1.0.0",
-  "description": "Bilibili-DL Project Configuration",
-  "scripts": {
-    "lint": "eslint -c eslint.cjs \"**/*.{js,cjs}\" --fix",
-    "format": "prettier --config prettier.cjs . --write"
-  },
-  "keywords": [
-    "bilibili-dl-config"
-  ],
-  "author": "Hanif Dwy Putra S <hanifdwyputrasembiring@gmail.com>",
-  "license": "MIT",
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.27.0",
-    "@typescript-eslint/parser": "^5.27.0",
-    "eslint": "^8.17.0",
-    "eslint-config-google": "^0.14.0",
-    "eslint-config-prettier": "^8.5.0",
-    "prettier": "^2.6.2",
-    "typescript": "^4.7.3"
-  },
-  "type": "module",
-  "files": [
-    "eslint.cjs",
-    "eslint-ts.cjs",
-    "prettier.cjs",
-    "tsconfig.base.json",
-    "constants.js"
-  ],
-  "main": "./dist/index.js"
+    "name": "@bilibili-dl/config",
+    "version": "1.0.0",
+    "description": "Bilibili-DL Project Configuration",
+    "scripts": {
+        "lint": "eslint -c eslint.cjs \"**/*.{js,cjs}\" --fix",
+        "format": "prettier --config prettier.cjs . --write"
+    },
+    "keywords": [
+        "bilibili-dl-config"
+    ],
+    "author": "Hanif Dwy Putra S <hanifdwyputrasembiring@gmail.com>",
+    "license": "MIT",
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.27.0",
+        "@typescript-eslint/parser": "^5.27.0",
+        "eslint": "^8.17.0",
+        "eslint-config-google": "^0.14.0",
+        "eslint-config-prettier": "^8.5.0",
+        "prettier": "^2.6.2",
+        "typescript": "^4.7.3"
+    },
+    "type": "module",
+    "files": [
+        "eslint.cjs",
+        "eslint-ts.cjs",
+        "prettier.cjs",
+        "tsconfig.base.json",
+        "constants.js"
+    ],
+    "main": "./dist/index.js"
 }

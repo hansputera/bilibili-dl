@@ -16,7 +16,11 @@ export class ItemTransformed {
 
     @Exclude()
     @Expose({name: 'mid'})
-    _videoId!: number;
+    _mId!: number;
+
+    @Exclude()
+    @Expose({name: 'aid'})
+    _aId!: number;
 
     @Exclude()
     @Expose({name: 'season_id'})
@@ -24,7 +28,7 @@ export class ItemTransformed {
 
     @Expose()
     get id(): number {
-        return this._videoId || this._seasonId;
+        return this._aId || this._mId || this._seasonId;
     }
 
     @Expose()
