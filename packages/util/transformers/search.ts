@@ -33,6 +33,7 @@ export class ItemTransformed {
 
     @Expose()
     get url(): string {
+        // TODO: use requested "locale"
         return new URL(
             `./en/${
                 this.type === 'anime' ? 'play' : 'video'
