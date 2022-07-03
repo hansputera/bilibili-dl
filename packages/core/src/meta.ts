@@ -9,9 +9,11 @@ import {
 /**
  * Get Video Meta data.
  * @param {string} url Bilibili.TV Video URL.
- * @return {Promise<*>}
+ * @return {Promise<MetaTransformed | undefined>}
  */
-export const getMeta = async (url: string): Promise<any> => {
+export const getMeta = async (
+    url: string,
+): Promise<MetaTransformed | undefined> => {
     const response = await fetchBase.get('.'.concat(new URL(url).pathname));
     // identify unknown page.
     if (
