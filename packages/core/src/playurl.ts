@@ -75,7 +75,7 @@ export const getPlayUrl = async (
             };
         }>();
         if (+response.code === 404 || !response.data) {
-            if (/unknown error/gi.test(response.message) && retryCount <= 2) {
+            if (retryCount <= 2) {
                 retryCount++;
                 return getPlayUrl(
                     id,
