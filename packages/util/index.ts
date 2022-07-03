@@ -1,3 +1,4 @@
+import {baseURL, supportedLocales} from '@bilibili-dl/config/constants';
 import 'reflect-metadata';
 
 interface BtvID {
@@ -38,15 +39,28 @@ export const getBtvID = (url: string): BtvID | undefined => {
         /http(s)?:\/\/(www\.)?bilibili\.tv\/[a-zA-Z]+\/(video|play)\/(\d+)(\/(\d+))?/gi
             .exec(url)
             ?.filter((x) => typeof x === 'string');
+
     if (matchs) {
+        const regexAnime = new RegExp(
+            `${baseURL}/${supportedLocales
+                .map((locale) => locale.split('_').at(0))
+                .join('|')}/play/(\d+)(\/(\d+))?`,
+            'gi',
+        );
+
         if (matchs.length > 5)
             return {
                 seasonId: matchs.at(4),
                 videoId: matchs.at(-1)!,
             };
-        else
+        else if (!regexAnime.test(url))
             return {
                 videoId: matchs.at(-1)!,
+            };
+        else
+            return {
+                seasonId: matchs.at(-1)!,
+                videoId: '',
             };
     } else {
         return undefined;
