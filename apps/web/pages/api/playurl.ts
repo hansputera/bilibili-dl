@@ -1,6 +1,7 @@
 import {NextApiRequest, NextApiResponse} from 'next';
 import Validator from 'fastest-validator';
 import {
+    cleanupURL,
     compare,
     getBtvID,
     instanceToPlain,
@@ -8,7 +9,7 @@ import {
     PlayUrlTransformed,
 } from '@bilibili-dl/util';
 import {redis} from '../../lib/redis';
-import {getPlayUrl} from '@bilibili-dl/core';
+import {getMeta, getPlayUrl} from '@bilibili-dl/core';
 import {supportedLocales} from '@bilibili-dl/config/constants.js';
 import {maxLifetimeData} from '../../config';
 
@@ -38,6 +39,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     let result = jsonParse((await redis.get(video.videoId)) ?? '');
     if (compare(result, {}) && !(result instanceof PlayUrlTransformed)) {
+        if (video.seasonId?.length && !video.videoId.length) {
+            const metaVideo = await getMeta(
+                cleanupURL(req.body?.url || req.query?.url),
+            );
+
+            if (!metaVideo)
+                return res.status(400).json({
+                    message: 'Please send valid bilibili.tv video url!',
+                });
+
+            video.videoId = metaVideo.episodes.find((s) => s.id.length)?.id!;
+        }
         result = await getPlayUrl(
             video.videoId,
             video.seasonId ? 'anime' : 'video',
