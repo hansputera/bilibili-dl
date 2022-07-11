@@ -3,8 +3,8 @@ import {getBtvID} from '@bilibili-dl/util';
 import Validator from 'fastest-validator';
 import {NextApiRequest, NextApiResponse} from 'next';
 
-const v = new Validator();
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+    const v = new Validator();
     const validationRequest = v.compile({
         url: {
             type: 'url',

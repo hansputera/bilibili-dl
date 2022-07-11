@@ -13,8 +13,8 @@ import {getMeta, getPlayUrl} from '@bilibili-dl/core';
 import {supportedLocales} from '@bilibili-dl/config/constants.js';
 import {maxLifetimeData} from '../../config';
 
-const v = new Validator();
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+    const v = new Validator();
     const validationRequest = v.compile({
         url: {
             type: 'url',

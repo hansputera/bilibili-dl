@@ -12,8 +12,8 @@ import {redis} from '../../lib/redis';
 import {maxLifetimeData} from '../../config';
 import {supportedLocales} from '@bilibili-dl/config/constants.js';
 
-const v = new Validator();
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+    const v = new Validator();
     const validReq = v.compile({
         query: {
             type: 'string',
