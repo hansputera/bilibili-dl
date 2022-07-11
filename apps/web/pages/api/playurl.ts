@@ -49,7 +49,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                     message: 'Please send valid bilibili.tv video url!',
                 });
 
-            video.videoId = metaVideo.episodes.find((s) => s.id.length)?.id!;
+            if (metaVideo.episodes?.length)
+                video.videoId = metaVideo.episodes.find(
+                    (s) => s.id.length,
+                )?.id!;
+            else video.videoId = metaVideo.id;
         }
         result = await getPlayUrl(
             video.videoId,
