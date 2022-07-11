@@ -43,8 +43,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 (req.query.query as string)?.toLowerCase(),
         );
     }
-    const filter =
-        (req.body.filter || req.query.filter)?.toLowerCase() ?? 'all';
+
     let result: ItemTransformed[] = jsonParse(
         (await redis.get(
             req.body.query?.toLowerCase() ||
@@ -77,6 +76,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         );
     }
 
+    const filter =
+        (req.body.filter || req.query.filter)?.toLowerCase() ?? 'all';
     result = result.filter((c) =>
         filter === 'all' ? true : filter === c.type,
     );
