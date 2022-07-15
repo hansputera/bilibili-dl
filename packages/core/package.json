@@ -15,15 +15,15 @@
     "author": "Hanif Dwy Putra S <hanidwyputrasembiring@gmail.com>",
     "license": "MIT",
     "dependencies": {
-        "@bilibili-dl/config": "*",
-        "@bilibili-dl/interfaces": "*",
-        "@bilibili-dl/util": "*"
+        "@bilibili-dl/config": "workspace:*",
+        "@bilibili-dl/interfaces": "workspace:*",
+        "@bilibili-dl/util": "workspace:*"
     },
     "type": "module",
     "devDependencies": {
-        "eslint": "^8.17.0",
-        "prettier": "^2.6.2",
+        "eslint": "^8.19.0",
+        "prettier": "^2.7.1",
         "rimraf": "^3.0.2",
-        "typescript": "^4.7.3"
+        "typescript": "^4.7.4"
     }
 }

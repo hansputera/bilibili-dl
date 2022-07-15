@@ -10,25 +10,24 @@
         "export": "next export"
     },
     "dependencies": {
-        "@bilibili-dl/core": "*",
-        "@bilibili-dl/util": "*",
+        "@bilibili-dl/core": "workspace:*",
+        "@bilibili-dl/util": "workspace:*",
         "dotenv": "^16.0.1",
         "fastest-validator": "^1.12.0",
-        "ioredis": "^5.0.6",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2"
+        "ioredis": "^5.2.0",
+        "next": "^12.2.2",
+        "next-transpile-modules": "^9.0.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
     },
     "devDependencies": {
-        "@bilibili-dl/config": "*",
-        "@next/eslint-plugin-next": "^12.1.6",
-        "@types/csurf": "^1.11.2",
-        "@types/node": "^17.0.40",
-        "@types/react": "^18.0.12",
-        "@types/react-dom": "^18.0.5",
-        "next": "latest",
-        "next-transpile-modules": "^9.0.0",
-        "prettier": "^2.6.2",
-        "typescript": "^4.7.3",
-        "windicss-webpack-plugin": "^1.7.3"
+        "@bilibili-dl/config": "workspace:*",
+        "@next/eslint-plugin-next": "^12.2.2",
+        "@types/node": "^18.0.4",
+        "@types/react": "^18.0.15",
+        "@types/react-dom": "^18.0.6",
+        "prettier": "^2.7.1",
+        "typescript": "^4.7.4",
+        "windicss-webpack-plugin": "^1.7.4"
     }
 }

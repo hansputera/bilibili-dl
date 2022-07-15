@@ -9,7 +9,7 @@
     "main": "./index.js",
     "license": "MIT",
     "devDependencies": {
-        "@bilibili-dl/config": "*"
+        "@bilibili-dl/config": "workspace:*"
     },
     "scripts": {
         "format": "prettier . --write"
