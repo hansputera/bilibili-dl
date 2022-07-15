@@ -1,34 +1,34 @@
 {
-  "name": "@bilibili-dl/util",
-  "version": "1.0.3",
-  "description": "Bilibili-DL Project Utility",
-  "main": "./index.ts",
-  "module": "./dist/index.js",
-  "scripts": {
-    "lint": "eslint \"**/*.ts\" --fix",
-    "format": "prettier . --write",
-    "build": "rimraf dist && tsc -p tsconfig.publish.json"
-  },
-  "keywords": [
-    "bilibili-project",
-    "bilibili-util"
-  ],
-  "author": "Hanif Dwy Putra S <hanifdwyputrasembiring@gmail.com>",
-  "license": "MIT",
-  "type": "module",
-  "dependencies": {
-    "@bilibili-dl/config": "workspace:*",
-    "class-transformer": "^0.5.1",
-    "got": "^12.1.0",
-    "pretty-bytes": "^6.0.0",
-    "pretty-ms": "^8.0.0",
-    "reflect-metadata": "^0.1.13"
-  },
-  "devDependencies": {
-    "@bilibili-dl/interfaces": "workspace:*",
-    "eslint": "^8.19.0",
-    "prettier": "^2.7.1",
-    "rimraf": "^3.0.2",
-    "typescript": "^4.7.4"
-  }
+    "name": "@bilibili-dl/util",
+    "version": "1.0.3",
+    "description": "Bilibili-DL Project Utility",
+    "main": "./index.ts",
+    "module": "./dist/index.js",
+    "scripts": {
+        "lint": "eslint \"**/*.ts\" --fix",
+        "format": "prettier . --write",
+        "build": "rimraf dist && tsc -p tsconfig.publish.json"
+    },
+    "keywords": [
+        "bilibili-project",
+        "bilibili-util"
+    ],
+    "author": "Hanif Dwy Putra S <hanifdwyputrasembiring@gmail.com>",
+    "license": "MIT",
+    "type": "module",
+    "dependencies": {
+        "@bilibili-dl/config": "workspace:*",
+        "class-transformer": "^0.5.1",
+        "got": "^12.1.0",
+        "pretty-bytes": "^6.0.0",
+        "pretty-ms": "^8.0.0",
+        "reflect-metadata": "^0.1.13"
+    },
+    "devDependencies": {
+        "@bilibili-dl/interfaces": "workspace:*",
+        "eslint": "^8.19.0",
+        "prettier": "^2.7.1",
+        "rimraf": "^3.0.2",
+        "typescript": "^4.7.4"
+    }
 }

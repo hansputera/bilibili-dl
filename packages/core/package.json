@@ -1,29 +1,29 @@
 {
-  "name": "@bilibili-dl/core",
-  "version": "1.0.3",
-  "description": "Bilibili-DL Core Project",
-  "main": "./src/index.ts",
-  "module": "./dist/index.js",
-  "scripts": {
-    "lint": "eslint \"src/**/*.{ts,js}\" --fix",
-    "format": "prettier . --write",
-    "build": "rimraf dist && tsc -p tsconfig.publish.json"
-  },
-  "keywords": [
-    "bilibili-core"
-  ],
-  "author": "Hanif Dwy Putra S <hanidwyputrasembiring@gmail.com>",
-  "license": "MIT",
-  "dependencies": {
-    "@bilibili-dl/config": "workspace:*",
-    "@bilibili-dl/interfaces": "workspace:*",
-    "@bilibili-dl/util": "workspace:*"
-  },
-  "type": "module",
-  "devDependencies": {
-    "eslint": "^8.19.0",
-    "prettier": "^2.7.1",
-    "rimraf": "^3.0.2",
-    "typescript": "^4.7.4"
-  }
+    "name": "@bilibili-dl/core",
+    "version": "1.0.3",
+    "description": "Bilibili-DL Core Project",
+    "main": "./src/index.ts",
+    "module": "./dist/index.js",
+    "scripts": {
+        "lint": "eslint \"src/**/*.{ts,js}\" --fix",
+        "format": "prettier . --write",
+        "build": "rimraf dist && tsc -p tsconfig.publish.json"
+    },
+    "keywords": [
+        "bilibili-core"
+    ],
+    "author": "Hanif Dwy Putra S <hanidwyputrasembiring@gmail.com>",
+    "license": "MIT",
+    "dependencies": {
+        "@bilibili-dl/config": "workspace:*",
+        "@bilibili-dl/interfaces": "workspace:*",
+        "@bilibili-dl/util": "workspace:*"
+    },
+    "type": "module",
+    "devDependencies": {
+        "eslint": "^8.19.0",
+        "prettier": "^2.7.1",
+        "rimraf": "^3.0.2",
+        "typescript": "^4.7.4"
+    }
 }
