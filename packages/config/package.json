@@ -1,6 +1,6 @@
 {
   "name": "@bilibili-dl/config",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Bilibili-DL Project Configuration",
   "scripts": {
     "lint": "eslint -c eslint.cjs \"**/*.{js,cjs}\" --fix",
