@@ -26,7 +26,8 @@
     "eslint-ts.cjs",
     "prettier.cjs",
     "tsconfig.base.json",
-    "constants.js"
+    "constants.js",
+    "constants.d.ts"
   ],
   "main": "./dist/index.js"
 }
