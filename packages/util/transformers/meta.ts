@@ -97,7 +97,9 @@ export class MetaTransformed {
 
 // TODO: completing meta data transform.
 export const transformMeta = (data: any) => {
-    const sectionsList = data.ogv?.season?.sectionsList?.reduce(
+    const sectionsList = (
+        'sectionsList' in data.ogv?.season ? data.ogv.season : data.ogv
+    )?.sectionsList?.reduce(
         (
             prev: {
                 episodes: Record<string, unknown>[];
