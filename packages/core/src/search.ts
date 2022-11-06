@@ -44,9 +44,9 @@ export const searchQuery = async (
     return response.data
         .at(-1)!
         .items.concat(
-            compare(response.data.at(-1), response.data.at(1))
+            compare(response.data.at(-1)?.items, response.data.at(1)?.items)
                 ? []
-                : response.data.at(1)!.items,
+                : response.data.at(1)?.items,
         )
         .map((t) =>
             plainToInstance(ItemTransformed, t, {
