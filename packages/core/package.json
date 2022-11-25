@@ -15,9 +15,9 @@
     "author": "Hanif Dwy Putra S <hanidwyputrasembiring@gmail.com>",
     "license": "MIT",
     "dependencies": {
-        "@bilibili-dl/config": "workspace:*",
-        "@bilibili-dl/interfaces": "workspace:*",
-        "@bilibili-dl/util": "workspace:*"
+        "@bilibili-dl/config": "*",
+        "@bilibili-dl/interfaces": "*",
+        "@bilibili-dl/util": "*"
     },
     "type": "module",
     "devDependencies": {
