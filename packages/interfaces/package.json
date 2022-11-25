@@ -1,7 +1,7 @@
 {
     "name": "@bilibili-dl/interfaces",
     "description": "Bilibili-DL Project TypeScript Interfaces",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "author": {
         "name": "Hanif Dwy Putra S",
         "email": "hanifdwyputrasembiring@gmail.com"
