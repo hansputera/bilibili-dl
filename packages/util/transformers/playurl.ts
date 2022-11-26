@@ -1,5 +1,5 @@
 /* eslint-disable */
-import {Resource, VideoResource} from '@bilibili-dl/interfaces/core';
+import type {Resource, VideoResource} from '@bilibili-dl/interfaces/core';
 import {Expose, Transform, Type} from 'class-transformer';
 import prettyMs from 'pretty-ms';
 import prettyBytes from 'pretty-bytes';

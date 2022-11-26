@@ -1,5 +1,5 @@
 /* eslint-disable new-cap */
-import {baseURL} from '@bilibili-dl/config/constants';
+import {baseURL} from '@bilibili-dl/config/constants.js';
 import {Expose, Transform, Type} from 'class-transformer';
 import {cleanupURL} from '..';
 
