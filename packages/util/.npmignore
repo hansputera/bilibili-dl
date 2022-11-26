@@ -7,4 +7,9 @@ node_modules
 src
 .turbo
 .eslintignore
-*.ts
+extractors
+transformers
+tsup.*
+index.ts
+fetch.ts
+compare.ts

@@ -6,3 +6,4 @@ tsconfig.publish.json
 node_modules
 src
 .turbo
+tsup.*
