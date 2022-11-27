@@ -1,11 +1,12 @@
 import {defineConfig} from 'tsup';
 
 /** @typedef {import('tsup').Options} Options */
+/** @typedef {ReturnType<typeof defineConfig>} TSUPDef */
 
 /**
- *
+ * Create tsup config
  * @param {Options} opts TSUP Options
- * @return {ReturnType<typeof defineConfig>}
+ * @return {TSUPDef}
  */
 export const defineTsup = (opts) =>
     defineConfig({
