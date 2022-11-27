@@ -35,9 +35,14 @@ export const searchQuery = async (
         })
         .json<{
             data: {
+                module: string;
                 items: unknown[];
             }[];
         }>();
+
+    response.data = response.data.filter(
+        (d) => ['ugc', 'ogv'].indexOf(d.module.toLowerCase()) !== -1,
+    );
 
     if (response.data.length < 2) return [];
 
