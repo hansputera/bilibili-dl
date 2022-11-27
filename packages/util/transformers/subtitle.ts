@@ -11,14 +11,17 @@ import {PassThrough} from 'node:stream';
 export const convertToSRTTime = (miliseconds: number): string => {
     const splits = prettyMilliseconds(miliseconds, {
         colonNotation: true,
-    });
+    }).split(/:/g);
 
-    if (splits.length > 3) return '';
-    else
-        return `${splits[0].padStart(2, '0')}:${splits[1].padStart(
-            2,
-            '0',
-        )}:${splits[2].padStart(2, '0').replace(/\./g, ',')}`;
+    if (splits.length < 3) {
+        splits.unshift('0');
+    }
+
+    splits[splits.length - 1] = splits[splits.length - 1]
+        .padStart(2, '0')
+        .replace(/\./g, '');
+
+    return splits.map((s) => s.padStart(2, '0')).join(':');
 };
 
 export const transformSubtitleCall = async (

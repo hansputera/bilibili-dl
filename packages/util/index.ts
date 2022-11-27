@@ -1,4 +1,4 @@
-import {baseURL, supportedLocales} from '@bilibili-dl/config/constants';
+import {baseURL, supportedLocales} from '@bilibili-dl/config/constants.js';
 import 'reflect-metadata';
 
 interface BtvID {
