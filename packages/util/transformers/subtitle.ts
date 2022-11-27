@@ -19,7 +19,7 @@ export const convertToSRTTime = (miliseconds: number): string => {
 
     splits[splits.length - 1] = splits[splits.length - 1]
         .padStart(2, '0')
-        .replace(/\./g, '');
+        .replace(/\./g, ',');
 
     return splits.map((s) => s.padStart(2, '0')).join(':');
 };
@@ -43,7 +43,11 @@ export const transformSubtitleCall = async (
 export const transformSubtitle = (subtitle: SubtitleData): PassThrough => {
     const s = new PassThrough();
     transformSubtitleCall(subtitle, async (output) => {
-        s.write(output, 'utf8');
+        if (output === 'done') {
+            s.end();
+        } else {
+            s.write(output.concat('\n\n'), 'utf8');
+        }
     });
 
     return s;

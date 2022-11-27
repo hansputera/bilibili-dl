@@ -23,7 +23,7 @@ export const getSubtitle = async (
         },
     }).json<SubtitleResponse>();
 
-    if (response.message.length) return response.message;
+    if (response.message.length > 1) return response.message;
     else {
         const sub = response.data.subtitles.find((s) =>
             locale.startsWith(
