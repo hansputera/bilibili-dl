@@ -26,7 +26,9 @@ export const getSubtitle = async (
     if (response.message.length) return response.message;
     else {
         const sub = response.data.subtitles.find((s) =>
-            s.lang_key.startsWith(locale),
+            locale.startsWith(
+                s.lang_key.toLowerCase().split('-').at(0) as string,
+            ),
         );
         if (!sub) return "Couldn't find the subtitle";
 
