@@ -1,18 +1,16 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 
-type MiddlewareFunc = <Req, Res, C>(req: Req, res: Res, c?: C) => Promise<void>;
-
 /**
  * Run middleware
  * @param {NextApiRequest} request API Request
  * @param {NextApiResponse} response API Response
  * @param {Function} fn Middleware function
- * @return {Promise<MiddlewareFunc>}
+ * @return {Promise<Function>}
  */
-export const runMiddleware = (
+export const runMiddleware = <T extends Function>(
     request: NextApiRequest,
     response: NextApiResponse,
-    fn: MiddlewareFunc,
+    fn: T,
 ) =>
     new Promise((resolve, reject) => {
         fn(request, response, (result: unknown) => {
