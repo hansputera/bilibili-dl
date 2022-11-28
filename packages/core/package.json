@@ -1,6 +1,6 @@
 {
     "name": "@bilibili-dl/core",
-    "version": "1.1.3",
+    "version": "1.1.4",
     "description": "Bilibili-DL Core Project",
     "main": "./src/index.ts",
     "module": "./dist/index.js",
