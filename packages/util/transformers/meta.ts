@@ -98,7 +98,7 @@ export class MetaTransformed {
 // TODO: completing meta data transform.
 export const transformMeta = (data: any) => {
     const sectionsList = (
-        'sectionsList' in data.ogv?.season ? data.ogv.season : data.ogv
+        data.ogv.season?.sectionsList || data.ogv
     )?.sectionsList?.reduce(
         (
             prev: {
@@ -107,7 +107,8 @@ export const transformMeta = (data: any) => {
             curr: {
                 episodes: Record<string, unknown>[];
             },
-        ) => prev.episodes.concat(curr.episodes),
+        ) => (prev.episodes || []).concat(curr.episodes),
+        [],
     );
 
     return {
