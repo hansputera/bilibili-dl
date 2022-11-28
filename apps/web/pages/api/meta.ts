@@ -2,8 +2,11 @@ import {getMeta} from '@bilibili-dl/core';
 import {getBtvID} from '@bilibili-dl/util';
 import Validator from 'fastest-validator';
 import {NextApiRequest, NextApiResponse} from 'next';
+import {applyCors} from '../../middlewares/cors';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+    await applyCors(req, res);
+
     const v = new Validator();
     const validationRequest = v.compile({
         url: {

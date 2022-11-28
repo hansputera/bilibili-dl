@@ -3,8 +3,11 @@ import {supportedLocales} from '@bilibili-dl/config/constants.js';
 import type {NextApiRequest, NextApiResponse} from 'next';
 import {getSubtitle} from '@bilibili-dl/core';
 import {transformSubtitle} from '@bilibili-dl/util';
+import {applyCors} from '../../middlewares/cors';
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
+    await applyCors(request, response);
+
     const validator = new Validator();
     const validatorPayload = validator.compile({
         id: {

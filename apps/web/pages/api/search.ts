@@ -11,8 +11,11 @@ import {
 import {redis} from '../../lib/redis';
 import {maxLifetimeData} from '../../config';
 import {supportedLocales} from '@bilibili-dl/config/constants.js';
+import {applyCors} from '../../middlewares/cors';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+    await applyCors(req, res);
+
     const v = new Validator();
     const validReq = v.compile({
         query: {
