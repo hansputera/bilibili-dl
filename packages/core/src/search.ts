@@ -41,7 +41,7 @@ export const searchQuery = async (
         }>();
 
     response.data = response.data.filter(
-        (d) => ['nav', 'creator'].indexOf(d.module.toLowerCase()) === -1,
+        (d) => ['creator'].indexOf(d.module.toLowerCase()) === -1,
     );
 
     if (response.data.length < 2) return [];
