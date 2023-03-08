@@ -2,7 +2,6 @@ import {
     fetchAPI,
     ItemTransformed,
     plainToInstance,
-    compare,
 } from '@bilibili-dl/util';
 import {
     getGatewayURL,
