@@ -20,11 +20,13 @@ export const searchQuery = async (
     locale: SupportedLocales = 'en_US',
 ): Promise<ItemTransformed[]> => {
     const response = await fetchAPI
-        .get(getGatewayURL('v2').concat('search'), {
+        .get(getGatewayURL('v2').concat('search_v2'), {
             searchParams: {
                 keyword: decodeURIComponent(query),
                 platform: 'web',
                 s_locale: locale,
+                pn: 1,
+                ps: 20,
             },
             headers: {
                 Referer: 'https://www.bilibili.tv/'.concat(
@@ -35,27 +37,23 @@ export const searchQuery = async (
         })
         .json<{
             data: {
-                module: string;
-                items: unknown[];
-            }[];
+                modules: {
+                    items: unknown[];
+                    type: 'uploader' | 'ugc' | 'ogv';
+                }[];
+            };
         }>();
 
-    response.data = response.data.filter(
-        (d) => ['creator'].indexOf(d.module.toLowerCase()) === -1,
+    response.data.modules = response.data.modules.filter(
+        m => m.type === 'ogv' || m.type === 'ugc'
     );
+    if (!response.data?.modules.length) return [];
 
-    if (response.data.length < 2) return [];
-
-    return response.data
-        .at(-1)!
-        .items.concat(
-            compare(response.data.at(-1)?.items, response.data.at(1)?.items)
-                ? []
-                : response.data.at(1)?.items,
-        )
+    return response.data.modules
+        .at(0)!.items.concat(response.data.modules.at(1)?.items)
         .map((t) =>
             plainToInstance(ItemTransformed, t, {
                 strategy: 'excludeAll',
             }),
-        );
+        ).filter(t => typeof t === 'object');
 };

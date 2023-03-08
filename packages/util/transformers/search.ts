@@ -89,7 +89,7 @@ export class ItemTransformed {
     }
 
     @Expose({name: 'duration'})
-    @Transform(({value}) => (value.length ? value : '-'))
+    @Transform(({value}) => (value?.length ? value : '-'))
     duration!: string;
     @Expose()
     get type(): ItemType {
