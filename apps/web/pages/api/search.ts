@@ -39,7 +39,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (typeof validReq === 'object') {
         return res.status(400).json(validReq);
     }
-    package;
 
     if (process.env.NODE_ENV === 'development') {
         await redis.del(
