@@ -1,3 +1,5 @@
+const {withSentryConfig} = require('@sentry/nextjs');
+
 const webpack = require('webpack');
 const withTM = require('next-transpile-modules')([
     '@bilibili-dl/core',
@@ -22,3 +24,9 @@ module.exports = withTM({
         return config;
     },
 });
+
+module.exports = withSentryConfig(
+    module.exports,
+    {silent: true},
+    {hideSourcemaps: true},
+);

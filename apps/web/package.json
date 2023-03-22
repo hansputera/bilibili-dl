@@ -12,6 +12,7 @@
     "dependencies": {
         "@bilibili-dl/core": "workspace:*",
         "@bilibili-dl/util": "workspace:*",
+        "@sentry/nextjs": "^7.41.0",
         "cors": "^2.8.5",
         "dotenv": "^16.0.1",
         "fastest-validator": "^1.12.0",

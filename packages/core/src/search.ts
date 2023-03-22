@@ -1,8 +1,4 @@
-import {
-    fetchAPI,
-    ItemTransformed,
-    plainToInstance,
-} from '@bilibili-dl/util';
+import {fetchAPI, ItemTransformed, plainToInstance} from '@bilibili-dl/util';
 import {
     getGatewayURL,
     SupportedLocales,
@@ -44,15 +40,17 @@ export const searchQuery = async (
         }>();
 
     response.data.modules = response.data.modules.filter(
-        m => m.type === 'ogv' || m.type === 'ugc'
+        (m) => m.type === 'ogv' || m.type === 'ugc',
     );
     if (!response.data?.modules.length) return [];
 
     return response.data.modules
-        .at(0)!.items.concat(response.data.modules.at(1)?.items)
+        .at(0)!
+        .items.concat(response.data.modules.at(1)?.items)
         .map((t) =>
             plainToInstance(ItemTransformed, t, {
                 strategy: 'excludeAll',
             }),
-        ).filter(t => typeof t === 'object');
+        )
+        .filter((t) => typeof t === 'object');
 };
