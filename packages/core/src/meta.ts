@@ -15,16 +15,8 @@ export const getMeta = async (
     url: string,
 ): Promise<MetaTransformed | undefined> => {
     const response = await fetchBase.get('.'.concat(new URL(url).pathname));
-    // identify unknown page.
-    if (
-        /\<title\>(.*)\<\/title\>/gi
-            .exec(response.body)
-            ?.at(1)
-            ?.toLowerCase() === 'bilibili'
-    )
-        return undefined;
-    return plainToInstance(
-        MetaTransformed,
-        transformMeta(extractInitialState(response.body)),
-    );
+    const initialState = extractInitialState(response.body);
+
+    if (!initialState) return undefined;
+    return plainToInstance(MetaTransformed, transformMeta(initialState));
 };

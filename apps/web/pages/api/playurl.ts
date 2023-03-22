@@ -48,7 +48,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
             if (!metaVideo)
                 return res.status(400).json({
-                    message: 'Please send valid bilibili.tv video url!',
+                    message:
+                        'Please send valid bilibili.tv video url! Make sure the video is exist!',
                 });
 
             if (metaVideo.episodes?.length)
