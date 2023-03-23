@@ -47,6 +47,7 @@ export const searchQuery = async (
     return response.data.modules
         .at(0)!
         .items.concat(response.data.modules.at(1)?.items)
+        .filter((t) => typeof t === 'object')
         .map((t) => {
             const ret = plainToInstance(ItemTransformed, t, {
                 strategy: 'excludeAll',
@@ -56,6 +57,5 @@ export const searchQuery = async (
             );
 
             return ret;
-        })
-        .filter((t) => typeof t === 'object');
+        });
 };

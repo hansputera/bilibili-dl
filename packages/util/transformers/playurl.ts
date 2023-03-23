@@ -41,12 +41,6 @@ export class PlayUrlResourceTransformed {
  */
 export class PlayUrlTransformed {
     @Expose()
-    @Transform(({value}) => prettyMs(value), {
-        toPlainOnly: true,
-    })
-    duration!: string;
-
-    @Expose()
     @Type(() => PlayUrlResourceTransformed)
     audios!: PlayUrlResourceTransformed[];
 
@@ -56,7 +50,6 @@ export class PlayUrlTransformed {
 }
 
 interface RawPlayUrlStruct {
-    duration: number;
     audio_resource: Resource[];
     video: VideoResource[];
 }
@@ -66,9 +59,8 @@ interface RawPlayUrlStruct {
  * @param {RawPlayUrlStruct} data original playurl data.
  * @return {*}
  */
-export const transformPlayUrl = (data: RawPlayUrlStruct): any => {
+export const transformPlayUrl = (data: RawPlayUrlStruct) => {
     return {
-        duration: data.duration,
         audios: data.audio_resource.map((audio) => ({
             url: audio.url,
             id: audio.id,
