@@ -8,3 +8,5 @@ dist/
 .vercel
 packages/**/dist
 tarballs
+bilibili-creds/
+qr.png
