@@ -34,6 +34,12 @@ export class PlayUrlResourceTransformed {
 
     @Expose()
     quality!: number;
+
+    @Expose()
+    frameRate!: string | undefined;
+
+    @Expose()
+    backupUrls!: string[];
 }
 
 /**
@@ -68,15 +74,20 @@ export const transformPlayUrl = (data: RawPlayUrlStruct) => {
             codecs: audio.codecs,
             size: audio.size,
             duration: audio.duration,
+            backupUrls: audio.backup_url,
         })),
-        videos: data.video.map((video) => ({
-            url: video.video_resource.url,
-            quality: video.stream_info.quality,
-            mimeType: video.video_resource.mime_type,
-            size: video.video_resource.size,
-            codecs: video.video_resource.codecs,
-            id: video.video_resource.id,
-            duration: +video.video_resource.duration,
-        })),
+        videos: data.video
+            .filter((v) => v.video_resource.url.length)
+            .map((video) => ({
+                url: video.video_resource.url,
+                quality: video.stream_info.quality,
+                mimeType: video.video_resource.mime_type,
+                size: video.video_resource.size,
+                codecs: video.video_resource.codecs,
+                id: video.video_resource.id,
+                duration: +video.video_resource.duration,
+                frameRate: video.video_resource.frame_rate ?? undefined,
+                backupUrls: video.video_resource.backup_url,
+            })),
     };
 };

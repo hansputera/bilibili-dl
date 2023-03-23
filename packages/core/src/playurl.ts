@@ -31,13 +31,8 @@ export const getPlayUrl = async (
             getGatewayURL(undefined).concat('playurl'),
             {
                 searchParams: {
-                    type: 0,
                     s_locale: locale,
-                    platform: 'web',
-                    qn: 4,
-                    tf: 0,
-                    device: 'wap',
-                    spm_id: 'bstar-web.pgc-video-detail.0.0',
+                    platform: 'tv',
                     ...(type === 'video'
                         ? {
                               aid: id,

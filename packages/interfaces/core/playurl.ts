@@ -7,6 +7,8 @@ export interface Resource {
     quality: number;
     size: number;
     url: string; // audio url.
+    frame_rate: string;
+    backup_url: string[];
 }
 
 export interface VideoStreamInfo {
