@@ -54,9 +54,8 @@ export class ItemTransformed {
     @Exclude({toPlainOnly: true})
     score!: number;
 
-    @Expose()
-    @Exclude({toPlainOnly: true})
-    styles!: string;
+    @Expose({name: 'update_pattern'})
+    updatePattern!: string;
 
     @Expose()
     get description(): string {
@@ -74,9 +73,7 @@ export class ItemTransformed {
     }
 
     @Expose()
-    get genre(): string {
-        return this.styles;
-    }
+    genres!: string[] | undefined;
 
     @Expose({name: 'view'})
     @Transform(({value}) => matchView(value))
@@ -93,6 +90,6 @@ export class ItemTransformed {
     duration!: string;
     @Expose()
     get type(): ItemType {
-        return this.duration === '-' ? 'anime' : 'video';
+        return !!this._seasonId ? 'anime' : 'video';
     }
 }

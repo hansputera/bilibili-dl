@@ -47,10 +47,15 @@ export const searchQuery = async (
     return response.data.modules
         .at(0)!
         .items.concat(response.data.modules.at(1)?.items)
-        .map((t) =>
-            plainToInstance(ItemTransformed, t, {
+        .map((t) => {
+            const ret = plainToInstance(ItemTransformed, t, {
                 strategy: 'excludeAll',
-            }),
-        )
+            });
+            ret.genres = (t as {styles: Array<{title: string}>}).styles?.map(
+                (s) => s.title,
+            );
+
+            return ret;
+        })
         .filter((t) => typeof t === 'object');
 };

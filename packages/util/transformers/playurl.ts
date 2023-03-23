@@ -66,22 +66,22 @@ interface RawPlayUrlStruct {
  * @param {RawPlayUrlStruct} data original playurl data.
  * @return {*}
  */
-export const transformPlayUrl = (data: RawPlayUrlStruct) => {
+export const transformPlayUrl = (data: RawPlayUrlStruct): any => {
     return {
-        duration: +data.duration,
+        duration: data.duration,
         audios: data.audio_resource.map((audio) => ({
             url: audio.url,
             id: audio.id,
             mimeType: audio.mime_type,
             codecs: audio.codecs,
-            size: +audio.size,
-            duration: +audio.duration,
+            size: audio.size,
+            duration: audio.duration,
         })),
         videos: data.video.map((video) => ({
             url: video.video_resource.url,
             quality: video.stream_info.quality,
             mimeType: video.video_resource.mime_type,
-            size: +video.video_resource.size,
+            size: video.video_resource.size,
             codecs: video.video_resource.codecs,
             id: video.video_resource.id,
             duration: +video.video_resource.duration,
