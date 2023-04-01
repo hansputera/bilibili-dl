@@ -56,6 +56,7 @@ export const getPlayUrl = async (
                     Referer: 'https://www.bilibili.tv/'.concat(
                         locale.split('_').at(0)!,
                     ),
+                    Cookie: process.env.BILI_COOKIE ?? '',
                 },
             },
         ).json<{

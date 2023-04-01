@@ -28,6 +28,7 @@ export const searchQuery = async (
                     locale.split('_')?.at(0)!,
                 ),
                 Origin: 'https://www.bilibili.tv',
+                Cookie: process.env.BILI_COOKIE ?? '',
             },
         })
         .json<{

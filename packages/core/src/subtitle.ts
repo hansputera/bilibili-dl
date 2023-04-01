@@ -20,6 +20,7 @@ export const getSubtitle = async (
         headers: {
             Origin: 'https://www.bilibili.tv',
             Referer: 'https://www.bilibili.tv/'.concat(locale),
+            Cookie: process.env.BILI_COOKIE ?? '',
         },
     }).json<SubtitleResponse>();
 
