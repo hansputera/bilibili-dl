@@ -128,9 +128,7 @@ export const transformMeta = (data: any) => {
                   .join(', ')
             : '-',
         originTitle: data.ogv?.season ? data.ogv.season.origin_name : undefined,
-        publishDate: data.ogv?.season
-            ? data.ogv.season.player_time.replace(/[a-zA-Z]/g, '')
-            : data.ugc.archive.formatted_pub_date,
+        publishDate: data.ogv?.season?.player_date || data.ugc.archive.formatted_pub_date,
         episodes:
             sectionsList?.map(
                 (e: {
