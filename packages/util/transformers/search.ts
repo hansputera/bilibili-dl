@@ -55,6 +55,11 @@ export class ItemTransformed {
     score!: number;
 
     @Expose({name: 'update_pattern'})
+    @Transform(({value}) =>
+        typeof value === 'string'
+            ? value.replace(/update at/gi, '').trim()
+            : value,
+    )
     updatePattern!: string;
 
     @Expose()
