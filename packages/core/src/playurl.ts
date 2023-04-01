@@ -32,7 +32,7 @@ export const getPlayUrl = async (
             {
                 searchParams: {
                     s_locale: locale,
-                    platform: 'tv',
+                    platform: 'web',
                     ...(type === 'video'
                         ? {
                               aid: id,

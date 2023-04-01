@@ -14,7 +14,10 @@ import {
 export const getMeta = async (
     url: string,
 ): Promise<MetaTransformed | undefined> => {
-    const response = await fetchBase.get('.'.concat(new URL(url).pathname));
+    const response = await fetchBase
+        .get('.'.concat(new URL(url).pathname))
+        .catch(() => undefined);
+    if (!response) return undefined;
     const initialState = extractInitialState(response.body);
 
     if (!initialState) return undefined;

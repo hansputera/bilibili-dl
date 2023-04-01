@@ -18,7 +18,7 @@ export const searchQuery = async (
         .get(getGatewayURL('v2').concat('search_v2'), {
             searchParams: {
                 keyword: decodeURIComponent(query),
-                platform: 'web',
+                platform: 'tv',
                 s_locale: locale,
                 pn: 1,
                 ps: 20,

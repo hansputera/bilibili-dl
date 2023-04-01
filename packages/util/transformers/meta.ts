@@ -95,20 +95,20 @@ export class MetaTransformed {
     series!: SerieMeta[];
 }
 
+interface Section {
+    episodes: Array<{}>;
+}
+
 // TODO: completing meta data transform.
 export const transformMeta = (data: any) => {
-    const sectionsList = (data.ogv?.season || data.ogv)?.sectionsList?.reduce(
-        (
-            prev: {
-                episodes: Record<string, unknown>[];
-            },
-            curr: {
-                episodes: Record<string, unknown>[];
-            },
-        ) => (prev.episodes || []).concat(curr.episodes),
-        [],
+    const sectionsList = (
+        'sectionsList' in data.ogv ? data.ogv : data.ogv.season
+    ).sectionsList?.reduce(
+        (prev: Section, curr: Section) => ({
+            episodes: (prev.episodes || []).concat(curr.episodes || []),
+        }),
+        [{episodes: []}],
     );
-
     return {
         title: data.share.shareInfo.title,
         url: data.share.shareInfo.url,
@@ -128,9 +128,11 @@ export const transformMeta = (data: any) => {
                   .join(', ')
             : '-',
         originTitle: data.ogv?.season ? data.ogv.season.origin_name : undefined,
-        publishDate: data.ogv?.season?.player_date || data.ugc.archive.formatted_pub_date,
+        publishDate:
+            data.ogv?.season?.player_date ||
+            data.ugc.archive.formatted_pub_date,
         episodes:
-            sectionsList?.map(
+            sectionsList?.episodes.map(
                 (e: {
                     title_display: string;
                     cover: string;
