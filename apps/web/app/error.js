@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * NOTE: This requires `@sentry/nextjs` version 7.3.0 or higher.
  *
