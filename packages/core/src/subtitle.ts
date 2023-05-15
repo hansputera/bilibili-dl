@@ -1,14 +1,11 @@
 import {getGatewayURL} from '@bilibili-dl/config/constants.js';
-import type {
-    SubtitleData,
-    SubtitleResponse,
-} from '@bilibili-dl/interfaces/core/subtitle';
+import type {SubtitleResponse} from '@bilibili-dl/interfaces/core/subtitle';
 import {fetchAPI, Got} from '@bilibili-dl/util';
 
 export const getSubtitle = async (
     id: string,
     locale: string,
-): Promise<SubtitleData | string> => {
+): Promise<string> => {
     const response = await fetchAPI(getGatewayURL('v2').concat('subtitle'), {
         searchParams: {
             s_locale: 'en_US',
@@ -35,7 +32,7 @@ export const getSubtitle = async (
 
         const twoResponse = await Got.got
             .get(sub.url)
-            .json<SubtitleData>()
+            .text()
             .catch(() => undefined);
         if (!twoResponse) return "Couldn't get the subtitle contents!";
 
