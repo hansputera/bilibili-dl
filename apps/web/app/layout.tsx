@@ -1,5 +1,8 @@
+'use client';
+
 import './global.css';
-import {Metadata} from 'next';
+import { ThemeProvider } from "@material-tailwind/react";
+import Head from 'next/head';
 
 /**
  * Bilibili-DL App
@@ -9,12 +12,13 @@ import {Metadata} from 'next';
 export default function RootLayout({children}: {children: React.ReactNode}): JSX.Element {
     return (
         <html lang="en">
-            <body>{children}</body>
+            <Head>
+                <title>Home</title>
+                <meta name="description" content="OpenBstation" />
+            </Head>
+            <ThemeProvider>
+                <body>{children}</body>
+            </ThemeProvider>
         </html>
     );
 }
-
-export const metadata: Metadata = {
-    title: 'Home',
-    description: 'Bilibili-DL App',
-};

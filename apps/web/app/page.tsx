@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 
 /**
  * Index page.
@@ -7,8 +7,7 @@ import Navbar from "../components/Navbar";
 export default function Index() {
   return (
     <>
-      <Navbar />
-      <div className="container mx-auto"></div>
+      <Sidebar />
     </>
   );
 }

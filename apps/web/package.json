@@ -13,6 +13,7 @@
     "dependencies": {
         "@bilibili-dl/core": "workspace:*",
         "@bilibili-dl/util": "workspace:*",
+        "@material-tailwind/react": "^2.0.1",
         "@sentry/nextjs": "latest",
         "cors": "^2.8.5",
         "dotenv": "^16.0.1",
