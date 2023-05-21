@@ -2,7 +2,6 @@ import { useState } from "react";
 import {
   AppShell,
   Header,
-  Text,
   MediaQuery,
   Burger,
   useMantineTheme,
@@ -12,6 +11,7 @@ import {
 } from "@mantine/core";
 import { IconMoonStars, IconSun } from "@tabler/icons-react";
 import Sidebar from "./Sidebar";
+import Image from "next/image";
 
 /**
  * Main Layout Component.
@@ -54,7 +54,12 @@ export default function Layout({
             </MediaQuery>
 
             <Group position="apart" w="100%">
-              <Text>Application header</Text>
+              <Image
+                src="/OpenBstation.svg"
+                alt="Logo Apps"
+                width={80}
+                height={34}
+              />
               <ActionIcon
                 variant="default"
                 onClick={() => toggleColorScheme()}

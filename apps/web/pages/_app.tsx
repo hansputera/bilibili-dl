@@ -49,7 +49,7 @@ export default function App(
           withGlobalStyles
           withNormalizeCSS
           theme={{
-            colorScheme: "light",
+            colorScheme,
           }}
         >
           <Layout>

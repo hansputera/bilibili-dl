@@ -1,4 +1,5 @@
-import { rem, Group, Text, Box } from "@mantine/core";
+import { rem, Group, Box } from "@mantine/core";
+import Logo from "/OpenBstation.svg";
 import Image from "next/image";
 
 /**
@@ -26,9 +27,7 @@ export default function Brand(): JSX.Element {
           width={30}
           height={30}
         />
-        <Text fw="bold" fz="lg">
-          OpenBstation
-        </Text>
+        <Image src={Logo} alt="Logo Apps" />
       </Group>
     </Box>
   );
