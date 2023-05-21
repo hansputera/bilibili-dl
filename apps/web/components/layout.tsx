@@ -57,8 +57,8 @@ export default function Layout({
               <Image
                 src="/OpenBstation.svg"
                 alt="Logo Apps"
-                width={80}
-                height={34}
+                width={80 * 2}
+                height={34 * 2}
               />
               <ActionIcon
                 variant="default"
