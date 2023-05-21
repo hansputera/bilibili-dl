@@ -3,6 +3,9 @@ import Document, { Head, Html, Main, NextScript } from "next/document";
 
 const getInitialProps = createGetInitialProps();
 
+/**
+ * HTML Document
+ */
 export default class _Document extends Document {
   static getInitialProps = getInitialProps;
 

@@ -166,7 +166,11 @@ const linksMockdata = [
   "Wiki pages",
 ];
 
-function DoubleNavbar() {
+/**
+ * Sidebar Component
+ * @return {JSX.Element}
+ */
+function Sidebar(): JSX.Element {
   const { classes, cx } = useStyles();
   const [active, setActive] = useState("Releases");
   const [activeLink, setActiveLink] = useState("Settings");
@@ -232,4 +236,4 @@ function DoubleNavbar() {
   );
 }
 
-export default DoubleNavbar;
+export default Sidebar;
