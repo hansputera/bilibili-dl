@@ -17,6 +17,7 @@ import {
   IconSettings,
 } from "@tabler/icons-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -195,7 +196,7 @@ function Sidebar(): JSX.Element {
   ));
 
   const links = linksMockdata.map((link) => (
-    <a
+    <Link
       className={cx(classes.link, {
         [classes.linkActive]: activeLink === link,
       })}
@@ -207,7 +208,7 @@ function Sidebar(): JSX.Element {
       key={link}
     >
       {link}
-    </a>
+    </Link>
   ));
 
   return (
