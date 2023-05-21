@@ -18,7 +18,6 @@
   "license": "MIT",
   "devDependencies": {
     "execa": "^6.1.0",
-    "prettier-plugin-tailwindcss": "^0.2.8",
     "turbo": "^1.6.3"
   },
   "type": "module",

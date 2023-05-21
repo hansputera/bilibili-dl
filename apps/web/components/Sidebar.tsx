@@ -1,169 +1,235 @@
-"use client";
-
-import React from "react";
+import { useState } from "react";
 import {
-  Card,
-  Typography,
-  List,
-  ListItem,
-  ListItemPrefix,
-  ListItemSuffix,
-  Chip,
-  Accordion,
-  AccordionHeader,
-  AccordionBody,
-} from "@material-tailwind/react";
+  createStyles,
+  Navbar,
+  UnstyledButton,
+  Tooltip,
+  Title,
+  rem,
+} from "@mantine/core";
 import {
-  PresentationChartBarIcon,
-  ShoppingBagIcon,
-  UserCircleIcon,
-  Cog6ToothIcon,
-  InboxIcon,
-  PowerIcon,
-} from "@heroicons/react/24/solid";
-import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
+  IconHome2,
+  IconGauge,
+  IconDeviceDesktopAnalytics,
+  IconFingerprint,
+  IconCalendarStats,
+  IconUser,
+  IconSettings,
+} from "@tabler/icons-react";
+import Image from "next/image";
 
-/**
- * Sidebar Component
- * @return {JSX.Element}
- */
-export default function Sidebar(): JSX.Element {
-  const [open, setOpen] = React.useState(0);
+const useStyles = createStyles((theme) => ({
+  wrapper: {
+    display: "flex",
+  },
 
-  const handleOpen = (value: number) => {
-    setOpen(open === value ? 0 : value);
-  };
+  aside: {
+    flex: `0 0 ${rem(60)}`,
+    backgroundColor:
+      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    borderRight: `${rem(1)} solid ${
+      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[3]
+    }`,
+  },
+
+  main: {
+    flex: 1,
+    backgroundColor:
+      theme.colorScheme === "dark"
+        ? theme.colors.dark[6]
+        : theme.colors.gray[0],
+  },
+
+  mainLink: {
+    width: rem(44),
+    height: rem(44),
+    borderRadius: theme.radius.md,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color:
+      theme.colorScheme === "dark"
+        ? theme.colors.dark[0]
+        : theme.colors.gray[7],
+
+    "&:hover": {
+      backgroundColor:
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[5]
+          : theme.colors.gray[0],
+    },
+  },
+
+  mainLinkActive: {
+    "&, &:hover": {
+      backgroundColor: theme.fn.variant({
+        variant: "light",
+        color: theme.primaryColor,
+      }).background,
+      color: theme.fn.variant({ variant: "light", color: theme.primaryColor })
+        .color,
+    },
+  },
+
+  title: {
+    boxSizing: "border-box",
+    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+    marginBottom: theme.spacing.xl,
+    backgroundColor:
+      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+    padding: theme.spacing.md,
+    paddingTop: rem(18),
+    height: rem(60),
+    borderBottom: `${rem(1)} solid ${
+      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[3]
+    }`,
+  },
+
+  logo: {
+    boxSizing: "border-box",
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    height: rem(60),
+    paddingTop: theme.spacing.md,
+    borderBottom: `${rem(1)} solid ${
+      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[3]
+    }`,
+    marginBottom: theme.spacing.xl,
+  },
+
+  link: {
+    boxSizing: "border-box",
+    display: "block",
+    textDecoration: "none",
+    borderTopRightRadius: theme.radius.md,
+    borderBottomRightRadius: theme.radius.md,
+    color:
+      theme.colorScheme === "dark"
+        ? theme.colors.dark[0]
+        : theme.colors.gray[7],
+    padding: `0 ${theme.spacing.md}`,
+    fontSize: theme.fontSizes.sm,
+    marginRight: theme.spacing.md,
+    fontWeight: 500,
+    height: rem(44),
+    lineHeight: rem(44),
+
+    "&:hover": {
+      backgroundColor:
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[5]
+          : theme.colors.gray[1],
+      color: theme.colorScheme === "dark" ? theme.white : theme.black,
+    },
+  },
+
+  linkActive: {
+    "&, &:hover": {
+      borderLeftColor: theme.fn.variant({
+        variant: "filled",
+        color: theme.primaryColor,
+      }).background,
+      backgroundColor: theme.fn.variant({
+        variant: "filled",
+        color: theme.primaryColor,
+      }).background,
+      color: theme.white,
+    },
+  },
+}));
+
+const mainLinksMockdata = [
+  { icon: IconHome2, label: "Home" },
+  { icon: IconGauge, label: "Dashboard" },
+  { icon: IconDeviceDesktopAnalytics, label: "Analytics" },
+  { icon: IconCalendarStats, label: "Releases" },
+  { icon: IconUser, label: "Account" },
+  { icon: IconFingerprint, label: "Security" },
+  { icon: IconSettings, label: "Settings" },
+];
+
+const linksMockdata = [
+  "Security",
+  "Settings",
+  "Dashboard",
+  "Releases",
+  "Account",
+  "Orders",
+  "Clients",
+  "Databases",
+  "Pull Requests",
+  "Open Issues",
+  "Wiki pages",
+];
+
+function DoubleNavbar() {
+  const { classes, cx } = useStyles();
+  const [active, setActive] = useState("Releases");
+  const [activeLink, setActiveLink] = useState("Settings");
+
+  const mainLinks = mainLinksMockdata.map((link) => (
+    <Tooltip
+      label={link.label}
+      position="right"
+      withArrow
+      transitionProps={{ duration: 0 }}
+      key={link.label}
+    >
+      <UnstyledButton
+        onClick={() => setActive(link.label)}
+        className={cx(classes.mainLink, {
+          [classes.mainLinkActive]: link.label === active,
+        })}
+      >
+        <link.icon size="1.4rem" stroke={1.5} />
+      </UnstyledButton>
+    </Tooltip>
+  ));
+
+  const links = linksMockdata.map((link) => (
+    <a
+      className={cx(classes.link, {
+        [classes.linkActive]: activeLink === link,
+      })}
+      href="/"
+      onClick={(event) => {
+        event.preventDefault();
+        setActiveLink(link);
+      }}
+      key={link}
+    >
+      {link}
+    </a>
+  ));
 
   return (
-    <Card className="fixed left-4 top-4 h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
-      <div className="mb-2 p-4">
-        <Typography variant="h5" color="blue-gray">
-          OpenBstation
-        </Typography>
-      </div>
-      <List>
-        <Accordion
-          open={open === 1}
-          icon={
-            <ChevronDownIcon
-              strokeWidth={2.5}
-              className={`mx-auto h-4 w-4 transition-transform ${
-                open === 1 ? "rotate-180" : ""
-              }`}
+    <Navbar height="100%" width={{ sm: 300 }}>
+      <Navbar.Section grow className={classes.wrapper}>
+        <div className={classes.aside}>
+          <div className={classes.logo}>
+            <Image
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Yin_and_Yang_symbol.svg/1200px-Yin_and_Yang_symbol.svg.png"
+              alt="Yin and Yang symbol"
+              width={30}
+              height={30}
             />
-          }
-        >
-          <ListItem className="p-0" selected={open === 1}>
-            <AccordionHeader
-              onClick={() => handleOpen(1)}
-              className="border-b-0 p-3"
-            >
-              <ListItemPrefix>
-                <PresentationChartBarIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              <Typography color="blue-gray" className="mr-auto font-normal">
-                Dashboard
-              </Typography>
-            </AccordionHeader>
-          </ListItem>
-          <AccordionBody className="py-1">
-            <List className="p-0">
-              <ListItem>
-                <ListItemPrefix>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                </ListItemPrefix>
-                Analytics
-              </ListItem>
-              <ListItem>
-                <ListItemPrefix>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                </ListItemPrefix>
-                Reporting
-              </ListItem>
-              <ListItem>
-                <ListItemPrefix>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                </ListItemPrefix>
-                Projects
-              </ListItem>
-            </List>
-          </AccordionBody>
-        </Accordion>
-        <Accordion
-          open={open === 2}
-          icon={
-            <ChevronDownIcon
-              strokeWidth={2.5}
-              className={`mx-auto h-4 w-4 transition-transform ${
-                open === 2 ? "rotate-180" : ""
-              }`}
-            />
-          }
-        >
-          <ListItem className="p-0" selected={open === 2}>
-            <AccordionHeader
-              onClick={() => handleOpen(2)}
-              className="border-b-0 p-3"
-            >
-              <ListItemPrefix>
-                <ShoppingBagIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              <Typography color="blue-gray" className="mr-auto font-normal">
-                E-Commerce
-              </Typography>
-            </AccordionHeader>
-          </ListItem>
-          <AccordionBody className="py-1">
-            <List className="p-0">
-              <ListItem>
-                <ListItemPrefix>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                </ListItemPrefix>
-                Orders
-              </ListItem>
-              <ListItem>
-                <ListItemPrefix>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                </ListItemPrefix>
-                Products
-              </ListItem>
-            </List>
-          </AccordionBody>
-        </Accordion>
-        <ListItem>
-          <ListItemPrefix>
-            <InboxIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Inbox
-          <ListItemSuffix>
-            <Chip
-              value="14"
-              size="sm"
-              variant="ghost"
-              color="blue-gray"
-              className="rounded-full"
-            />
-          </ListItemSuffix>
-        </ListItem>
-        <ListItem>
-          <ListItemPrefix>
-            <UserCircleIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Profile
-        </ListItem>
-        <ListItem>
-          <ListItemPrefix>
-            <Cog6ToothIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Settings
-        </ListItem>
-        <ListItem>
-          <ListItemPrefix>
-            <PowerIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Log Out
-        </ListItem>
-      </List>
-    </Card>
+          </div>
+          {mainLinks}
+        </div>
+        <div className={classes.main}>
+          <Title order={4} className={classes.title}>
+            {active}
+          </Title>
+
+          {links}
+        </div>
+      </Navbar.Section>
+    </Navbar>
   );
 }
+
+export default DoubleNavbar;
