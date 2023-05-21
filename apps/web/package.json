@@ -20,6 +20,7 @@
         "@mantine/next": "^6.0.11",
         "@sentry/nextjs": "latest",
         "@tabler/icons-react": "^2.20.0",
+        "cookies-next": "^2.1.1",
         "cors": "^2.8.5",
         "dotenv": "^16.0.1",
         "fastest-validator": "^1.12.0",

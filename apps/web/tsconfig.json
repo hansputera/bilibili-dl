@@ -20,7 +20,11 @@
         "name": "next"
       }
     ],
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"]
+    }
   },
   "exclude": [
     "node_modules",
