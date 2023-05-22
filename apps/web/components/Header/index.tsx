@@ -24,13 +24,18 @@ import {
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
+/**
+ * Topbar Component
+ * @param {TopbarProps} props Topbar Props.
+ * @return {JSX.Element}
+ */
 export default function Topbar({
   setOpened,
   opened,
 }: {
   setOpened: React.Dispatch<React.SetStateAction<boolean>>;
   opened: boolean;
-}) {
+}): JSX.Element {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const theme = useMantineTheme();
   const t = useTranslations();
