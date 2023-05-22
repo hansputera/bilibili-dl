@@ -1,6 +1,7 @@
 import "./global.css";
 import NextApp, { AppContext, AppProps } from "next/app";
 import Head from "next/head";
+import { AbstractIntlMessages, NextIntlProvider } from "next-intl";
 import {
   ColorScheme,
   ColorSchemeProvider,
@@ -10,14 +11,18 @@ import { useState } from "react";
 import { getCookie, setCookie } from "cookies-next";
 import Layout from "@/components/layout";
 
+type Props = {
+  messages: AbstractIntlMessages;
+  locale: string;
+  colorScheme: ColorScheme;
+};
+
 /**
  * Bilibili-DL App
  * @param {AppProps} props React Props.
  * @return {JSX.Element}
  */
-export default function App(
-  props: AppProps & { colorScheme: ColorScheme }
-): JSX.Element {
+export default function App(props: AppProps & Props): JSX.Element {
   const { Component, pageProps } = props;
   const [colorScheme, setColorScheme] = useState<ColorScheme>(
     props.colorScheme
@@ -52,9 +57,14 @@ export default function App(
             colorScheme,
           }}
         >
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <NextIntlProvider
+            messages={pageProps.messages}
+            locale={pageProps.locale ?? "en"}
+          >
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </NextIntlProvider>
         </MantineProvider>
       </ColorSchemeProvider>
     </>

@@ -7,6 +7,10 @@ const {parsed: customEnvironment} = require('dotenv').config({
 
 /** @type {import('next').NextConfig} */
 module.exports = {
+    i18n: {
+        locales: ['en-US', 'id-ID'],
+        defaultLocale: 'en-US'
+    },
     transpilePackages: ['@bilibili-dl/core', '@bilibili-dl/util'],
     reactStrictMode: true,
     experimental: {esmExternals: true},

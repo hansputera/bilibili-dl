@@ -1,0 +1,21 @@
+{
+  "sidebar": {
+    "main": {
+      "home": "Home",
+      "category": "Category"
+    },
+    "loginMessage": "Log in to view your \"Followed\" content.",
+    "footer": {
+      "about": "About us",
+      "contact": "Contact us",
+      "getApp": "Get App",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "infringement": "Infringement Complaint"
+    }
+  },
+  "topbar": {
+    "create": "Create",
+    "search": "Search"
+  }
+}

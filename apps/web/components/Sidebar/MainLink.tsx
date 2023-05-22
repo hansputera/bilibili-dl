@@ -6,28 +6,13 @@ import {
   IconFilterCog,
   IconBroadcast,
 } from "@tabler/icons-react";
+import { useTranslations } from "next-intl";
 
 interface MainLinkProps {
   icon: React.ReactNode;
   color: string;
   label: string;
 }
-
-const data = [
-  {
-    icon: <IconHome2 size="1rem" />,
-    color: "blue",
-    label: "Home",
-  },
-  {
-    icon: <IconDeviceTv size="1rem" />,
-    color: "teal",
-    label: "Anime",
-  },
-  { icon: <IconFlame size="1rem" />, color: "violet", label: "Trending" },
-  { icon: <IconFilterCog size="1rem" />, color: "grape", label: "Category" },
-  { icon: <IconBroadcast size="1rem" />, color: "grape", label: "Live" },
-];
 
 /**
  * MainLink Component.
@@ -68,6 +53,27 @@ function MainLink({ icon, color, label }: MainLinkProps): JSX.Element {
  * @return {JSX.Element}
  */
 export default function MainLinks(): JSX.Element {
+  const t = useTranslations();
+  const data = [
+    {
+      icon: <IconHome2 size="1rem" />,
+      color: "blue",
+      label: t("sidebar.main.home"),
+    },
+    {
+      icon: <IconDeviceTv size="1rem" />,
+      color: "teal",
+      label: "Anime",
+    },
+    { icon: <IconFlame size="1rem" />, color: "violet", label: "Trending" },
+    {
+      icon: <IconFilterCog size="1rem" />,
+      color: "grape",
+      label: t("sidebar.main.category"),
+    },
+    { icon: <IconBroadcast size="1rem" />, color: "grape", label: "Live" },
+  ];
   const links = data.map((link) => <MainLink {...link} key={link.label} />);
+
   return <div>{links}</div>;
 }

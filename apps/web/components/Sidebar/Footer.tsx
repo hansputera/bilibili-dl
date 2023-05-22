@@ -1,4 +1,5 @@
 import { rem, Box, createStyles, Anchor } from "@mantine/core";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
@@ -32,26 +33,27 @@ const useStyles = createStyles((theme) => ({
  */
 export default function Footer(): JSX.Element {
   const { classes } = useStyles();
+  const t = useTranslations();
 
   return (
     <Box className={classes.wrapper}>
       <Anchor component={Link} className={classes.anchor} href="/">
-        About us
+        {t("sidebar.footer.about")}
       </Anchor>
       <Anchor component={Link} className={classes.anchor} href="/">
-        Contact us
+        {t("sidebar.footer.contact")}
       </Anchor>
       <Anchor component={Link} className={classes.anchor} href="/">
-        Get App
+        {t("sidebar.footer.getApp")}
       </Anchor>
       <Anchor component={Link} className={classes.anchor} href="/">
-        Terms of Service
+        {t("sidebar.footer.terms")}
       </Anchor>
       <Anchor component={Link} className={classes.anchor} href="/">
-        Privacy Policy
+        {t("sidebar.footer.privacy")}
       </Anchor>
       <Anchor component={Link} className={classes.anchor} href="/">
-        Infringement Complaint
+        {t("sidebar.footer.infringement")}
       </Anchor>
       <span className={classes.copyright}>
         &copy; {new Date().getFullYear()} OpenBstation
