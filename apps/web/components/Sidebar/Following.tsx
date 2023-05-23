@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
  * @return {JSX.Element}
  */
 export default function Following(): JSX.Element {
-  const t = useTranslations();
+  const t = useTranslations("sidebar.Following");
 
   return (
     <Box
@@ -28,7 +28,7 @@ export default function Following(): JSX.Element {
             color: theme.colorScheme === "dark" ? "inherit" : "gray",
           })}
         >
-          {t("sidebar.loginMessage")}
+          {t("loginMessage")}
         </Text>
         <Button variant="outline" fullWidth>
           Log in

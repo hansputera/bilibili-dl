@@ -33,27 +33,27 @@ const useStyles = createStyles((theme) => ({
  */
 export default function Footer(): JSX.Element {
   const { classes } = useStyles();
-  const t = useTranslations();
+  const t = useTranslations("sidebar.Footer");
 
   return (
     <Box className={classes.wrapper}>
       <Anchor component={Link} className={classes.anchor} href="/">
-        {t("sidebar.footer.about")}
+        {t("about")}
       </Anchor>
       <Anchor component={Link} className={classes.anchor} href="/">
-        {t("sidebar.footer.contact")}
+        {t("contact")}
       </Anchor>
       <Anchor component={Link} className={classes.anchor} href="/">
-        {t("sidebar.footer.getApp")}
+        {t("getApp")}
       </Anchor>
       <Anchor component={Link} className={classes.anchor} href="/">
-        {t("sidebar.footer.terms")}
+        {t("terms")}
       </Anchor>
       <Anchor component={Link} className={classes.anchor} href="/">
-        {t("sidebar.footer.privacy")}
+        {t("privacy")}
       </Anchor>
       <Anchor component={Link} className={classes.anchor} href="/">
-        {t("sidebar.footer.infringement")}
+        {t("infringement")}
       </Anchor>
       <span className={classes.copyright}>
         &copy; {new Date().getFullYear()} OpenBstation

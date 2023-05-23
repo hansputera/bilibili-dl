@@ -53,12 +53,12 @@ function MainLink({ icon, color, label }: MainLinkProps): JSX.Element {
  * @return {JSX.Element}
  */
 export default function MainLinks(): JSX.Element {
-  const t = useTranslations();
+  const t = useTranslations("sidebar.MainLinks");
   const data = [
     {
       icon: <IconHome2 size="1rem" />,
       color: "blue",
-      label: t("sidebar.main.home"),
+      label: t("home"),
     },
     {
       icon: <IconDeviceTv size="1rem" />,
@@ -69,7 +69,7 @@ export default function MainLinks(): JSX.Element {
     {
       icon: <IconFilterCog size="1rem" />,
       color: "grape",
-      label: t("sidebar.main.category"),
+      label: t("category"),
     },
     { icon: <IconBroadcast size="1rem" />, color: "grape", label: "Live" },
   ];

@@ -1,11 +1,13 @@
 {
   "sidebar": {
-    "main": {
+    "MainLinks": {
       "home": "Home",
       "category": "Category"
     },
-    "loginMessage": "Log in to view your \"Followed\" content.",
-    "footer": {
+    "Following": {
+      "loginMessage": "Log in to view your \"Followed\" content."
+    },
+    "Footer": {
       "about": "About us",
       "contact": "Contact us",
       "getApp": "Get App",
@@ -14,7 +16,7 @@
       "infringement": "Infringement Complaint"
     }
   },
-  "topbar": {
+  "Topbar": {
     "create": "Create",
     "search": "Search"
   }

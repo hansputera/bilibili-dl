@@ -9,8 +9,17 @@ import {
   Button,
   Input,
   Menu,
+  Box,
+  Center,
+  Dialog,
+  Divider,
+  Stack,
+  UnstyledButton,
+  rem,
 } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import {
+  IconArrowLeft,
   IconBookmarkPlus,
   IconDotsVertical,
   IconHistory,
@@ -23,6 +32,8 @@ import {
 } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 /**
  * Topbar Component
@@ -38,7 +49,9 @@ export default function Topbar({
 }): JSX.Element {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const theme = useMantineTheme();
-  const t = useTranslations();
+  const t = useTranslations("Topbar");
+  const { locale } = useRouter();
+  const [openedLang, { toggle, close }] = useDisclosure(false);
 
   return (
     <Header height={{ base: 50, md: 70 }} p="md">
@@ -61,7 +74,7 @@ export default function Topbar({
             height={34 * 2}
           />
           <Input
-            placeholder={t("topbar.search")}
+            placeholder={t("search")}
             rightSection={
               <IconSearch
                 size="1rem"
@@ -71,7 +84,7 @@ export default function Topbar({
           />
           <Group>
             <Button leftIcon={<IconVideoPlus />} variant="outline">
-              {t("topbar.create")}
+              {t("create")}
             </Button>
             <ActionIcon onClick={() => toggleColorScheme()}>
               {colorScheme === "dark" ? (
@@ -94,8 +107,8 @@ export default function Topbar({
               </Menu.Target>
 
               <Menu.Dropdown>
-                <Menu.Item icon={<IconWorld size="1rem" />}>
-                  Language: English
+                <Menu.Item onClick={toggle} icon={<IconWorld size="1rem" />}>
+                  Language: {locale === "id-ID" ? "Indonesia" : "English"}
                 </Menu.Item>
                 <Menu.Item icon={<IconMessageQuestion size="1rem" />}>
                   Send Feedback
@@ -106,6 +119,29 @@ export default function Topbar({
           </Group>
         </Group>
       </div>
+      <Dialog
+        position={{ top: 20, right: 20 }}
+        opened={openedLang}
+        onClose={close}
+        size="lg"
+        radius="md"
+      >
+        <Stack>
+          <UnstyledButton onClick={toggle}>
+            <Center inline>
+              <IconArrowLeft size={rem(14)} />
+              <Box ml={5}>Select Language</Box>
+            </Center>
+          </UnstyledButton>
+          <Divider />
+          <Button component={Link} locale="en-US" href="/" variant="subtle">
+            English
+          </Button>
+          <Button component={Link} locale="id-ID" href="/" variant="subtle">
+            Bahasa Indonesia
+          </Button>
+        </Stack>
+      </Dialog>
     </Header>
   );
 }
