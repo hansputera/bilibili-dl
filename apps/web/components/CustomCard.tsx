@@ -46,12 +46,18 @@ export default function CustomCard(): JSX.Element {
             >
               Suster Ngesot
             </Text>
-            <Flex gap={5}>
+            <Flex gap={5} align="center">
               <Text
                 component="a"
                 href="https://www.bilibili.tv/id/space/2037353183"
               >
-                <Text component="span" size={14} color="gray">
+                <Text
+                  component="span"
+                  size={14}
+                  sx={(theme) => ({
+                    color: theme.colorScheme === "dark" ? "inherit" : "gray",
+                  })}
+                >
                   SANTOON TV
                 </Text>
                 <Image
@@ -62,7 +68,12 @@ export default function CustomCard(): JSX.Element {
                   style={{ marginLeft: 2 }}
                 />
               </Text>
-              <Text size={14} color="gray">
+              <Text
+                size={14}
+                sx={(theme) => ({
+                  color: theme.colorScheme === "dark" ? "inherit" : "gray",
+                })}
+              >
                 {" "}
                 · 34.0K Ditonton
               </Text>
