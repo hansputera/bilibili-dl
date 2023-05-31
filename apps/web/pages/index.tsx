@@ -1,4 +1,4 @@
-import { Text } from "@mantine/core";
+import Popular from "@/components/Home/Popular";
 import { GetServerSidePropsContext } from "next";
 
 /**
@@ -8,7 +8,7 @@ import { GetServerSidePropsContext } from "next";
 export default function Index(): JSX.Element {
   return (
     <>
-      <Text>Resize app to see responsive navbar in action</Text>
+      <Popular />
     </>
   );
 }

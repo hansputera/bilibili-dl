@@ -23,7 +23,7 @@ module.exports = {
         return config;
     },
     images: {
-        domains: ['upload.wikimedia.org', 'pic.bstarstatic.com']
+        domains: ['upload.wikimedia.org', 'pic.bstarstatic.com', 'pic-bstarstatic.akamaized.net']
     }
 };
 
