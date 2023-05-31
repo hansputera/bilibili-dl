@@ -14,8 +14,13 @@ import {
   Dialog,
   Divider,
   Stack,
+  Flex,
   UnstyledButton,
   rem,
+  Text,
+  SimpleGrid,
+  Anchor,
+  Popover,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
@@ -51,11 +56,14 @@ export default function Topbar({
   const theme = useMantineTheme();
   const t = useTranslations("Topbar");
   const { locale } = useRouter();
-  const [openedLang, { toggle, close }] = useDisclosure(false);
+  const [openedLang, { toggle: toggleLang, close: closeLang }] =
+    useDisclosure(false);
+  const [openedHot, { toggle: toggleHot, close: closeHot }] =
+    useDisclosure(false);
 
   return (
     <Header height={{ base: 50, md: 70 }} p="md">
-      <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
+      <Flex align="center" h="100%">
         <MediaQuery largerThan="sm" styles={{ display: "none" }}>
           <Burger
             opened={opened}
@@ -73,15 +81,70 @@ export default function Topbar({
             width={80 * 2}
             height={34 * 2}
           />
-          <Input
-            placeholder={t("search")}
-            rightSection={
-              <IconSearch
-                size="1rem"
-                style={{ display: "block", opacity: 0.5 }}
+          <Popover
+            opened={openedHot}
+            onClose={closeHot}
+            width="37.25rem"
+            radius="md"
+            position="bottom"
+            shadow="md"
+          >
+            <Popover.Target>
+              <Input
+                w="32%"
+                onFocus={toggleHot}
+                placeholder={t("search")}
+                rightSection={
+                  <IconSearch
+                    size="1rem"
+                    style={{ display: "block", opacity: 0.5 }}
+                  />
+                }
               />
-            }
-          />
+            </Popover.Target>
+            <Popover.Dropdown py="24px">
+              <SimpleGrid cols={2} spacing={12} sx={{ fontSize: 12 }}>
+                {Array.apply(null, Array(19)).map((_, i) => (
+                  <SimpleGrid
+                    spacing={6}
+                    sx={{ gridTemplateColumns: "40px 1fr" }}
+                    key={i}
+                  >
+                    <Anchor
+                      sx={{
+                        ":hover": { textDecoration: "none" },
+                        wordBreak: "break-word",
+                      }}
+                      color="#333"
+                      href="https://www.bilibili.tv/id/play/37976"
+                      target="_blank"
+                    >
+                      <Image
+                        src="https://pic.bstarstatic.com/ogv/56076fdff40680ee5cc087adf7a2c34357b04b27.jpg@80w_104h_1e_1c_1f.webp"
+                        alt="Thumbnail Anime"
+                        width={40}
+                        height={52}
+                      />
+                    </Anchor>
+                    <Box>
+                      <Anchor
+                        sx={{
+                          ":hover": { textDecoration: "none" },
+                          wordBreak: "break-word",
+                        }}
+                        color="#333"
+                        href="https://www.bilibili.tv/id/play/37976"
+                        target="_blank"
+                      >
+                        One Piece
+                      </Anchor>
+                      <Text>1999 · Petualangan / Action · Memperbarui</Text>
+                    </Box>
+                  </SimpleGrid>
+                ))}
+              </SimpleGrid>
+            </Popover.Dropdown>
+          </Popover>
           <Group>
             <Button leftIcon={<IconVideoPlus />} variant="outline">
               {t("create")}
@@ -107,7 +170,10 @@ export default function Topbar({
               </Menu.Target>
 
               <Menu.Dropdown>
-                <Menu.Item onClick={toggle} icon={<IconWorld size="1rem" />}>
+                <Menu.Item
+                  onClick={toggleLang}
+                  icon={<IconWorld size="1rem" />}
+                >
                   Language: {locale === "id-ID" ? "Indonesia" : "English"}
                 </Menu.Item>
                 <Menu.Item icon={<IconMessageQuestion size="1rem" />}>
@@ -118,16 +184,16 @@ export default function Topbar({
             <Button>Login</Button>
           </Group>
         </Group>
-      </div>
+      </Flex>
       <Dialog
         position={{ top: 20, right: 20 }}
         opened={openedLang}
-        onClose={close}
+        onClose={closeLang}
         size="lg"
         radius="md"
       >
         <Stack>
-          <UnstyledButton onClick={toggle}>
+          <UnstyledButton onClick={toggleLang}>
             <Center inline>
               <IconArrowLeft size={rem(14)} />
               <Box ml={5}>Select Language</Box>
