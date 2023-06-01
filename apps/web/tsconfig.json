@@ -23,7 +23,8 @@
     "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"]
+      "@/components/*": ["components/*"],
+      "@/styles/*": ["styles/*"]
     }
   },
   "exclude": [

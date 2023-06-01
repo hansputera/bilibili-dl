@@ -7,7 +7,7 @@ import Image from "next/image";
  */
 export default function CustomCard(): JSX.Element {
   return (
-    <Card shadow="sm" padding="lg" radius="md" w={291}>
+    <Card shadow="sm" padding="lg" radius="md">
       <Card.Section>
         <Text
           component="a"
@@ -18,6 +18,10 @@ export default function CustomCard(): JSX.Element {
             src="https://pic-bstarstatic.akamaized.net/ugc/04acdad8ca2e0ab360b70e363d616558.jpg@720w_405h_1e_1c_90q"
             height={164}
             width={291}
+            style={{
+              width: "100%",
+              height: "100%",
+            }}
             alt="Norway"
           />
         </Text>

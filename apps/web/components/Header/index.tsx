@@ -81,52 +81,36 @@ export default function Topbar({
             width={80 * 2}
             height={34 * 2}
           />
-          <Popover
-            opened={openedHot}
-            onClose={closeHot}
-            width="37.25rem"
-            radius="md"
-            position="bottom"
-            shadow="md"
-          >
-            <Popover.Target>
-              <Input
-                w="32%"
-                onFocus={toggleHot}
-                placeholder={t("search")}
-                rightSection={
-                  <IconSearch
-                    size="1rem"
-                    style={{ display: "block", opacity: 0.5 }}
-                  />
-                }
-              />
-            </Popover.Target>
-            <Popover.Dropdown py="24px">
-              <SimpleGrid cols={2} spacing={12} sx={{ fontSize: 12 }}>
-                {Array.apply(null, Array(19)).map((_, i) => (
-                  <SimpleGrid
-                    spacing={6}
-                    sx={{ gridTemplateColumns: "40px 1fr" }}
-                    key={i}
-                  >
-                    <Anchor
-                      sx={{
-                        ":hover": { textDecoration: "none" },
-                        wordBreak: "break-word",
-                      }}
-                      color="#333"
-                      href="https://www.bilibili.tv/id/play/37976"
-                      target="_blank"
+          <MediaQuery smallerThan="md" styles={{ display: "none" }}>
+            <Popover
+              opened={openedHot}
+              onClose={closeHot}
+              width="37.25rem"
+              radius="md"
+              position="bottom"
+              shadow="md"
+            >
+              <Popover.Target>
+                <Input
+                  w="32%"
+                  onFocus={toggleHot}
+                  placeholder={t("search")}
+                  rightSection={
+                    <IconSearch
+                      size="1rem"
+                      style={{ display: "block", opacity: 0.5 }}
+                    />
+                  }
+                />
+              </Popover.Target>
+              <Popover.Dropdown py="24px">
+                <SimpleGrid cols={2} spacing={12} sx={{ fontSize: 12 }}>
+                  {Array.apply(null, Array(19)).map((_, i) => (
+                    <SimpleGrid
+                      spacing={6}
+                      sx={{ gridTemplateColumns: "40px 1fr" }}
+                      key={i}
                     >
-                      <Image
-                        src="https://pic.bstarstatic.com/ogv/56076fdff40680ee5cc087adf7a2c34357b04b27.jpg@80w_104h_1e_1c_1f.webp"
-                        alt="Thumbnail Anime"
-                        width={40}
-                        height={52}
-                      />
-                    </Anchor>
-                    <Box>
                       <Anchor
                         sx={{
                           ":hover": { textDecoration: "none" },
@@ -136,16 +120,37 @@ export default function Topbar({
                         href="https://www.bilibili.tv/id/play/37976"
                         target="_blank"
                       >
-                        One Piece
+                        <Image
+                          src="https://pic.bstarstatic.com/ogv/56076fdff40680ee5cc087adf7a2c34357b04b27.jpg@80w_104h_1e_1c_1f.webp"
+                          alt="Thumbnail Anime"
+                          width={40}
+                          height={52}
+                        />
                       </Anchor>
-                      <Text>1999 · Petualangan / Action · Memperbarui</Text>
-                    </Box>
-                  </SimpleGrid>
-                ))}
-              </SimpleGrid>
-            </Popover.Dropdown>
-          </Popover>
+                      <Box>
+                        <Anchor
+                          sx={{
+                            ":hover": { textDecoration: "none" },
+                            wordBreak: "break-word",
+                          }}
+                          color="#333"
+                          href="https://www.bilibili.tv/id/play/37976"
+                          target="_blank"
+                        >
+                          One Piece
+                        </Anchor>
+                        <Text>1999 · Petualangan / Action · Memperbarui</Text>
+                      </Box>
+                    </SimpleGrid>
+                  ))}
+                </SimpleGrid>
+              </Popover.Dropdown>
+            </Popover>
+          </MediaQuery>
           <Group>
+            <MediaQuery largerThan="md" styles={{ display: "none" }}>
+              <ActionIcon children={<IconSearch size="1rem" />} />
+            </MediaQuery>
             <Button leftIcon={<IconVideoPlus />} variant="outline">
               {t("create")}
             </Button>
