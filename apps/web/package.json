@@ -28,7 +28,7 @@
         "embla-carousel-react": "7.x.x",
         "fastest-validator": "^1.12.0",
         "ioredis": "^5.2.2",
-        "next": "latest",
+        "next": "~13.3.4",
         "next-intl": "^2.14.4",
         "react": "latest",
         "react-dom": "latest",
