@@ -135,6 +135,7 @@ __metadata:
     "@bilibili-dl/util": "workspace:*"
     "@emotion/react": ^11.11.0
     "@emotion/server": ^11.11.0
+    "@mantine/carousel": ^6.0.13
     "@mantine/core": ^6.0.11
     "@mantine/hooks": ^6.0.11
     "@mantine/next": ^6.0.11
@@ -150,6 +151,7 @@ __metadata:
     cookies-next: ^2.1.1
     cors: ^2.8.5
     dotenv: ^16.0.1
+    embla-carousel-react: 7.x.x
     fastest-validator: ^1.12.0
     ioredis: ^5.2.2
     next: latest
@@ -157,6 +159,7 @@ __metadata:
     prettier: ^2.7.1
     react: latest
     react-dom: latest
+    swr: ^2.1.5
     typescript: ^4.7.4
   languageName: unknown
   linkType: soft
@@ -482,6 +485,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mantine/carousel@npm:^6.0.13":
+  version: 6.0.13
+  resolution: "@mantine/carousel@npm:6.0.13"
+  dependencies:
+    "@mantine/utils": 6.0.13
+  peerDependencies:
+    "@mantine/core": 6.0.13
+    "@mantine/hooks": 6.0.13
+    embla-carousel-react: ^7.0.0
+    react: ">=16.8.0"
+  checksum: ff2b18216b3e9cbe1059b328b6699a1212683b54f0f6a16329079eb689efd90a17fdfacfb43f780e5f56a63910d1354749d52727e97841e3d775952231e5e2ab
+  languageName: node
+  linkType: hard
+
 "@mantine/core@npm:^6.0.11":
   version: 6.0.11
   resolution: "@mantine/core@npm:6.0.11"
@@ -558,6 +575,15 @@ __metadata:
   peerDependencies:
     react: ">=16.8.0"
   checksum: 2ed85f45595793b059d5818704f75ad7844e85e2aecf901d65e02a3997b6ad4ac50e5dc4e8e2a52f3554b30426e48ddaaa4ba73627f19c2491340cc5e49feaed
+  languageName: node
+  linkType: hard
+
+"@mantine/utils@npm:6.0.13":
+  version: 6.0.13
+  resolution: "@mantine/utils@npm:6.0.13"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 7b59db35a7245af138b9af7b143b4ef30e9b5d0bf85e796034ab2368b1a449d67f2023d9d174c532ebd94e9e63037d2e4e0da46e259572de7397e4b0d8867ca0
   languageName: node
   linkType: hard
 
@@ -1987,6 +2013,24 @@ __metadata:
   dependencies:
     readable-stream: ^2.0.2
   checksum: 744961f03c7f54313f90555ac20284a3fb7bf22fdff6538f041a86c22499560eb6eac9d30ab5768054137cb40e6b18b40f621094e0261d7d8c35a37b7a5ad241
+  languageName: node
+  linkType: hard
+
+"embla-carousel-react@npm:7.x.x":
+  version: 7.1.0
+  resolution: "embla-carousel-react@npm:7.1.0"
+  dependencies:
+    embla-carousel: 7.1.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.1 || ^18.0.0
+  checksum: e5c914874e2acb4db26f7f4da9e7658522e0714fed8b72b3e99984a2e48ff1a3f618ae74855baea5da42d9dd65f4706d7bfe6384ff9f8b542060a0e17ca63264
+  languageName: node
+  linkType: hard
+
+"embla-carousel@npm:7.1.0":
+  version: 7.1.0
+  resolution: "embla-carousel@npm:7.1.0"
+  checksum: fffb3d77cbd0866d4fcfa0247ead60297f57d62ee3dcf737a4f5708c0e6034ba308716d6a8a567ead55520c117de61b382fd040e4aec3daaee55bb5ba11fee7f
   languageName: node
   linkType: hard
 
@@ -4737,6 +4781,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"swr@npm:^2.1.5":
+  version: 2.1.5
+  resolution: "swr@npm:2.1.5"
+  dependencies:
+    use-sync-external-store: ^1.2.0
+  peerDependencies:
+    react: ^16.11.0 || ^17.0.0 || ^18.0.0
+  checksum: f2ef9b83ec4b2ebf4d520578ab847307700db01ffcab64b3aec6ea94feaf96ca10e38e8b08bc8adfab8eaa6ec1bdfd64f82b6f5c14cc4cb5cf11e6fd22b405a4
+  languageName: node
+  linkType: hard
+
 "tabbable@npm:^6.0.1":
   version: 6.1.2
   resolution: "tabbable@npm:6.1.2"
@@ -5132,6 +5187,15 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 925d1922f9853e516eaad526b6fed1be38008073067274f0ecc3f56b17bb8ab63480140dd7c271f94150027c996cea4efe83d3e3525e8f3eda22055f6a39220b
+  languageName: node
+  linkType: hard
+
+"use-sync-external-store@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "use-sync-external-store@npm:1.2.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 5c639e0f8da3521d605f59ce5be9e094ca772bd44a4ce7322b055a6f58eeed8dda3c94cabd90c7a41fb6fa852210092008afe48f7038792fd47501f33299116a
   languageName: node
   linkType: hard
 
