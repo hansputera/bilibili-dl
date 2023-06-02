@@ -105,7 +105,7 @@ export default function Topbar({
               </Popover.Target>
               <Popover.Dropdown py="24px">
                 <SimpleGrid cols={2} spacing={12} sx={{ fontSize: 12 }}>
-                  {Array.apply(null, Array(19)).map((_, i) => (
+                  {[...Array(19)].map((_, i) => (
                     <SimpleGrid
                       spacing={6}
                       sx={{ gridTemplateColumns: "40px 1fr" }}

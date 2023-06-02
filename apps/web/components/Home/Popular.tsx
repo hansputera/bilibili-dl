@@ -29,7 +29,7 @@ export default function Popular(): JSX.Element {
         </ActionIcon>
       </Group>
       <ContainerCard styles={{ root: { rowGap: 10, columnGap: 10 } }}>
-        {(Array.apply(null, Array(10)) as any).map((_: any, i: number) => (
+        {[...Array(10)].map((_, i) => (
           <CustomCard key={i} />
         ))}
       </ContainerCard>
