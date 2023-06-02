@@ -13,7 +13,10 @@ module.exports = {
     },
     transpilePackages: ['@bilibili-dl/core', '@bilibili-dl/util'],
     reactStrictMode: true,
-    experimental: {esmExternals: true},
+    experimental: {
+        esmExternals: true,
+        appDir: false
+    },
     webpack(config) {
         if (typeof customEnvironment !== 'undefined') {
             config.plugins.push(
@@ -24,7 +27,7 @@ module.exports = {
     },
     images: {
         domains: ['upload.wikimedia.org', 'pic.bstarstatic.com', 'pic-bstarstatic.akamaized.net', 'p.bstarstatic.com']
-    }
+    },
 };
 
 module.exports = withSentryConfig(
