@@ -1,4 +1,6 @@
+import Anime from "@/components/Home/Anime";
 import Popular from "@/components/Home/Popular";
+import { Stack } from "@mantine/core";
 import { GetServerSidePropsContext } from "next";
 
 /**
@@ -7,9 +9,10 @@ import { GetServerSidePropsContext } from "next";
  */
 export default function Index(): JSX.Element {
   return (
-    <>
+    <Stack spacing="lg">
       <Popular />
-    </>
+      <Anime />
+    </Stack>
   );
 }
 
