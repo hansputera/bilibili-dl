@@ -1,13 +1,20 @@
 import { Carousel } from "@mantine/carousel";
 import { Anchor, Button, Group, Title } from "@mantine/core";
+import { ListTimelineAnime } from "@bilibili-dl/interfaces/core";
 import Image from "next/image";
-import CustomCard from "../CustomCard";
+import OGV from "../Card/OGV";
+import useTimelinePicker from "hooks/useTimelinePicker";
 
 /**
  * Anime content component.
  * @return {JSX.Element}
  */
-export default function Anime(): JSX.Element {
+export default function Anime({
+  timelineList,
+}: {
+  timelineList: ListTimelineAnime;
+}): JSX.Element {
+  const { selectedTimeline } = useTimelinePicker(timelineList);
   return (
     <>
       <Group spacing={0} mb={16}>
@@ -16,10 +23,11 @@ export default function Anime(): JSX.Element {
         </Title>
         <Group sx={{ flexGrow: 1, flexShrink: 1 }} position="apart" ml="lg">
           <Carousel
-            slideSize="20%"
+            slideSize="10%"
             slideGap="xs"
             controlsOffset="xs"
-            align="start"
+            // containScroll="trimSnaps"
+            align={0.1}
             dragFree
           >
             <Carousel.Slide>
@@ -106,9 +114,9 @@ export default function Anime(): JSX.Element {
         align="start"
         slidesToScroll={5}
       >
-        {[...Array(10)].map((_, i) => (
+        {selectedTimeline.cards.map((item, i) => (
           <Carousel.Slide key={i}>
-            <CustomCard />
+            <OGV {...item} />
           </Carousel.Slide>
         ))}
       </Carousel>

@@ -1,4 +1,4 @@
-import type {PopularCards} from '@bilibili-dl/interfaces/core';
+import type {ListTimelineAnime} from '@bilibili-dl/interfaces/core';
 import {fetchAPI} from '@bilibili-dl/util';
 import {
     getGatewayURL,
@@ -8,18 +8,16 @@ import {
 /**
  * Get list of popular videos.
  * @param {SupportedLocales} locale Supported Locales.
- * @return {Promise<PopularCards>}
+ * @return {Promise<ListTimelineAnime>}
  */
-export const getPopularList = async (
+export const getTimelineList = async (
     locale: SupportedLocales = 'en_US',
-): Promise<PopularCards> => {
+): Promise<ListTimelineAnime> => {
     const response = await fetchAPI
-        .get(getGatewayURL('v2').concat('home/popular'), {
+        .get(getGatewayURL('v2').concat('ogv/timeline'), {
             searchParams: {
                 platform: 'web',
                 s_locale: locale,
-                pn: 1,
-                ps: 50,
             },
             headers: {
                 Referer: 'https://www.bilibili.tv/'.concat(
@@ -31,9 +29,9 @@ export const getPopularList = async (
         })
         .json<{
             data: {
-                cards: PopularCards;
+                items: ListTimelineAnime;
             };
         }>();
 
-    return response.data.cards;
+    return response.data.items;
 };

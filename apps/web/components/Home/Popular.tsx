@@ -1,23 +1,23 @@
-import CustomCard from "@/components/CustomCard";
 import { ActionIcon, Group, Title } from "@mantine/core";
-import ContainerCard from "../ContainerCard";
 import { IconChevronRight } from "@tabler/icons-react";
-import useSWR from "swr";
+import type {
+  Live_Content,
+  PopularCards,
+  UGC_Content,
+} from "@bilibili-dl/interfaces/core";
+import ContainerCard from "../ContainerCard";
+import UGC from "../Card/UGC";
+import Live from "../Card/Live";
 
 /**
  * Popular content component.
  * @return {JSX.Element}
  */
-export default function Popular(): JSX.Element {
-  const { data, error, isLoading } = useSWR(
-    "/api/search?query=bleach",
-    (...args) => fetch(...args).then((res) => res.json())
-  );
-
-  if (error) return <div>failed to load</div>;
-  if (isLoading) return <div>loading...</div>;
-  console.log(data);
-
+export default function Popular({
+  popularList,
+}: {
+  popularList: PopularCards;
+}): JSX.Element {
   return (
     <>
       <Group position="apart" mb={16}>
@@ -28,10 +28,14 @@ export default function Popular(): JSX.Element {
           <IconChevronRight />
         </ActionIcon>
       </Group>
-      <ContainerCard styles={{ root: { rowGap: 10, columnGap: 10 } }}>
-        {[...Array(10)].map((_, i) => (
-          <CustomCard key={i} />
-        ))}
+      <ContainerCard>
+        {popularList.map((item, i) =>
+          item.card_type === "ugc_video" ? (
+            <UGC key={i} {...(item as UGC_Content)} />
+          ) : (
+            <Live key={i} {...(item as Live_Content)} />
+          )
+        )}
       </ContainerCard>
     </>
   );

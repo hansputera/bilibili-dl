@@ -1,4 +1,4 @@
-import type {PopularCards} from '@bilibili-dl/interfaces/core';
+import type {RecommendationContent} from '@bilibili-dl/interfaces/core';
 import {fetchAPI} from '@bilibili-dl/util';
 import {
     getGatewayURL,
@@ -6,20 +6,21 @@ import {
 } from '@bilibili-dl/config/constants.js';
 
 /**
- * Get list of popular videos.
+ * Get list of recommendation videos.
  * @param {SupportedLocales} locale Supported Locales.
- * @return {Promise<PopularCards>}
+ * @return {Promise<RecommendationContent>}
  */
-export const getPopularList = async (
+export const getRecommendList = async (
     locale: SupportedLocales = 'en_US',
-): Promise<PopularCards> => {
+    pn: number,
+): Promise<RecommendationContent> => {
     const response = await fetchAPI
-        .get(getGatewayURL('v2').concat('home/popular'), {
+        .get(getGatewayURL('v2').concat('home/recommend'), {
             searchParams: {
                 platform: 'web',
                 s_locale: locale,
-                pn: 1,
-                ps: 50,
+                pn,
+                ps: pn === 1 ? 50 : 20,
             },
             headers: {
                 Referer: 'https://www.bilibili.tv/'.concat(
@@ -31,7 +32,7 @@ export const getPopularList = async (
         })
         .json<{
             data: {
-                cards: PopularCards;
+                cards: RecommendationContent;
             };
         }>();
 
