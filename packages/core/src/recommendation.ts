@@ -8,6 +8,7 @@ import {
 /**
  * Get list of recommendation videos.
  * @param {SupportedLocales} locale Supported Locales.
+ * @param {number} pn Index Pagination Number.
  * @return {Promise<RecommendationContent>}
  */
 export const getRecommendList = async (

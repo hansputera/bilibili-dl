@@ -4,9 +4,9 @@ import useRecommendation from "hooks/useRecommendation";
 import OGV from "../Card/OGV";
 import UGC from "../Card/UGC";
 import {
-  OGV_Content,
+  OGVContent,
   RecommendationContent,
-  UGC_Content,
+  UGCContent,
 } from "@bilibili-dl/interfaces/core";
 
 /**
@@ -28,9 +28,9 @@ export default function Recomendation(): JSX.Element {
       <ContainerCard styles={{ root: { gridAutoRows: "auto" } }}>
         {(data[0].data as RecommendationContent).map((item, i) =>
           item.card_type === "ogv_anime" ? (
-            <OGV key={i} {...(item as OGV_Content)} />
+            <OGV key={i} {...(item as OGVContent)} />
           ) : (
-            <UGC key={i} {...(item as UGC_Content)} />
+            <UGC key={i} {...(item as UGCContent)} />
           )
         )}
       </ContainerCard>

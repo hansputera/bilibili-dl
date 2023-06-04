@@ -4,6 +4,7 @@ import Image from "next/image";
 
 /**
  * Card Component.
+ * @param {TimelineCard} props
  * @return {JSX.Element}
  */
 export default function OGVCard(props: TimelineCard): JSX.Element {

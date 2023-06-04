@@ -1,12 +1,13 @@
-import type { UGC_Content } from "@bilibili-dl/interfaces/core";
-import { Box, Card, Flex, Group, Text } from "@mantine/core";
+import type { UGCContent } from "@bilibili-dl/interfaces/core";
+import { Box, Card, Group, Text } from "@mantine/core";
 import Image from "next/image";
 
 /**
  * Card Component.
+ * @param {UGCContent} props
  * @return {JSX.Element}
  */
-export default function UGCCard(props: UGC_Content): JSX.Element {
+export default function UGCCard(props: UGCContent): JSX.Element {
   return (
     <Card shadow="sm" padding="lg" radius="md" mb={{ xl: "xl", sm: "md" }}>
       <Card.Section>

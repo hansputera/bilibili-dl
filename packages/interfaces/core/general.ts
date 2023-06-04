@@ -7,7 +7,7 @@ export interface TimelineAnime {
     cards: TimelineCard[];
 }
 
-export interface Live_Content {
+export interface LiveContent {
     card_type: Card_Type;
     type: string;
     title: string;
@@ -17,7 +17,7 @@ export interface Live_Content {
     live: Live;
 }
 
-export interface OGV_Content {
+export interface OGVContent {
     type: string;
     card_type: Card_Type;
     title: string;
@@ -41,7 +41,7 @@ export interface OGV_Content {
     unavailable: boolean;
 }
 
-export interface UGC_Content {
+export interface UGCContent {
     type: string;
     aid: string;
     card_type: Card_Type;
@@ -60,7 +60,7 @@ export interface UGC_Content {
 
 export type PopularCards = PopularContent[];
 export type ListTimelineAnime = TimelineAnime[];
-export type RecommendationContent = (UGC_Content | OGV_Content)[];
+export type RecommendationContent = (UGCContent | OGVContent)[];
 
 export interface TimelineCard {
     type: string;
@@ -105,4 +105,4 @@ interface Identity {
     icon: string;
 }
 
-type PopularContent = UGC_Content | Live_Content;
+type PopularContent = UGCContent | LiveContent;

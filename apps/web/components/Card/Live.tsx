@@ -1,12 +1,11 @@
-import type { Live_Content } from "@bilibili-dl/interfaces/core";
-import { Box, Card, Flex, Group, Text } from "@mantine/core";
+import { Card, Flex, Group, Text } from "@mantine/core";
 import Image from "next/image";
 
 /**
  * Card Component.
  * @return {JSX.Element}
  */
-export default function LiveCard(props: Live_Content): JSX.Element {
+export default function LiveCard(): JSX.Element {
   return (
     <Card shadow="sm" padding="lg" radius="md" mb={{ xl: "xl", sm: "md" }}>
       <Card.Section>
