@@ -7,9 +7,16 @@ const {parsed: customEnvironment} = require('dotenv').config({
 
 /** @type {import('next').NextConfig} */
 module.exports = {
+    i18n: {
+        locales: ['en-US', 'id-ID'],
+        defaultLocale: 'en-US'
+    },
     transpilePackages: ['@bilibili-dl/core', '@bilibili-dl/util'],
     reactStrictMode: true,
-    experimental: {esmExternals: true},
+    experimental: {
+        esmExternals: true,
+        appDir: false
+    },
     webpack(config) {
         if (typeof customEnvironment !== 'undefined') {
             config.plugins.push(
@@ -17,6 +24,9 @@ module.exports = {
             );
         }
         return config;
+    },
+    images: {
+        domains: ['upload.wikimedia.org', 'pic.bstarstatic.com', 'pic-bstarstatic.akamaized.net', 'p.bstarstatic.com']
     },
 };
 

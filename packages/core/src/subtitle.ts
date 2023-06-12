@@ -8,7 +8,7 @@ import {fetchAPI, Got} from '@bilibili-dl/util';
 export const getSubtitle = async (
     id: string,
     locale: string,
-): Promise<SubtitleData | string> => {
+): Promise<string | SubtitleData> => {
     const response = await fetchAPI(getGatewayURL('v2').concat('subtitle'), {
         searchParams: {
             s_locale: 'en_US',
@@ -35,7 +35,7 @@ export const getSubtitle = async (
 
         const twoResponse = await Got.got
             .get(sub.url)
-            .json<SubtitleData>()
+            .text()
             .catch(() => undefined);
         if (!twoResponse) return "Couldn't get the subtitle contents!";
 
