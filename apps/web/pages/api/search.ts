@@ -1,13 +1,22 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 import {searchQuery} from '@bilibili-dl/core';
 import Validator from 'fastest-validator';
-import {instanceToPlain, ItemTransformed, jsonParse} from '@bilibili-dl/util';
+import {
+    compare,
+    instanceToPlain,
+    ItemTransformed,
+    jsonParse,
+} from '@bilibili-dl/util';
 
 import {redis} from '../../lib/redis';
 import {maxLifetimeData} from '../../config';
+import {supportedLocales} from '@bilibili-dl/config/constants.js';
+import {applyCors} from '../../middlewares/cors';
 
-const v = new Validator();
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+    await applyCors(req, res);
+
+    const v = new Validator();
     const validReq = v.compile({
         query: {
             type: 'string',
@@ -18,6 +27,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             type: 'enum',
             values: ['anime', 'video'],
             optional: true,
+        },
+        locale: {
+            type: 'enum',
+            values: supportedLocales,
+            optional: true,
+            default: 'en_US',
         },
     })(req.body || req.query);
 
@@ -31,8 +46,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 (req.query.query as string)?.toLowerCase(),
         );
     }
-    const filter =
-        (req.body.filter || req.query.filter)?.toLowerCase() ?? 'all';
+
     let result: ItemTransformed[] = jsonParse(
         (await redis.get(
             req.body.query?.toLowerCase() ||
@@ -41,37 +55,42 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         [],
     );
 
-    if (!result.length) {
+    if (
+        !result.length ||
+        compare(result[0], {} as unknown as ItemTransformed)
+    ) {
         result = await searchQuery(
             req.body.query?.toLowerCase() ||
                 (req.query.query as string)?.toLowerCase(),
+            req.body.locale || req.query.locale || 'en_US',
         );
         await redis.set(
             req.body.query?.toLowerCase() ||
                 (req.query.query as string)?.toLowerCase(),
             JSON.stringify(
-                result
-                    .filter((c) =>
-                        filter === 'all' ? true : filter === c.type,
-                    )
-                    .map((c) =>
-                        instanceToPlain(c, {
-                            strategy: 'excludeAll',
-                        }),
-                    ),
+                result.map((x) =>
+                    instanceToPlain(x, {
+                        strategy: 'excludeAll',
+                    }),
+                ),
             ),
             'EX',
             maxLifetimeData,
         );
     }
 
+    const filter =
+        (req.body.filter || req.query.filter)?.toLowerCase() ?? 'all';
+    result = result.filter((c) =>
+        filter === 'all' ? true : filter === c.type,
+    );
     return res.status(200).json(
-        result
-            .filter((c) => (filter === 'all' ? true : filter === c.type))
-            .map((c) =>
-                instanceToPlain(c, {
-                    strategy: 'excludeAll',
-                }),
-            ),
+        result[0] instanceof ItemTransformed
+            ? result.map((c) =>
+                  instanceToPlain(c, {
+                      strategy: 'excludeAll',
+                  }),
+              )
+            : result,
     );
 };

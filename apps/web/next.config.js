@@ -1,19 +1,23 @@
+const {withSentryConfig} = require('@sentry/nextjs');
+
 const webpack = require('webpack');
-const withTM = require('next-transpile-modules')([
-    '@bilibili-dl/core',
-    '@bilibili-dl/util',
-]);
-const WindiCSSWebpackPlugin = require('windicss-webpack-plugin');
 const {parsed: customEnvironment} = require('dotenv').config({
     path: require('path').resolve(__dirname, '..', '..', '.env'),
 });
 
-module.exports = withTM({
+/** @type {import('next').NextConfig} */
+module.exports = {
+    i18n: {
+        locales: ['en-US', 'id-ID'],
+        defaultLocale: 'en-US'
+    },
+    transpilePackages: ['@bilibili-dl/core', '@bilibili-dl/util'],
     reactStrictMode: true,
-    experimental: {esmExternals: true},
+    experimental: {
+        esmExternals: true,
+        appDir: false
+    },
     webpack(config) {
-        // adding windicss plugin
-        config.plugins.push(new WindiCSSWebpackPlugin());
         if (typeof customEnvironment !== 'undefined') {
             config.plugins.push(
                 new webpack.EnvironmentPlugin(customEnvironment),
@@ -21,4 +25,13 @@ module.exports = withTM({
         }
         return config;
     },
-});
+    images: {
+        domains: ['upload.wikimedia.org', 'pic.bstarstatic.com', 'pic-bstarstatic.akamaized.net', 'p.bstarstatic.com']
+    },
+};
+
+module.exports = withSentryConfig(
+    module.exports,
+    {silent: true},
+    {hideSourcemaps: true},
+);

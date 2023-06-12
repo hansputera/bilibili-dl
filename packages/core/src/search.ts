@@ -1,10 +1,8 @@
+import {fetchAPI, ItemTransformed, plainToInstance} from '@bilibili-dl/util';
 import {
-    fetchAPI,
-    ItemTransformed,
-    plainToInstance,
-    compare,
-} from '@bilibili-dl/util';
-import {getGatewayURL} from '@bilibili-dl/config/constants.js';
+    getGatewayURL,
+    SupportedLocales,
+} from '@bilibili-dl/config/constants.js';
 
 /**
  * Search videos/anime from given query.
@@ -14,33 +12,51 @@ import {getGatewayURL} from '@bilibili-dl/config/constants.js';
 // TODO: create pagination request
 export const searchQuery = async (
     query: string,
+    locale: SupportedLocales = 'en_US',
 ): Promise<ItemTransformed[]> => {
     const response = await fetchAPI
-        .get(getGatewayURL('v2').concat('search'), {
+        .get(getGatewayURL('v2').concat('search_v2'), {
             searchParams: {
-                keyword: encodeURIComponent(query),
-                platform: 'web',
-                s_locale: 'id-ID',
+                keyword: decodeURIComponent(query),
+                platform: 'tv',
+                s_locale: locale,
+                pn: 1,
+                ps: 20,
+            },
+            headers: {
+                Referer: 'https://www.bilibili.tv/'.concat(
+                    locale.split('_')?.at(0)!,
+                ),
+                Origin: 'https://www.bilibili.tv',
+                Cookie: process.env.BILI_COOKIE ?? '',
             },
         })
         .json<{
             data: {
-                items: unknown[];
-            }[];
+                modules: {
+                    items: unknown[];
+                    type: 'uploader' | 'ugc' | 'ogv';
+                }[];
+            };
         }>();
 
-    if (response.data.length < 2) return [];
+    response.data.modules = response.data.modules.filter(
+        (m) => m.type === 'ogv' || m.type === 'ugc',
+    );
+    if (!response.data?.modules.length) return [];
 
-    return response.data
-        .at(-1)!
-        .items.concat(
-            compare(response.data.at(-1), response.data.at(1))
-                ? []
-                : response.data.at(1)!.items,
-        )
-        .map((t) =>
-            plainToInstance(ItemTransformed, t, {
+    return response.data.modules
+        .at(0)!
+        .items.concat(response.data.modules.at(1)?.items)
+        .filter((t) => typeof t === 'object')
+        .map((t) => {
+            const ret = plainToInstance(ItemTransformed, t, {
                 strategy: 'excludeAll',
-            }),
-        );
+            });
+            ret.genres = (t as {styles: Array<{title: string}>}).styles?.map(
+                (s) => s.title,
+            );
+
+            return ret;
+        });
 };

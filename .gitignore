@@ -5,3 +5,8 @@ dist/
 .yarn/cache
 .yarn/*.gz
 .env
+.vercel
+packages/**/dist
+tarballs
+bilibili-creds/
+qr.png

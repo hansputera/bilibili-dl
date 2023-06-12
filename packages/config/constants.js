@@ -10,3 +10,4 @@ export const getGatewayURL = (version) => {
         return `./intl/gateway/web/${version.toLowerCase()}/`;
     } else return './intl/gateway/web/';
 };
+export const supportedLocales = ['en_US', 'id_ID', 'ms_MY', 'vi_VN', 'th_TH'];

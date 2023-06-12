@@ -1,6 +1,6 @@
 {
     "name": "@bilibili-dl/config",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Bilibili-DL Project Configuration",
     "scripts": {
         "lint": "eslint -c eslint.cjs \"**/*.{js,cjs}\" --fix",
@@ -12,13 +12,14 @@
     "author": "Hanif Dwy Putra S <hanifdwyputrasembiring@gmail.com>",
     "license": "MIT",
     "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^5.27.0",
-        "@typescript-eslint/parser": "^5.27.0",
-        "eslint": "^8.17.0",
+        "@typescript-eslint/eslint-plugin": "^5.33.0",
+        "@typescript-eslint/parser": "^5.33.0",
+        "eslint": "^8.22.0",
         "eslint-config-google": "^0.14.0",
         "eslint-config-prettier": "^8.5.0",
-        "prettier": "^2.6.2",
-        "typescript": "^4.7.3"
+        "prettier": "^2.7.1",
+        "tsup": "^6.5.0",
+        "typescript": "^4.7.4"
     },
     "type": "module",
     "files": [
@@ -26,6 +27,10 @@
         "eslint-ts.cjs",
         "prettier.cjs",
         "tsconfig.base.json",
-        "constants.js"
-    ]
+        "constants.js",
+        "constants.d.ts",
+        "tsup.base.js",
+        "tsup.base.d.ts"
+    ],
+    "main": "./dist/index.js"
 }

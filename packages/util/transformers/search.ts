@@ -2,6 +2,7 @@
 
 import {Exclude, Expose, Transform} from 'class-transformer';
 import {baseURL} from '@bilibili-dl/config/constants.js';
+import {matchView} from '..';
 
 export type ItemType = 'anime' | 'video';
 
@@ -15,7 +16,11 @@ export class ItemTransformed {
 
     @Exclude()
     @Expose({name: 'mid'})
-    _videoId!: number;
+    _mId!: number;
+
+    @Exclude()
+    @Expose({name: 'aid'})
+    _aId!: number;
 
     @Exclude()
     @Expose({name: 'season_id'})
@@ -23,11 +28,12 @@ export class ItemTransformed {
 
     @Expose()
     get id(): number {
-        return this._videoId || this._seasonId;
+        return this._aId || this._mId || this._seasonId;
     }
 
     @Expose()
     get url(): string {
+        // TODO: use requested "locale"
         return new URL(
             `./en/${
                 this.type === 'anime' ? 'play' : 'video'
@@ -48,9 +54,13 @@ export class ItemTransformed {
     @Exclude({toPlainOnly: true})
     score!: number;
 
-    @Expose()
-    @Exclude({toPlainOnly: true})
-    styles!: string;
+    @Expose({name: 'update_pattern'})
+    @Transform(({value}) =>
+        typeof value === 'string'
+            ? value.replace(/update at/gi, '').trim()
+            : value,
+    )
+    updatePattern!: string;
 
     @Expose()
     get description(): string {
@@ -68,29 +78,23 @@ export class ItemTransformed {
     }
 
     @Expose()
-    get genre(): string {
-        return this.styles;
-    }
+    genres!: string[] | undefined;
 
     @Expose({name: 'view'})
-    @Transform(
-        ({value}) => value.match(/\d+((.|\/)+)?\d+(m|k)?/gi)?.at(0) ?? '0',
-    )
+    @Transform(({value}) => matchView(value))
     @Exclude({toPlainOnly: true})
     _views!: string;
 
     @Expose()
     get views(): string {
-        return this._views === '0'
-            ? this.desc.match(/\d+((.|\/)+)?\d+(m|k)?/gi)?.at(0) ?? '0'
-            : this._views;
+        return this._views === '0' ? matchView(this.desc) : this._views;
     }
 
     @Expose({name: 'duration'})
-    @Transform(({value}) => (value.length ? value : '-'))
+    @Transform(({value}) => (value?.length ? value : '-'))
     duration!: string;
     @Expose()
     get type(): ItemType {
-        return this.duration === '-' ? 'anime' : 'video';
+        return !!this._seasonId ? 'anime' : 'video';
     }
 }

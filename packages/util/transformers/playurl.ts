@@ -1,5 +1,5 @@
 /* eslint-disable */
-import {Resource, VideoResource} from '@bilibili-dl/interfaces/core';
+import type {Resource, VideoResource} from '@bilibili-dl/interfaces/core';
 import {Expose, Transform, Type} from 'class-transformer';
 import prettyMs from 'pretty-ms';
 import prettyBytes from 'pretty-bytes';
@@ -15,7 +15,9 @@ export class PlayUrlResourceTransformed {
     id!: string;
 
     @Expose()
-    @Transform(({value}) => prettyMs(value))
+    @Transform(({value}) => prettyMs(value), {
+        toPlainOnly: true,
+    })
     duration!: string;
 
     @Expose()
@@ -25,20 +27,25 @@ export class PlayUrlResourceTransformed {
     codecs!: string;
 
     @Expose()
-    @Transform(({value}) => prettyBytes(value))
+    @Transform(({value}) => prettyBytes(value), {
+        toPlainOnly: true,
+    })
     size!: string;
 
     @Expose()
     quality!: number;
+
+    @Expose()
+    frameRate!: string | undefined;
+
+    @Expose()
+    backupUrls!: string[];
 }
 
 /**
  * @class PlayUrlTransformed
  */
 export class PlayUrlTransformed {
-    @Expose()
-    duration!: number;
-
     @Expose()
     @Type(() => PlayUrlResourceTransformed)
     audios!: PlayUrlResourceTransformed[];
@@ -49,7 +56,6 @@ export class PlayUrlTransformed {
 }
 
 interface RawPlayUrlStruct {
-    duration: number;
     audio_resource: Resource[];
     video: VideoResource[];
 }
@@ -59,23 +65,29 @@ interface RawPlayUrlStruct {
  * @param {RawPlayUrlStruct} data original playurl data.
  * @return {*}
  */
-export const transformToReadable = (data: RawPlayUrlStruct) => {
+export const transformPlayUrl = (data: RawPlayUrlStruct) => {
     return {
-        duration: data.duration,
         audios: data.audio_resource.map((audio) => ({
             url: audio.url,
             id: audio.id,
             mimeType: audio.mime_type,
             codecs: audio.codecs,
             size: audio.size,
+            duration: audio.duration,
+            backupUrls: audio.backup_url,
         })),
-        videos: data.video.map((video) => ({
-            url: video.video_resource.url,
-            quality: video.stream_info.quality,
-            mimeType: video.video_resource.mime_type,
-            size: video.video_resource.size,
-            codecs: video.video_resource.codecs,
-            id: video.video_resource.id,
-        })),
+        videos: data.video
+            .filter((v) => v.video_resource.url.length)
+            .map((video) => ({
+                url: video.video_resource.url,
+                quality: video.stream_info.quality,
+                mimeType: video.video_resource.mime_type,
+                size: video.video_resource.size,
+                codecs: video.video_resource.codecs,
+                id: video.video_resource.id,
+                duration: +video.video_resource.duration,
+                frameRate: video.video_resource.frame_rate ?? undefined,
+                backupUrls: video.video_resource.backup_url,
+            })),
     };
 };

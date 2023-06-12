@@ -1,1 +1,3 @@
-module.exports = require('@bilibili-dl/config/prettier.cjs');
+module.exports = {
+  plugins: [require('@bilibili-dl/config/prettier.cjs')]
+};

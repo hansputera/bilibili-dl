@@ -1,0 +1,23 @@
+{
+  "sidebar": {
+    "MainLinks": {
+      "home": "Halaman utama",
+      "category": "Kategori"
+    },
+    "Following": {
+      "loginMessage": "Masuk untuk lihat konten yang Anda ikuti"
+    },
+    "Footer": {
+      "about": "Tentang kami",
+      "contact": "Hubungi kami",
+      "getApp": "Dapatkan aplikasi",
+      "terms": "Syarat Layanan",
+      "privacy": "Kebijakan Privasi",
+      "infringement": "Keluhan pelanggaran"
+    }
+  },
+  "Topbar": {
+    "create": "Buat",
+    "search": "Cari"
+  }
+}

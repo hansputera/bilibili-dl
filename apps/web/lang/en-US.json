@@ -1,0 +1,23 @@
+{
+  "sidebar": {
+    "MainLinks": {
+      "home": "Home",
+      "category": "Category"
+    },
+    "Following": {
+      "loginMessage": "Log in to view your \"Followed\" content."
+    },
+    "Footer": {
+      "about": "About us",
+      "contact": "Contact us",
+      "getApp": "Get App",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "infringement": "Infringement Complaint"
+    }
+  },
+  "Topbar": {
+    "create": "Create",
+    "search": "Search"
+  }
+}

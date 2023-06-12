@@ -1,0 +1,104 @@
+diff --git a/apps/web/pages/api/playurl.ts b/apps/web/pages/api/playurl.ts
+index f6cd980..60b7e13 100644
+--- a/apps/web/pages/api/playurl.ts
++++ b/apps/web/pages/api/playurl.ts
+@@ -1,6 +1,7 @@
+ import {NextApiRequest, NextApiResponse} from 'next';
+ import Validator from 'fastest-validator';
+ import {
++    compare,
+     getBtvID,
+     instanceToPlain,
+     jsonParse,
+@@ -36,7 +37,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
+         });
+ 
+     let result = jsonParse((await redis.get(video.videoId)) ?? '');
+-    if (!(result instanceof PlayUrlTransformed)) {
++    if (compare(result, {}) && !(result instanceof PlayUrlTransformed)) {
+         result = await getPlayUrl(
+             video.videoId,
+             video.seasonId ? 'anime' : 'video',
+@@ -50,7 +51,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
+         }
+         await redis.set(
+             video.videoId,
+-            JSON.stringify(result),
++            JSON.stringify(instanceToPlain(result, {
++                strategy: 'excludeAll',
++            })),
+             'EX',
+             maxLifetimeData,
+         );
+diff --git a/apps/web/pages/api/search.ts b/apps/web/pages/api/search.ts
+index 313d0e8..dbb0fbb 100644
+--- a/apps/web/pages/api/search.ts
++++ b/apps/web/pages/api/search.ts
+@@ -65,19 +65,28 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
+         await redis.set(
+             req.body.query?.toLowerCase() ||
+                 (req.query.query as string)?.toLowerCase(),
+-            JSON.stringify(result),
++            JSON.stringify(
++                result.map((x) =>
++                    instanceToPlain(x, {
++                        strategy: 'excludeAll',
++                    }),
++                ),
++            ),
+             'EX',
+             maxLifetimeData,
+         );
+     }
+ 
++    result = result.filter((c) =>
++        filter === 'all' ? true : filter === c.type,
++    );
+     return res.status(200).json(
+-        result
+-            .filter((c) => (filter === 'all' ? true : filter === c.type))
+-            .map((c) =>
+-                instanceToPlain(c, {
+-                    strategy: 'excludeAll',
+-                }),
+-            ),
++        result[0] instanceof ItemTransformed
++            ? result.map((c) =>
++                  instanceToPlain(c, {
++                      strategy: 'excludeAll',
++                  }),
++              )
++            : result,
+     );
+ };
+diff --git a/packages/core/src/playurl.ts b/packages/core/src/playurl.ts
+index dfd4ef7..8a59e11 100644
+--- a/packages/core/src/playurl.ts
++++ b/packages/core/src/playurl.ts
+@@ -69,11 +69,12 @@ export const getPlayUrl = async (
+         }>();
+         if (+response.code === 404 || !response.data) {
+             if (/unknown error/gi.test(response.message) && retryCount <= 2) {
++                retryCount++;
+                 return getPlayUrl(
+                     id,
+                     type === 'video' ? 'anime' : 'video',
+                     locale,
+-                    retryCount++,
++                    retryCount,
+                 );
+             }
+             return response.message;
+diff --git a/packages/util/compare.ts b/packages/util/compare.ts
+index 25936b1..c6fcf75 100644
+--- a/packages/util/compare.ts
++++ b/packages/util/compare.ts
+@@ -16,7 +16,7 @@ export function compare<T>(first: T, second: T): boolean {
+         typeof first === 'object' &&
+         typeof second === 'object'
+     ) {
+-        return Object.is(first, second);
++        return JSON.stringify(first) === JSON.stringify(second);
+     } else {
+         return first === second;
+     }
