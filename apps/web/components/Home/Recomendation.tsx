@@ -14,11 +14,10 @@ import {
  * @return {JSX.Element}
  */
 export default function Recomendation(): JSX.Element {
-  const { data, isLoading, error } = useRecommendation();
+  const { recommend, isLoading, error, ref } = useRecommendation();
 
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
-  console.log(data);
 
   return (
     <>
@@ -26,13 +25,15 @@ export default function Recomendation(): JSX.Element {
         Direkomendasikan untukmu
       </Title>
       <ContainerCard styles={{ root: { gridAutoRows: "auto" } }}>
-        {(data[0].data as RecommendationContent).map((item, i) =>
+        {recommend.map((item, i) =>
+          // {(data?.[0]?.data as RecommendationContent)?.map((item, i) =>
           item.card_type === "ogv_anime" ? (
-            <OGV key={i} {...(item as OGVContent)} />
+            <OGV key={i} {...(item as OGVContent)} measureRef={ref} />
           ) : (
-            <UGC key={i} {...(item as UGCContent)} />
+            <UGC key={i} {...(item as UGCContent)} measureRef={ref} />
           )
         )}
+        <div ref={ref} />
       </ContainerCard>
     </>
   );

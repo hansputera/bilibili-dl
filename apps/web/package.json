@@ -32,7 +32,7 @@
         "next-intl": "^2.14.4",
         "react": "latest",
         "react-dom": "latest",
-        "swr": "^2.1.5"
+        "swr": "^2.2.0"
     },
     "devDependencies": {
         "@bilibili-dl/config": "workspace:*",

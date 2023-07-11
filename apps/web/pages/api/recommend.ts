@@ -19,7 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       optional: true,
       default: "en_US",
     },
-    ps: "string",
+    pn: "string",
   })(req.query);
 
   if (typeof validReq === "object") {
@@ -28,7 +28,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const data = await getRecommendList(
     req.query.locale as SupportedLocales,
-    req.query.ps as unknown as number
+    req.query.pn as unknown as number
   );
 
   return res.status(200).json({ data });

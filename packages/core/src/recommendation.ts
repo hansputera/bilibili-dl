@@ -9,12 +9,12 @@ import {
  * Get list of recommendation videos.
  * @param {SupportedLocales} locale Supported Locales.
  * @param {number} pn Index Pagination Number.
- * @return {Promise<RecommendationContent>}
+ * @return {Promise<RecommendationContent[]>}
  */
 export const getRecommendList = async (
     locale: SupportedLocales = 'en_US',
     pn: number,
-): Promise<RecommendationContent> => {
+): Promise<RecommendationContent[]> => {
     const response = await fetchAPI
         .get(getGatewayURL('v2').concat('home/recommend'), {
             searchParams: {
@@ -33,7 +33,7 @@ export const getRecommendList = async (
         })
         .json<{
             data: {
-                cards: RecommendationContent;
+                cards: RecommendationContent[];
             };
         }>();
 

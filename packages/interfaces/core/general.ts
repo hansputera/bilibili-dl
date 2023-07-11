@@ -60,7 +60,7 @@ export interface UGCContent {
 
 export type PopularCards = PopularContent[];
 export type ListTimelineAnime = TimelineAnime[];
-export type RecommendationContent = (UGCContent | OGVContent)[];
+export type RecommendationContent = UGCContent | OGVContent;
 
 export interface TimelineCard {
     type: string;

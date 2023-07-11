@@ -7,9 +7,17 @@ import Image from "next/image";
  * @param {UGCContent} props
  * @return {JSX.Element}
  */
-export default function UGCCard(props: UGCContent): JSX.Element {
+export default function UGCCard(
+  props: UGCContent & { measureRef: any }
+): JSX.Element {
   return (
-    <Card shadow="sm" padding="lg" radius="md" mb={{ xl: "xl", sm: "md" }}>
+    <Card
+      shadow="sm"
+      padding="lg"
+      radius="md"
+      mb={{ xl: "xl", sm: "md" }}
+      ref={props.measureRef}
+    >
       <Card.Section>
         <Text
           component="a"

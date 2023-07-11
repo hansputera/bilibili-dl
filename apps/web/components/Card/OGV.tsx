@@ -7,9 +7,17 @@ import Image from "next/image";
  * @param {TimelineCard} props
  * @return {JSX.Element}
  */
-export default function OGVCard(props: TimelineCard): JSX.Element {
+export default function OGVCard(
+  props: TimelineCard & { measureRef: any }
+): JSX.Element {
   return (
-    <Card shadow="sm" padding="lg" radius="md" mb={{ xl: "xl", sm: "md" }}>
+    <Card
+      shadow="sm"
+      padding="lg"
+      radius="md"
+      mb={{ xl: "xl", sm: "md" }}
+      ref={props.measureRef}
+    >
       <Card.Section>
         <Text
           component="a"

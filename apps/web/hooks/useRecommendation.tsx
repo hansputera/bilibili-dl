@@ -1,43 +1,40 @@
-import { useEffect } from "react";
+import { RecommendationContent } from "@bilibili-dl/interfaces/core";
+import { useIntersection } from "@mantine/hooks";
+import { useEffect, useMemo } from "react";
 import useSWRInfinite from "swr/infinite";
 
-export default function useRecommendation(): any {
-  // const [incremental, setIncremental] = useState(1);
-  // const [recommendList, setRecommendList] = useState<any>([]);
+export default function useRecommendation() {
+  const { data, error, isLoading, isValidating, size, setSize } =
+    useSWRInfinite<RecommendationContent>(
+      (pageIndex) => {
+        return `/api/recommend?pn=${pageIndex + 1}`;
+      },
+      (...args) =>
+        fetch(...args)
+          .then((res) => res.json())
+          .then((res) => res.data),
+      {
+        revalidateOnFocus: false,
+        revalidateFirstPage: false,
+      }
+    );
+  const { ref: scrollRef, entry } = useIntersection();
 
-  const { data, error, isLoading, size, setSize } = useSWRInfinite(
-    (pageIndex, prevPageData) => {
-      if (prevPageData && !prevPageData.length) return null;
-      return `/api/recommend?ps=${pageIndex + 1}`;
-    },
-    (...args) => fetch(...args).then((res) => res.json())
+  const recommend_card = useMemo(
+    () => (data ? ([] as RecommendationContent[]).concat(...data) : []),
+    [data]
   );
-  const onScroll = () => {
-    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-    if (Math.abs(scrollHeight - scrollTop - clientHeight) < 1) {
-      // setIncremental((current) => current++);
-      setSize(size + 1);
-    }
-  };
-
-  // useEffect(() => {
-  //   if (data) {
-  //     setRecommendList((current: any) =>
-  //       current.length ? [...current, data] : [data]
-  //     );
-  //   }
-  // }, [data]);
 
   useEffect(() => {
-    window.addEventListener("scroll", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, []);
+    if (!isValidating && entry?.isIntersecting) {
+      setSize(size + 1);
+    }
+  }, [entry?.isIntersecting]);
 
   return {
-    data,
+    recommend: recommend_card,
     error,
     isLoading,
+    ref: scrollRef,
   };
 }
