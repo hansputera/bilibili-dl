@@ -3,7 +3,7 @@ import {
     getGatewayURL,
     SupportedLocales,
 } from '@bilibili-dl/config/constants.js';
-import type {PopularData} from '@bilibili-dl/interfaces/api';
+import type {IPopularAPI, PopularData} from '@bilibili-dl/interfaces/api';
 
 /**
  * Get list of popular videos.
@@ -29,11 +29,7 @@ export const getPopularList = async (
                 Cookie: process.env.BILI_COOKIE ?? '',
             },
         })
-        .json<{
-            data: {
-                cards: PopularData;
-            };
-        }>();
+        .json<IPopularAPI>();
 
-    return response.data.cards;
+    return response.data;
 };
