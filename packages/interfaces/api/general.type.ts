@@ -8,6 +8,16 @@ export type IResponseAPI<T> = {
     data: T;
 };
 
+export interface LiveCard {
+    card_type: 'ugc_video';
+    type: string;
+    title: string;
+    cover: string;
+    view: string;
+    author: Author;
+    live: Live;
+}
+
 export interface OGVCard {
     type: string;
     card_type: 'ogv_anime';
@@ -57,4 +67,9 @@ interface Author {
 interface Identity {
     role: number;
     icon: string;
+}
+
+interface Live {
+    state: number;
+    room_id: number;
 }

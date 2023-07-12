@@ -1,13 +1,9 @@
 import { ActionIcon, Group, Title } from "@mantine/core";
 import { IconChevronRight } from "@tabler/icons-react";
-import type {
-  LiveContent,
-  PopularCards,
-  UGCContent,
-} from "@bilibili-dl/interfaces/core";
 import ContainerCard from "../ContainerCard";
 import UGC from "../Card/UGC";
 import Live from "../Card/Live";
+import { LiveCard, PopularData, UGCCard } from "@bilibili-dl/interfaces/api";
 
 /**
  * Popular content component.
@@ -16,7 +12,7 @@ import Live from "../Card/Live";
 export default function Popular({
   popularList,
 }: {
-  popularList: PopularCards;
+  popularList: PopularData;
 }): JSX.Element {
   return (
     <>
@@ -29,11 +25,11 @@ export default function Popular({
         </ActionIcon>
       </Group>
       <ContainerCard>
-        {popularList.map((item, i) =>
+        {popularList.cards.map((item, i) =>
           item.card_type === "ugc_video" ? (
-            <UGC key={i} {...(item as UGCContent)} />
+            <UGC key={i} {...(item as UGCCard)} />
           ) : (
-            <Live key={i} {...(item as LiveContent)} />
+            <Live key={i} {...(item as LiveCard)} />
           )
         )}
       </ContainerCard>

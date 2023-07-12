@@ -2,7 +2,7 @@ import type { UGCCard } from "@bilibili-dl/interfaces/api";
 import { Box, Card, Group, Text } from "@mantine/core";
 import Image from "next/image";
 
-type Props = UGCCard & { measureRef: any };
+type Props = UGCCard & { measureRef?: any };
 
 /**
  * Card Component.
