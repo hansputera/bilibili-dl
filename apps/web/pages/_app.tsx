@@ -13,7 +13,6 @@ import Layout from "@/components/layout";
 
 type Props = {
   messages: AbstractIntlMessages;
-  locale: string;
   colorScheme: ColorScheme;
 };
 
@@ -57,10 +56,7 @@ export default function App(props: AppProps & Props): JSX.Element {
             colorScheme,
           }}
         >
-          <NextIntlProvider
-            messages={pageProps.messages}
-            locale={pageProps.locale ?? "en"}
-          >
+          <NextIntlProvider messages={pageProps.messages}>
             <Layout>
               <Component {...pageProps} />
             </Layout>

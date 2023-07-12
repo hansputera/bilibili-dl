@@ -1,15 +1,15 @@
-import type { UGCContent } from "@bilibili-dl/interfaces/core";
+import type { UGCCard } from "@bilibili-dl/interfaces/api";
 import { Box, Card, Group, Text } from "@mantine/core";
 import Image from "next/image";
 
+type Props = UGCCard & { measureRef: any };
+
 /**
  * Card Component.
- * @param {UGCContent} props
+ * @param {Props} props
  * @return {JSX.Element}
  */
-export default function UGCCard(
-  props: UGCContent & { measureRef: any }
-): JSX.Element {
+export default function UGCCard(props: Props): JSX.Element {
   return (
     <Card
       shadow="sm"

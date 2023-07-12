@@ -55,7 +55,7 @@ export default function Topbar({
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const theme = useMantineTheme();
   const t = useTranslations("Topbar");
-  const { locale } = useRouter();
+  const { locale, route } = useRouter();
   const [openedLang, { toggle: toggleLang, close: closeLang }] =
     useDisclosure(false);
   const [openedHot, { toggle: toggleHot, close: closeHot }] =
@@ -205,10 +205,10 @@ export default function Topbar({
             </Center>
           </UnstyledButton>
           <Divider />
-          <Button component={Link} locale="en-US" href="/" variant="subtle">
+          <Button component={Link} locale="en-US" href={route} variant="subtle">
             English
           </Button>
-          <Button component={Link} locale="id-ID" href="/" variant="subtle">
+          <Button component={Link} locale="id-ID" href={route} variant="subtle">
             Bahasa Indonesia
           </Button>
         </Stack>

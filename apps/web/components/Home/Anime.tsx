@@ -1,20 +1,24 @@
 import { Carousel } from "@mantine/carousel";
 import { Anchor, Button, Group, Title } from "@mantine/core";
-import { ListTimelineAnime } from "@bilibili-dl/interfaces/core";
 import Image from "next/image";
 import OGV from "../Card/OGV";
-import useTimelinePicker from "hooks/useTimelinePicker";
+import useAnimeCarousel from "hooks/useAnimeCarousel";
+import {
+  CarouselAnime,
+  PickCarousel,
+} from "@bilibili-dl/interfaces/web/home/anime.type";
 
 /**
  * Anime content component.
  * @return {JSX.Element}
  */
 export default function Anime({
-  timelineList,
+  animeList,
 }: {
-  timelineList: ListTimelineAnime;
+  animeList: CarouselAnime;
 }): JSX.Element {
-  const { selectedTimeline } = useTimelinePicker(timelineList);
+  const { items, selectedKey, handleOnSelect } = useAnimeCarousel(animeList);
+
   return (
     <>
       <Group spacing={0} mb={16}>
@@ -30,46 +34,19 @@ export default function Anime({
             align={0.1}
             dragFree
           >
-            <Carousel.Slide>
-              <Button size="xs" variant="light">
-                Populer
-              </Button>
-            </Carousel.Slide>
-            <Carousel.Slide>
-              <Button size="xs" variant="subtle">
-                Sel
-              </Button>
-            </Carousel.Slide>
-            <Carousel.Slide>
-              <Button size="xs" variant="subtle">
-                Rab
-              </Button>
-            </Carousel.Slide>
-            <Carousel.Slide>
-              <Button size="xs" variant="subtle">
-                Kam
-              </Button>
-            </Carousel.Slide>
-            <Carousel.Slide>
-              <Button size="xs" variant="subtle">
-                Jum
-              </Button>
-            </Carousel.Slide>
-            <Carousel.Slide>
-              <Button size="xs" variant="subtle">
-                Sab
-              </Button>
-            </Carousel.Slide>
-            <Carousel.Slide>
-              <Button size="xs" variant="subtle">
-                Min
-              </Button>
-            </Carousel.Slide>
-            <Carousel.Slide>
-              <Button size="xs" variant="subtle">
-                Sen
-              </Button>
-            </Carousel.Slide>
+            {animeList?.map((item) => (
+              // todo: figure out the alternative instead of use any
+              <Carousel.Slide key={item.key as PickCarousel}>
+                <Button
+                  size="xs"
+                  variant={item.key === selectedKey ? "light" : "subtle"}
+                  tt="capitalize"
+                  onClick={() => handleOnSelect(item.key as PickCarousel)}
+                >
+                  {item.key}
+                </Button>
+              </Carousel.Slide>
+            ))}
           </Carousel>
           {/* <Group spacing="xs">
             <Button size="xs" variant="light">
@@ -114,7 +91,7 @@ export default function Anime({
         align="start"
         slidesToScroll={5}
       >
-        {selectedTimeline.cards.map((item, i) => (
+        {items?.cards.map((item, i) => (
           <Carousel.Slide key={i}>
             <OGV {...item} />
           </Carousel.Slide>

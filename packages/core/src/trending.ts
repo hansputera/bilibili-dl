@@ -3,25 +3,21 @@ import {
     getGatewayURL,
     SupportedLocales,
 } from '@bilibili-dl/config/constants.js';
-import {IRecommendAPI, RecommendedData} from '@bilibili-dl/interfaces/api';
+import type {ITrendingAPI, TrendingData} from '@bilibili-dl/interfaces/api';
 
 /**
- * Get list of recommendation videos.
+ * Get list of popular videos.
  * @param {SupportedLocales} locale Supported Locales.
- * @param {number} pn Index Pagination Number.
- * @return {Promise<RecommendationContent[]>}
+ * @return {Promise<TrendingData>}
  */
-export const getRecommendList = async (
+export const getTrendingList = async (
     locale: SupportedLocales = 'en_US',
-    pn: number,
-): Promise<RecommendedData> => {
-    const response = await fetchAPI
-        .get(getGatewayURL('v2').concat('home/recommend'), {
+): Promise<TrendingData> => {
+    const trending = await fetchAPI
+        .get(getGatewayURL('v2').concat('/home/ogv/trending'), {
             searchParams: {
                 platform: 'web',
                 s_locale: locale,
-                pn,
-                ps: pn === 1 ? 50 : 20,
             },
             headers: {
                 Referer: 'https://www.bilibili.tv/'.concat(
@@ -31,7 +27,7 @@ export const getRecommendList = async (
                 Cookie: process.env.BILI_COOKIE ?? '',
             },
         })
-        .json<IRecommendAPI>();
+        .json<ITrendingAPI>();
 
-    return response.data;
+    return trending.data;
 };

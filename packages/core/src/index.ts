@@ -5,3 +5,4 @@ export * from './subtitle';
 export * from './popular';
 export * from './recommendation';
 export * from './timeline';
+export * from './trending';

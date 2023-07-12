@@ -3,11 +3,7 @@ import ContainerCard from "../ContainerCard";
 import useRecommendation from "hooks/useRecommendation";
 import OGV from "../Card/OGV";
 import UGC from "../Card/UGC";
-import {
-  OGVContent,
-  RecommendationContent,
-  UGCContent,
-} from "@bilibili-dl/interfaces/core";
+import { OGVCard, UGCCard } from "@bilibili-dl/interfaces/api";
 
 /**
  * Recomendation content component.
@@ -26,12 +22,13 @@ export default function Recomendation(): JSX.Element {
       </Title>
       <ContainerCard styles={{ root: { gridAutoRows: "auto" } }}>
         {recommend.map((item, i) =>
-          // {(data?.[0]?.data as RecommendationContent)?.map((item, i) =>
-          item.card_type === "ogv_anime" ? (
-            <OGV key={i} {...(item as OGVContent)} measureRef={ref} />
-          ) : (
-            <UGC key={i} {...(item as UGCContent)} measureRef={ref} />
-          )
+          item?.card_type ? (
+            item.card_type === "ogv_anime" ? (
+              <OGV key={i} {...(item as OGVCard)} measureRef={ref} />
+            ) : (
+              <UGC key={i} {...(item as UGCCard)} measureRef={ref} />
+            )
+          ) : null
         )}
         <div ref={ref} />
       </ContainerCard>

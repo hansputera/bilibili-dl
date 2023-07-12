@@ -1,18 +1,18 @@
-import { RecommendationContent } from "@bilibili-dl/interfaces/core";
+import { RecommendItem } from "@bilibili-dl/interfaces/api";
 import { useIntersection } from "@mantine/hooks";
 import { useEffect, useMemo } from "react";
 import useSWRInfinite from "swr/infinite";
 
 export default function useRecommendation() {
   const { data, error, isLoading, isValidating, size, setSize } =
-    useSWRInfinite<RecommendationContent>(
+    useSWRInfinite<RecommendItem>(
       (pageIndex) => {
         return `/api/recommend?pn=${pageIndex + 1}`;
       },
-      (...args) =>
-        fetch(...args)
+      (args: RequestInfo) =>
+        fetch(args)
           .then((res) => res.json())
-          .then((res) => res.data),
+          .then((res) => res.data.cards),
       {
         revalidateOnFocus: false,
         revalidateFirstPage: false,
@@ -21,7 +21,7 @@ export default function useRecommendation() {
   const { ref: scrollRef, entry } = useIntersection();
 
   const recommend_card = useMemo(
-    () => (data ? ([] as RecommendationContent[]).concat(...data) : []),
+    () => (data ? ([] as RecommendItem[]).concat(...data) : []),
     [data]
   );
 

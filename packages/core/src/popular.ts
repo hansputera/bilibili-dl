@@ -1,18 +1,18 @@
-import type {PopularCards} from '@bilibili-dl/interfaces/core';
 import {fetchAPI} from '@bilibili-dl/util';
 import {
     getGatewayURL,
     SupportedLocales,
 } from '@bilibili-dl/config/constants.js';
+import type {PopularData} from '@bilibili-dl/interfaces/api';
 
 /**
  * Get list of popular videos.
  * @param {SupportedLocales} locale Supported Locales.
- * @return {Promise<PopularCards>}
+ * @return {Promise<PopularData>}
  */
 export const getPopularList = async (
     locale: SupportedLocales = 'en_US',
-): Promise<PopularCards> => {
+): Promise<PopularData> => {
     const response = await fetchAPI
         .get(getGatewayURL('v2').concat('home/popular'), {
             searchParams: {
@@ -31,7 +31,7 @@ export const getPopularList = async (
         })
         .json<{
             data: {
-                cards: PopularCards;
+                cards: PopularData;
             };
         }>();
 

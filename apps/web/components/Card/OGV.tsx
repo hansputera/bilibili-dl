@@ -1,15 +1,15 @@
-import type { TimelineCard } from "@bilibili-dl/interfaces/core";
+import type { OGVCard } from "@bilibili-dl/interfaces/api";
 import { Box, Card, Text } from "@mantine/core";
 import Image from "next/image";
 
+type Props = OGVCard & { measureRef?: any };
+
 /**
  * Card Component.
- * @param {TimelineCard} props
+ * @param {Props} props
  * @return {JSX.Element}
  */
-export default function OGVCard(
-  props: TimelineCard & { measureRef: any }
-): JSX.Element {
+export default function OGVCard(props: Props): JSX.Element {
   return (
     <Card
       shadow="sm"
