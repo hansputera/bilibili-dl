@@ -1,12 +1,12 @@
 import { Carousel } from "@mantine/carousel";
 import { Anchor, Button, Group, Title } from "@mantine/core";
 import Image from "next/image";
-import OGV from "../Card/OGV";
 import useAnimeCarousel from "hooks/useAnimeCarousel";
 import {
   CarouselAnime,
   PickCarousel,
 } from "@bilibili-dl/interfaces/web/home/anime.type";
+import LayoutCard from "../Card/LayoutCard";
 
 /**
  * Anime content component.
@@ -35,7 +35,6 @@ export default function Anime({
             dragFree
           >
             {animeList?.map((item) => (
-              // todo: figure out the alternative instead of use any
               <Carousel.Slide key={item.key as PickCarousel}>
                 <Button
                   size="xs"
@@ -48,32 +47,6 @@ export default function Anime({
               </Carousel.Slide>
             ))}
           </Carousel>
-          {/* <Group spacing="xs">
-            <Button size="xs" variant="light">
-              Populer
-            </Button>
-            <Button size="xs" variant="subtle">
-              Sel
-            </Button>
-            <Button size="xs" variant="subtle">
-              Rab
-            </Button>
-            <Button size="xs" variant="subtle">
-              Kam
-            </Button>
-            <Button size="xs" variant="subtle">
-              Jum
-            </Button>
-            <Button size="xs" variant="subtle">
-              Sab
-            </Button>
-            <Button size="xs" variant="subtle">
-              Min
-            </Button>
-            <Button size="xs" variant="subtle">
-              Sen
-            </Button>
-          </Group> */}
           <Anchor href="https://www.bilibili.tv/id/timeline">
             <Image
               src="https://p.bstarstatic.com/fe-lib/images/web/schedule/calendar-ms.png@326w_72h_1e_1c_1f.webp"
@@ -93,7 +66,7 @@ export default function Anime({
       >
         {items?.cards.map((item, i) => (
           <Carousel.Slide key={i}>
-            <OGV {...item} />
+            <LayoutCard {...item} />
           </Carousel.Slide>
         ))}
       </Carousel>

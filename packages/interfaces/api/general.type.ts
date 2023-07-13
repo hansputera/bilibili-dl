@@ -9,7 +9,7 @@ export type IResponseAPI<T> = {
 };
 
 export interface LiveCard {
-    card_type: 'ugc_video';
+    card_type: 'live_recommend';
     type: string;
     title: string;
     cover: string;

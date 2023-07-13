@@ -1,9 +1,7 @@
 import { Title } from "@mantine/core";
 import ContainerCard from "../ContainerCard";
 import useRecommendation from "hooks/useRecommendation";
-import OGV from "../Card/OGV";
-import UGC from "../Card/UGC";
-import { OGVCard, UGCCard } from "@bilibili-dl/interfaces/api";
+import LayoutCard from "../Card/LayoutCard";
 
 /**
  * Recomendation content component.
@@ -21,15 +19,9 @@ export default function Recomendation(): JSX.Element {
         Direkomendasikan untukmu
       </Title>
       <ContainerCard styles={{ root: { gridAutoRows: "auto" } }}>
-        {recommend.map((item, i) =>
-          item?.card_type ? (
-            item.card_type === "ogv_anime" ? (
-              <OGV key={i} {...(item as OGVCard)} measureRef={ref} />
-            ) : (
-              <UGC key={i} {...(item as UGCCard)} measureRef={ref} />
-            )
-          ) : null
-        )}
+        {recommend.map((item, i) => (
+          <LayoutCard key={i} {...item} measureRef={ref} />
+        ))}
         <div ref={ref} />
       </ContainerCard>
     </>
