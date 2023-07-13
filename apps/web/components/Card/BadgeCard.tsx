@@ -1,6 +1,15 @@
 import { Text } from "@mantine/core";
 
-export default function BadgeCard({ text }: { text: string }) {
+/**
+ * Badge Card Component.
+ * @param {{ text: string }} props
+ * @return {JSX.Element | null}
+ */
+export default function BadgeCard({
+  text,
+}: {
+  text: string;
+}): JSX.Element | null {
   return text ? (
     <Text
       component="span"

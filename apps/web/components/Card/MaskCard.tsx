@@ -2,13 +2,18 @@ import { Text, Box } from "@mantine/core";
 import { LIVE_BADGE } from "config";
 import Image from "next/image";
 
+/**
+ * Badge Card Component.
+ * @param {{ value: string, isLive: boolean }} props
+ * @return {JSX.Element}
+ */
 export default function MaskCard({
   value,
   isLive = false,
 }: {
   isLive?: boolean;
   value?: string;
-}) {
+}): JSX.Element {
   return (
     <Box
       py={12}
