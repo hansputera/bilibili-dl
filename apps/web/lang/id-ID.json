@@ -19,5 +19,12 @@
   "Topbar": {
     "create": "Buat",
     "search": "Cari"
+  },
+  "popup": {
+    "LoginModal": {
+      "signIn": "Login dengan",
+      "phone": "ponsel",
+      "barcode": "Kode QR"
+    }
   }
 }

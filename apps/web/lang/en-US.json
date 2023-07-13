@@ -19,5 +19,12 @@
   "Topbar": {
     "create": "Create",
     "search": "Search"
+  },
+  "popup": {
+    "LoginModal": {
+      "signIn": "Login with",
+      "phone": "phone",
+      "barcode": "QR Code"
+    }
   }
 }

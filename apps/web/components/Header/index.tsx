@@ -39,6 +39,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { LoginModal } from "../Login/LoginModal";
 
 /**
  * Topbar Component
@@ -186,7 +187,9 @@ export default function Topbar({
                 </Menu.Item>
               </Menu.Dropdown>
             </Menu>
-            <Button>Login</Button>
+            <LoginModal>
+              {(open) => <Button onClick={open}>Login</Button>}
+            </LoginModal>
           </Group>
         </Group>
       </Flex>

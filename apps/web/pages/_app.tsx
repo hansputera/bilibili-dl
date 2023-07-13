@@ -54,6 +54,7 @@ export default function App(props: AppProps & Props): JSX.Element {
           withNormalizeCSS
           theme={{
             colorScheme,
+            breakpoints: { "2xs": "27em" },
           }}
         >
           <NextIntlProvider messages={pageProps.messages}>
