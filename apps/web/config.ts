@@ -2,7 +2,7 @@
  * Max Lifetime data saved on redis in seconds.
  */
 export const maxLifetimeData = 60 * 5;
-export const LABEL = ["", "", "Bstation eksklusif"] as const;
+export const LABEL = ["", "Premium", "Bstation eksklusif"] as const;
 export const LIVE_BADGE =
   "https://p.bstarstatic.com/fe-static/bstar-web-new/client/assets/live_badge-5a2c97db.gif";
 export const FALLBACK_IMG =

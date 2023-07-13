@@ -20,7 +20,7 @@ export interface LiveCard {
 
 export interface OGVCard {
     type: string;
-    card_type: 'ogv_anime';
+    card_type: 'ogv_anime' | 'ogv_timeline';
     title: string;
     cover: string;
     view: string;

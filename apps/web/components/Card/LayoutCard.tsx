@@ -17,10 +17,11 @@ export default function LayoutCard(props: Props): JSX.Element {
     "https://www.bilibili.tv/en" +
     (props.card_type === "ogv_anime"
       ? `/play/${props.season_id}`
-      : props.live
-      ? `/live/${props.live.room_id}`
+      : (props as LiveCard).live
+      ? `/live/${(props as LiveCard).live.room_id}`
       : `/video/${(props as UGCCard).aid}`) +
     "?bstar_from=bstar-web.homepage.trending.all"; // tranding.all | recommend.all | anime.all
+
   return (
     <Card
       padding="lg"
@@ -49,17 +50,19 @@ export default function LayoutCard(props: Props): JSX.Element {
             />
           </Text>
           {/* displayed only for update info, timestamp, show info, live badge */}
-          {props.card_type === "ogv_anime" ? (
+          {props.card_type === "ogv_anime" ||
+          props.card_type === "ogv_timeline" ? (
             <MaskCard value={props.index_show} />
-          ) : props.live ? (
+          ) : (props as LiveCard).live ? (
             <MaskCard isLive />
           ) : (
             <MaskCard value={(props as UGCCard).duration} />
           )}
           {/* displayed only for premium, eksklusif (OGV only) */}
-          {props.card_type === "ogv_anime" && (
-            <BadgeCard text={LABEL[props.label]} />
-          )}
+          {props.card_type === "ogv_anime" ||
+            (props.card_type === "ogv_timeline" && (
+              <BadgeCard text={LABEL[props.label]} />
+            ))}
         </BackgroundImage>
       </Card.Section>
 
@@ -137,8 +140,8 @@ export default function LayoutCard(props: Props): JSX.Element {
                 !!props.style_list.length && (
                   <>&#160; · {props.style_list.join(" / ")}</>
                 )
-              ) : props.live ? (
-                <>&#160; · {props.live.state}</>
+              ) : (props as LiveCard).live ? (
+                <>&#160; · {(props as LiveCard).live.state}</>
               ) : (
                 <>&#160; · {props.view}</>
               )}
