@@ -1,4 +1,11 @@
-export function GoogleIcon(props: React.ComponentPropsWithoutRef<"svg">) {
+/**
+ * Google Icon.
+ * @param {React.ComponentProps<"svg">} props
+ * @return {JSX.Element}
+ */
+export function GoogleIcon(
+  props: React.ComponentPropsWithoutRef<"svg">
+): JSX.Element {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

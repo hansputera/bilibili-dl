@@ -13,11 +13,15 @@ import { FacebookIcon } from "../Icon/FacebookIcon";
 import { TwitterIcon } from "../Icon/TwitterIcon";
 import { IconQrcode, IconUser } from "@tabler/icons-react";
 
+/**
+ * LoginModal Component.
+ * @return {JSX.Element}
+ */
 export function LoginModal({
   children,
 }: {
   children: (open: () => void) => React.ReactNode;
-}) {
+}): JSX.Element {
   const [opened, { open, close }] = useDisclosure(false);
   const t = useTranslations("popup.LoginModal");
 

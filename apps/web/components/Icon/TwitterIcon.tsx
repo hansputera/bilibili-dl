@@ -1,4 +1,11 @@
-export function TwitterIcon(props: React.ComponentPropsWithoutRef<"svg">) {
+/**
+ * Twitter Icon.
+ * @param {React.ComponentProps<"svg">} props
+ * @return {JSX.Element}
+ */
+export function TwitterIcon(
+  props: React.ComponentPropsWithoutRef<"svg">
+): JSX.Element {
   return (
     <svg
       preserveAspectRatio="xMidYMid"

@@ -132,7 +132,7 @@ export const transformMeta = (data: any) => {
             data.ogv?.season?.player_date ||
             data.ugc.archive.formatted_pub_date,
         episodes:
-            sectionsList?.episodes.map(
+            sectionsList?.episodes?.map(
                 (e: {
                     title_display: string;
                     cover: string;

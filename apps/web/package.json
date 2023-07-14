@@ -21,6 +21,7 @@
         "@mantine/next": "^6.0.11",
         "@sentry/nextjs": "latest",
         "@tabler/icons-react": "^2.20.0",
+        "@vidstack/react": "^0.6.13",
         "accept-language-parser": "^1.5.0",
         "cookies-next": "^2.1.1",
         "cors": "^2.8.5",
@@ -32,7 +33,8 @@
         "next-intl": "^2.14.4",
         "react": "latest",
         "react-dom": "latest",
-        "swr": "^2.2.0"
+        "swr": "^2.2.0",
+        "vidstack": "^0.6.13"
     },
     "devDependencies": {
         "@bilibili-dl/config": "workspace:*",

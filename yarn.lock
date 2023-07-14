@@ -147,6 +147,7 @@ __metadata:
     "@types/node": ^18.7.3
     "@types/react": ^18.0.17
     "@types/react-dom": ^18.0.6
+    "@vidstack/react": ^0.6.13
     accept-language-parser: ^1.5.0
     cookies-next: ^2.1.1
     cors: ^2.8.5
@@ -161,6 +162,7 @@ __metadata:
     react-dom: latest
     swr: ^2.2.0
     typescript: ^4.7.4
+    vidstack: ^0.6.13
   languageName: unknown
   linkType: soft
 
@@ -584,6 +586,13 @@ __metadata:
   peerDependencies:
     react: ">=16.8.0"
   checksum: 7b59db35a7245af138b9af7b143b4ef30e9b5d0bf85e796034ab2368b1a449d67f2023d9d174c532ebd94e9e63037d2e4e0da46e259572de7397e4b0d8867ca0
+  languageName: node
+  linkType: hard
+
+"@maverick-js/signals@npm:^5.10.3":
+  version: 5.11.2
+  resolution: "@maverick-js/signals@npm:5.11.2"
+  checksum: 3adf44c110dabc9e965bf5dfff42c7b9a4d00843677202e1ea2899fa2fb8910d8d5785e8ebac9d3ca68412d1224201b2d4d3c875a7d204cc466ca9c326653fa8
   languageName: node
   linkType: hard
 
@@ -1323,6 +1332,18 @@ __metadata:
     "@typescript-eslint/types": 5.44.0
     eslint-visitor-keys: ^3.3.0
   checksum: a012c888209e1d6ae684b2a44fd460ae5a80f5faf07bca4bda6c9c0d8c063ad3297d4c53f7151ae86cf1a43dee09625dc3ee72183323c91089c7288fd573c6f4
+  languageName: node
+  linkType: hard
+
+"@vidstack/react@npm:^0.6.13":
+  version: 0.6.13
+  resolution: "@vidstack/react@npm:0.6.13"
+  peerDependencies:
+    "@types/react": ^18.0.0
+    maverick.js: 0.37.0
+    react: ^18.0.0
+    vidstack: 0.6.13
+  checksum: 6eca254915d88b7707432322975d1f96b300dad8f4a9d425908f97ce0067b8c24605241186d1855692dfce4cce11bdaf7114ae8d3e7efe554ec345dd5c0d10d5
   languageName: node
   linkType: hard
 
@@ -3462,6 +3483,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"maverick.js@npm:0.37.0":
+  version: 0.37.0
+  resolution: "maverick.js@npm:0.37.0"
+  dependencies:
+    "@maverick-js/signals": ^5.10.3
+    type-fest: ^3.8.0
+  checksum: 837c17ffc80711b2e72b5acc5e9367f5cf01d1961047adaf8872d121ad5007a13584417c816db05795be8ccd0db4e3166d62b292e97ce743d4e1487ad6208cc0
+  languageName: node
+  linkType: hard
+
+"media-captions@npm:0.0.18":
+  version: 0.0.18
+  resolution: "media-captions@npm:0.0.18"
+  checksum: 04e4480192e55a0ea8ca6a4cccfcded3ac1c9152bc739a941a0c5f5060927d4c9ac7deb9c82d3c175a11dd1911591a28e41fa339ddc707e77284ecc24fcee85d
+  languageName: node
+  linkType: hard
+
 "merge-stream@npm:^2.0.0":
   version: 2.0.0
   resolution: "merge-stream@npm:2.0.0"
@@ -5064,6 +5102,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"type-fest@npm:^3.8.0":
+  version: 3.13.0
+  resolution: "type-fest@npm:3.13.0"
+  checksum: f7be142ae1ad0582eafd52d085350799c8cd918c15455896a06c82c147b61f8cea58892bedf1348943478e37740562219375b3b59fd855db99cd2b2766510f98
+  languageName: node
+  linkType: hard
+
 "typescript@npm:^4.7.4":
   version: 4.9.3
   resolution: "typescript@npm:4.9.3"
@@ -5209,6 +5254,17 @@ __metadata:
   version: 1.1.2
   resolution: "vary@npm:1.1.2"
   checksum: ae0123222c6df65b437669d63dfa8c36cee20a504101b2fcd97b8bf76f91259c17f9f2b4d70a1e3c6bbcee7f51b28392833adb6b2770b23b01abec84e369660b
+  languageName: node
+  linkType: hard
+
+"vidstack@npm:^0.6.13":
+  version: 0.6.13
+  resolution: "vidstack@npm:0.6.13"
+  dependencies:
+    maverick.js: 0.37.0
+    media-captions: 0.0.18
+    type-fest: ^3.8.0
+  checksum: 73b84e4400a29b65ad2acd43f4a5ca660d71cac8a3f1815e1180a2e59b9db741212b382f5e43dc7b904466f1899dc13b5d76b2ee08100e0bd6c96e1119c8e9c1
   languageName: node
   linkType: hard
 
