@@ -1,7 +1,7 @@
 # Bilibili.TV Downloader
 Download, and track/scrape [bilibili.tv](https://bilibili.tv) videos using NodeJS
 
-> This project isn't ready yet
+> This project isn't ready yet, join our [telegram community](https://t.me/OpenBstation) to get more ingfo!
 
 ## Packages
 - [@bilibili-dl/core](https://npmjs.com/package/@bilibili-dl/core)  A core of this project
